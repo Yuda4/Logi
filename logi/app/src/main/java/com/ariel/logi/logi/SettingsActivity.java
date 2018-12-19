@@ -2,8 +2,12 @@ package com.ariel.logi.logi;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +19,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SettingsActivity extends AppCompatActivity {
+import java.util.Objects;
+
+public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, signOut;
 
@@ -23,12 +29,22 @@ public class SettingsActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_);
+        setContentView(R.layout.activity_settings);
 
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_setting);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view__setting);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -258,6 +274,35 @@ public class SettingsActivity extends AppCompatActivity {
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) return true;
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.home:
+                startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                finish();
+                break;
+            case R.id.profile:
+                Toast.makeText(SettingsActivity.this, "Profile Press!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.setting:
+                Toast.makeText(SettingsActivity.this, "Setting Press!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.logout:
+                signOut();
+                finish();
+                break;
+        }
+        return false;
     }
 
 }
