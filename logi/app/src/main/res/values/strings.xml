@@ -29,4 +29,13 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="logo_login">logo login image</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="logout">Logout</string>
+    <string name="profile">Profile</string>
+    <string name="setting">Setting</string>
+    <string name="home">Home</string>
+    <string name="user_name_template">User Name</string>
+    <string name="email_template">user@example.com</string>
+    <string name="title_activity_Settings">SettingsActivity</string>
 </resources>
