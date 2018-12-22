@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
+    private static final String TAG = "SignupActivity";
+
+    private DatabaseReference mDatabase;
+    private FirebaseDatabase database;
 
     private EditText inputEmail, inputPassword;
     private Button btnSignIn, btnSignUp, btnResetPassword;
@@ -30,6 +37,9 @@ public class SignupActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+        //get firebase database instance
+        database = FirebaseDatabase.getInstance();
+        mDatabase = database.getReference();
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
@@ -56,7 +66,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = inputEmail.getText().toString().trim();
+                final String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
@@ -89,6 +99,10 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
+                                    // Write to database
+                                    String userUid = auth.getCurrentUser().getUid();
+                                    mDatabase.child("users").child(userUid).child("email").setValue(email);
+                                    Log.i(TAG, "Add data to database succeded!");
                                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                     finish();
                                 }

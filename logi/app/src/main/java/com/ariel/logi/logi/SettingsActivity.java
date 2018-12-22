@@ -1,6 +1,7 @@
 package com.ariel.logi.logi;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -38,12 +39,12 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_setting);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayoutSetting);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view__setting);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view_Setting);
         navigationView.setNavigationItemSelectedListener(this);
 
         //get firebase auth instance
@@ -98,11 +99,18 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!btnChangeEmail.isActivated()){
+                    newEmail.setVisibility(View.VISIBLE);
+                    changeEmail.setVisibility(View.VISIBLE);
+                }else {
+                    newEmail.setVisibility(View.GONE);
+                    changeEmail.setVisibility(View.GONE);
+                }
+                btnChangeEmail.setActivated(!btnChangeEmail.isActivated());
+                if(btnChangePassword.isActivated()) btnChangePassword.setActivated(false);
                 oldEmail.setVisibility(View.GONE);
-                newEmail.setVisibility(View.VISIBLE);
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
-                changeEmail.setVisibility(View.VISIBLE);
                 changePassword.setVisibility(View.GONE);
                 sendEmail.setVisibility(View.GONE);
                 remove.setVisibility(View.GONE);
@@ -138,12 +146,19 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!btnChangePassword.isActivated()){
+                    newPassword.setVisibility(View.VISIBLE);
+                    changePassword.setVisibility(View.VISIBLE);
+                }else{
+                    newPassword.setVisibility(View.GONE);
+                    changePassword.setVisibility(View.GONE);
+                }
+                btnChangePassword.setActivated(!btnChangePassword.isActivated());
+                if(btnChangeEmail.isActivated()) btnChangeEmail.setActivated(false);
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.GONE);
                 password.setVisibility(View.GONE);
-                newPassword.setVisibility(View.VISIBLE);
                 changeEmail.setVisibility(View.GONE);
-                changePassword.setVisibility(View.VISIBLE);
                 sendEmail.setVisibility(View.GONE);
                 remove.setVisibility(View.GONE);
             }
@@ -183,7 +198,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         btnSendResetEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                oldEmail.setVisibility(View.VISIBLE);
+                oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.GONE);
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
@@ -298,8 +313,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 Toast.makeText(SettingsActivity.this, "Setting Press!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.logout:
-                signOut();
-                finish();
+               signOut();
                 break;
         }
         return false;

@@ -1,19 +1,22 @@
 package com.ariel.User;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-	private static long USERID = 17942;
-	long userId;
+public class User implements Parcelable {
+
+	//private static long USERID = 17942;
+    protected String userId;
 	protected String email;
 	protected String name;
 	protected String phone;
 
 	User(String name, String email, String phone){
-		this.userId = this.USERID;
-		this.USERID++;
+		//this.userId = this.USERID;
+		//this.USERID++;
 		this.email = email;
-		if(setName(name))this.name = name;
-		if(setPhone(phone)) this.phone = phone;
+		this.name = name;
+		this.phone = phone;
 		
 	}
 
@@ -21,43 +24,9 @@ public class User {
 		// Default constructor required for calls to DataSnapshot.getValue(User.class)
 	}
 
-	public long getUSERID() {
-		return this.userId;
-	}
-
-	protected void setEmail(String email) {
-		this.email = email;
-	}
-
-	protected boolean setName(String name) {
-		if(name == null || name.isEmpty() || name.trim().isEmpty()) {
-			System.out.println("You should enter a valid name");
-			return false;
-		}
-		this.name = name;
-		return true;
-	}
-
-	protected boolean setPhone(String phone) {
-		if (!onlyContainsNumbers(phone) || !(phone.length() == 10)) {
-			System.out.println("10 number please");
-			return false;
-		}
-		this.phone = phone;
-		return true;
-	}
-
-	private boolean onlyContainsNumbers(String phone) {
-	    try {
-	        Long.parseLong(phone);
-	        return true;
-	    } catch (NumberFormatException ex) {
-	        return false;
-	    }
-	} 
-	
+	// getter
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public String getName() {
@@ -65,26 +34,59 @@ public class User {
 	}
 
 	public String getPhone() {
-		return phone;
+		return this.phone;
 	}
 
-	protected boolean changePassword(String pass) {
-		return true;
-	}
+    public String getUserId() {
+        return this.userId;
+    }
+
+    //setter
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setName(String name) { this.name = name; }
+
+    public void setPhone(String phone) { this.phone = phone; }
 
 	public String toString() {
 		return (this.name + ", " + this.email + ", " + this.phone );
 	}
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-	public static void main(String[] args) {
-		User yuda = new User("Yehuda Neumann", "yuda@gmail.com", "0546500907");
-		User A = new User ("a","aa","0546500908");
-		System.out.println(A.getName() + "   " + A.getUSERID());
-		yuda.setName(" ");
-		System.out.println(yuda.getName() + " " + yuda.getUSERID());
-		yuda.setPhone("0546055622");
-		System.out.println(yuda.getPhone() +"  " + yuda.getUSERID());
-	}
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(userId);
+        parcel.writeString(email);
+        parcel.writeString(name);
+        parcel.writeString(phone);
+    }
 
+    protected User(Parcel in) {
+        userId = in.readString();
+        email = in.readString();
+        name = in.readString();
+        phone = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

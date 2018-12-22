@@ -1,6 +1,9 @@
 package com.ariel.User;
 
-public class Customer extends User { 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Customer extends User implements Parcelable {
 	
 	protected String address;
 	protected String deliveryInfo;
@@ -31,5 +34,35 @@ public class Customer extends User {
 	public String toString() {
 		return super.toString() + ", "+ this.address + ", " + this.deliveryInfo;
 	}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+       super.writeToParcel(parcel, i);
+       parcel.writeString(address);
+       parcel.writeString(deliveryInfo);
+    }
+
+    protected Customer(Parcel in) {
+        super(in);
+        address = in.readString();
+        deliveryInfo = in.readString();
+    }
+
+    public static final Creator<Customer> CREATOR = new Creator<Customer>() {
+        @Override
+        public Customer createFromParcel(Parcel in) {
+            return new Customer(in);
+        }
+
+        @Override
+        public Customer[] newArray(int size) {
+            return new Customer[size];
+        }
+    };
 
 }

@@ -16,13 +16,15 @@
 
 
         <ImageView
-            android:layout_width="@dimen/logo_w_h"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/logo_w_h"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:contentDescription="@string/logo_login"
-            android:src="@mipmap/ic_launcher"
-            app:srcCompat="@drawable/ic_launcher" />
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@mipmap/ic_launcher_logi"
+            app:srcCompat="@mipmap/ic_launcher_logi" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

@@ -1,6 +1,9 @@
 package com.ariel.User;
 
-public class Manager extends User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Manager extends User implements Parcelable {
 
 	public Manager() {
 		// Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -11,5 +14,31 @@ public class Manager extends User {
 		super(email, name, phone);
 		
 	}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        super.writeToParcel(parcel, i);
+    }
+
+    protected Manager(Parcel in) {
+        super(in);
+    }
+
+    public static final Creator<Manager> CREATOR = new Creator<Manager>() {
+        @Override
+        public Manager createFromParcel(Parcel in) {
+            return new Manager(in);
+        }
+
+        @Override
+        public Manager[] newArray(int size) {
+            return new Manager[size];
+        }
+    };
 
 }
