@@ -12,12 +12,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     private DrawerLayout drawerLayout;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
+        //get firebase database instance
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

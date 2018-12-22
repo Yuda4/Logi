@@ -1,4 +1,4 @@
-package DeliverySystem;
+package com.ariel.DeliverySystem;
 
 import java.util.Date;
 

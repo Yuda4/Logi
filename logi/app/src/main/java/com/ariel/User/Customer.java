@@ -1,4 +1,4 @@
-package User;
+package com.ariel.User;
 
 public class Customer extends User { 
 	
