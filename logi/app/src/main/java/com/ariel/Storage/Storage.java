@@ -1,4 +1,4 @@
-package Storage;
+package com.ariel.Storage;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import Storage.Product;
+import com.ariel.Storage.Product;
 
 public class Storage {
 	private static long STORAGEID = 1022;

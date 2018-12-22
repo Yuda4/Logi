@@ -1,11 +1,17 @@
-package Storage;
+package com.ariel.Storage;
 
 public class Product {
 	static long PRODUCTID = 102172;
 	long productId;
 	String name, desc;
 	int amount;
-	
+
+
+	public Product() {
+		// Default constructor required for calls to DataSnapshot.getValue(User.class)
+	}
+
+
 	Product(String name, String desc, int amount){
 		this.productId = this.PRODUCTID;
 		this.PRODUCTID++;

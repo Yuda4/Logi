@@ -9,6 +9,10 @@ public class Delivery {
 	private long courierId, customerId, productId;
 	private Date date;
 	private String status = "Order placed";
+
+	public Delivery() {
+		// Default constructor required for calls to DataSnapshot.getValue(User.class)
+	}
 	
 	Delivery(long courierId, long customerId, long productId, Date date, String status){
 		this.deliveryId = this.DELIVERYID;

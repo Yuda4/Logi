@@ -1,8 +1,4 @@
 package com.ariel.User;
-import java.io.*;
-import java.util.*;
-
-import Storage.Product;
 
 public class User {
 
@@ -21,7 +17,10 @@ public class User {
 		
 	}
 
-	
+	public User() {
+		// Default constructor required for calls to DataSnapshot.getValue(User.class)
+	}
+
 	public long getUSERID() {
 		return this.userId;
 	}

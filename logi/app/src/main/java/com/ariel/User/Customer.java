@@ -5,6 +5,10 @@ public class Customer extends User {
 	protected String address;
 	protected String deliveryInfo;
 
+	public Customer() {
+		// Default constructor required for calls to DataSnapshot.getValue(User.class)
+	}
+
 	Customer(String name, String email, String phone, String address, String deliveryInfo) {
 		super(name, email, phone);
 		this.address = address;
