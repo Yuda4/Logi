@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:id="@+id/parent_recycler_profile">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recycler_label"
+        android:id="@+id/label_item"
+        android:layout_centerVertical="true"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recycler_content"
+        android:textSize="18sp"
+        android:layout_toEndOf="@id/label_item"
+        android:layout_marginStart="10dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/content_item"/>
+
+
+</RelativeLayout>

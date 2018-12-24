@@ -22,14 +22,14 @@ public class Customer extends User implements Parcelable {
 		return address;
 	}
 
-	protected boolean setAddress(String address) {
-		if(address.equals("") || address.equals(" ")) {
-			System.out.println("You should enter a valid address");
-			return false;
-		}
-		this.address = address;
-		return true;
-	}
+//	protected boolean setAddress(String address) {
+//		if(address.equals("") || address.equals(" ")) {
+//			System.out.println("You should enter a valid address");
+//			return false;
+//		}
+//		this.address = address;
+//		return true;
+//	}
 
 	public String toString() {
 		return super.toString() + ", "+ this.address + ", " + this.deliveryInfo;

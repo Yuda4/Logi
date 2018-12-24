@@ -10,6 +10,54 @@ public class User implements Parcelable {
 	protected String email;
 	protected String name;
 	protected String phone;
+    protected String country;
+    protected String city;
+    protected String address;
+    protected Long zip_code;
+
+    public Long getZip_code() {
+        return zip_code;
+    }
+
+    public void setZip_code(Long zip_code) {
+        this.zip_code = zip_code;
+    }
+
+    protected String type;
+
+
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 	User(String name, String email, String phone){
 		//this.userId = this.USERID;

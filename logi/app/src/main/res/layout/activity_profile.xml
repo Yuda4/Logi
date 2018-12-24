@@ -19,49 +19,58 @@
         app:itemTextColor="@color/darkgray">
 
     </android.support.design.widget.NavigationView>
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/imageView"
+        android:orientation="vertical">
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/ic_navigator_800px"
-            android:contentDescription="@string/ProfileHeaderImage" />
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
-        <LinearLayout
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:src="@drawable/user_blank_512"
-                android:layout_width="100dp"
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="30dp"/>
+                android:adjustViewBounds="true"
+                android:background="@drawable/ic_navigator_800px"
+                android:contentDescription="@string/ProfileHeaderImage" />
 
-            <TextView
-                android:id="@+id/name_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/user_name_template"
-                android:textColor="@color/darkgray"
-                android:textStyle="bold"
-                android:layout_marginTop="2dp"
-                android:layout_marginStart="2dp"/>
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
 
-            <TextView
-                android:id="@+id/email_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email_template"
-                android:textColor="@color/darkgray"
-                android:layout_marginStart="2dp"/>
+                <android.support.v7.widget.AppCompatImageView
+                    android:src="@drawable/user_blank_512"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="30dp"/>
 
-        </LinearLayout>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/name_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_name_template"
+                    android:textColor="@color/darkgray"
+                    android:textStyle="bold"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginStart="2dp"/>
+
+                <TextView
+                    android:id="@+id/email_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_template"
+                    android:textColor="@color/darkgray"
+                    android:layout_marginStart="2dp"/>
+
+            </LinearLayout>
+        </FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler_view_profile"/>
+    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
