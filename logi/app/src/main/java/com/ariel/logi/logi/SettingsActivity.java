@@ -45,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         drawerToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         navigationView = (NavigationView) findViewById(R.id.navigation_view_Setting);
+        navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
 
         //get firebase auth instance
@@ -304,10 +305,9 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         switch (id){
             case R.id.home:
                 startActivity(new Intent(SettingsActivity.this, MainActivity.class));
-                finish();
                 break;
             case R.id.profile:
-                Toast.makeText(SettingsActivity.this, "Profile Press!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(SettingsActivity.this, ProfileActivity.class));
                 break;
             case R.id.setting:
                 Toast.makeText(SettingsActivity.this, "Setting Press!", Toast.LENGTH_SHORT).show();

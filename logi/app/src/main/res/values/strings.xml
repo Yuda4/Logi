@@ -39,4 +39,13 @@
     <string name="email_template">user@example.com</string>
     <string name="title_activity_Settings">SettingsActivity</string>
     <string name="ProfileActivity">ProfileActivity</string>
+    <string name="ProfileHeaderImage">ProfileHeaderImage</string>
+    <string name="deliveries_waiting_for_date">delivey_waiting</string>
+    <string name="next_delivery_arrive_at">next_delivery_arrive</string>
+    <string name="your_deliveries">your_deliveries</string>
+    <string name="your_favorite_hour">favorite_hour</string>
+    <string name="hour">hour</string>
+    <string name="your_favorite_date">favorite_date</string>
+    <string name="date">date</string>
+    <string name="CustomerActivity">CustomerActivity</string>
 </resources>

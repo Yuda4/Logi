@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariel.User.User;
@@ -32,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private  NavigationView navigationView;
+    private TextView nameTextView, emailTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,11 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         drawerToggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         navigationView = (NavigationView) findViewById(R.id.navigation_view_profile);
+        navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
+
+        nameTextView = (TextView) findViewById(R.id.name_textView);
+        emailTextView = (TextView) findViewById(R.id.email_textView);
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -88,12 +95,32 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
+    }
+
     private void ShowData(DataSnapshot dataSnapshot) {
         for (DataSnapshot ds: dataSnapshot.getChildren()){
             String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
             User user = new User();
             user.setEmail(ds.child(userID).getValue(User.class).getEmail());
-            Toast.makeText(ProfileActivity.this, "Your email is" + user.getEmail(), Toast.LENGTH_SHORT ).show();
+            emailTextView.setText(user.getEmail());
+            Toast.makeText(ProfileActivity.this, "Your email is " + user.getEmail(), Toast.LENGTH_SHORT ).show();
         }
     }
 
