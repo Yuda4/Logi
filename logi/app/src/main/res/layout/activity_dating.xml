@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DatingActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical|fill_horizontal|center"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="30dp"
+            android:contentDescription="@string/logo_login"
+            android:padding="0dp"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="0dp"
+            android:scaleX="2"
+            android:scaleY="2
+"
+            android:src="@mipmap/ic_launcher" />
+
+        <!-- Login Button -->
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/date_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/your_favorite_date"
+            android:inputType="date"
+            android:autofillHints="" />
+
+        <TextView
+            android:id="@+id/hour_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hour"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/Hour_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/your_favorite_hour"
+            android:inputType="time"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/btn_signout"
+            android:layout_width="128dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dip"
+            android:background="@null"
+            android:text="@string/sign_out"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <!-- Link to Login Screen -->
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

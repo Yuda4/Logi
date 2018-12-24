@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CustomerActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical|fill_horizontal|center"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="30dp"
+            android:contentDescription="@string/logo_login"
+            android:padding="0dp"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="0dp"
+            android:scaleX="2"
+            android:scaleY="2
+"
+            android:src="@mipmap/ic_launcher" />
+
+        <!-- Login Button -->
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="154dp"
+            android:layout_height="31dp"
+            android:text="@string/next_delivery_arrive_at"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/Date_del"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <TextView
+            android:id="@+id/delTxt"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:text="@string/your_deliveries"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:id="@+id/spin_proc"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:background="@color/colorAccent"
+            android:dropDownWidth="match_parent" />
+
+        <ListView
+            android:id="@+id/dlvrs_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:text="@string/deliveries_waiting_for_date"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:id="@+id/spin_date"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:background="@color/colorAccent"
+            android:dropDownWidth="match_parent" />
+
+        <Button
+            android:id="@+id/btn_signout"
+            android:layout_width="128dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dip"
+            android:background="@null"
+            android:text="@string/sign_out"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <!-- Link to Login Screen -->
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
