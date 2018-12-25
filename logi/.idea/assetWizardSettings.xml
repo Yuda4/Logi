@@ -75,9 +75,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="8f8f8f" />
-                            <entry key="outputName" value="ic_expand_less_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\adiel" />
+                            <entry key="outputName" value="ic_product" />
+                            <entry key="sourceFile" value="C:\Users\adiel\Downloads\product.svg" />
                           </map>
                         </option>
                       </PersistentState>

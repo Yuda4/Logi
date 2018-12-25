@@ -42,8 +42,10 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/ProfileActivity" />
-        <activity android:name=".CustomerActivity"
-            android:label="@string/CustomerActivity"/>
+        <activity
+            android:name=".CustomerActivity"
+            android:label="@string/CustomerActivity" />
+        <activity android:name=".ManagerActivity"></activity>
     </application>
 
 </manifest>

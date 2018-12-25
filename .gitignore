@@ -128,3 +128,11 @@ node_modules/
 # dotenv environment variables file
 .env
 
+## Compiled JavaScript files
+**/*.js
+**/*.js.map
+
+# Typescript v1 declaration files
+typings/
+
+

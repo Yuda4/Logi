@@ -50,4 +50,8 @@
     <string name="CustomerActivity">CustomerActivity</string>
     <string name="recycler_content">content</string>
     <string name="recycler_label">label:</string>
+    <string name="panding_approval">Panding Approval</string>
+    <string name="in_process">In Process</string>
+    <string name="deliverd">Deliverd</string>
+    <string name="courier">Courier</string>
 </resources>

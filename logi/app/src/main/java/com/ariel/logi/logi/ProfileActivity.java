@@ -152,17 +152,18 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     private void ShowData(DataSnapshot dataSnapshot) {
         User user = new User();
-        for (DataSnapshot ds: dataSnapshot.getChildren()){
-            String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-            user = ds.getValue(User.class);
-            if (user != null) {
-                user.setUserId(userID);
-                mContent.set(0, user.getName());
-                mContent.set(1, user.getEmail());
-                mContent.set(2, user.getPhone());
-                emailTextView.setText(user.getEmail());
-            }
+        //for (DataSnapshot ds: dataSnapshot.getChildren()){
+        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+        user = dataSnapshot.child(userID).getValue(User.class);
+        if (user != null) {
+            user.setUserId(userID);
+            mContent.set(0, user.getName());
+            mContent.set(1, user.getEmail());
+            mContent.set(2, user.getPhone());
+            emailTextView.setText(user.getEmail());
+            nameTextView.setText(user.getName());
         }
+        //}
         if (user != null)
             Toast.makeText(ProfileActivity.this, "Your email is " + user.getEmail(), Toast.LENGTH_SHORT ).show();
 
@@ -180,8 +181,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         int id = item.getItemId();
         switch (id){
             case R.id.home:
-                // startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                Toast.makeText(ProfileActivity.this, "Home Press!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                // Toast.makeText(ProfileActivity.this, "Home Press!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.profile:
                 Toast.makeText(ProfileActivity.this, "Profile Press!", Toast.LENGTH_SHORT).show();
