@@ -73,4 +73,10 @@
     <string name="manager_radio_btn">Manager</string>
     <string name="customer_radio_btn">Customer</string>
     <string name="no_products">No Products</string>
+    <string name="add_product">Add Product</string>
+    <string name="new_product">New Product</string>
+    <string name="no_item_to_show">No item to show</string>
+    <string name="new_delivery">New Delivery</string>
+    <string name="new_courier">New Courier</string>
+
 </resources>

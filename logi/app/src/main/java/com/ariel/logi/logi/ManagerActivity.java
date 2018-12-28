@@ -16,7 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,10 +57,14 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private ArrayList<Product> dbProduct;
     private ArrayList<Delivery> dbDelivery;
 
-    private Button btnProduct ,btnPending, btnCourier, btnInProcess, btnDelivered;
-    private  RecyclerView rcwProduct ,rcwPending, rcwCourier, rcwInProcess, rcwDelivered;
-    private TextView noProduct ,noPending, noCourier, noInProcess, noDelivered;
+    private Button btnNewProduct, btnNewCourier, btnNewDelivery;
+    private  RecyclerView rcvProduct, rcvCourier, rcvDelivery;
+    private TextView nothogToShow;
     private TextView icProduct, icDelivery, icCourier;
+    private RelativeLayout rlDelivery, rlCourier, rlProduct;
+
+    private Spinner spinnerDelivery;
+    private ArrayAdapter<CharSequence> adapterDeliverySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,40 +85,48 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         navigationView.bringToFront();
 
+        spinnerDelivery = (Spinner) findViewById(R.id.spinner_delivery);
+        adapterDeliverySpinner = ArrayAdapter.createFromResource(this, R.array.filter_delivery, android.R.layout.simple_list_item_1);
+        adapterDeliverySpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDelivery.setAdapter(adapterDeliverySpinner);
+        spinnerDelivery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                Toast.makeText(ManagerActivity.this, parent.getItemAtPosition(position) + "selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
         icCourier = (TextView) findViewById(R.id.ic_courier);
         icDelivery = (TextView) findViewById(R.id.ic_delivery);
         icProduct = (TextView) findViewById(R.id.ic_product);
 
-        noProduct = (TextView) findViewById(R.id.no_products);
-        noPending = (TextView) findViewById(R.id.no_panding_approval);
-        noCourier = (TextView) findViewById(R.id.no_Courier);
-        noInProcess = (TextView) findViewById(R.id.no_in_process);
-        noDelivered = (TextView) findViewById(R.id.no_delivered);
+        nothogToShow = (TextView) findViewById(R.id.no_item_to_show);
+        nothogToShow.setVisibility(View.GONE);
 
-        noProduct.setVisibility(View.GONE);
-        noPending.setVisibility(View.GONE);
-        noCourier.setVisibility(View.GONE);
-        noInProcess.setVisibility(View.GONE);
-        noDelivered.setVisibility(View.GONE);
+        btnNewProduct = (Button) findViewById(R.id.btn_new_product);
+        btnNewCourier = (Button) findViewById(R.id.btn_new_courier);
+        btnNewDelivery = (Button) findViewById(R.id.btn_new_delivery);
 
-        btnProduct = (Button) findViewById(R.id.btn_products);
-        btnPending = (Button) findViewById(R.id.btn_pending_approval);
-        btnCourier = (Button) findViewById(R.id.btn_courier);
-        btnInProcess = (Button) findViewById(R.id.btn_in_process);
-        btnDelivered = (Button) findViewById(R.id.btn_delivered);
+        rlCourier = (RelativeLayout) findViewById(R.id.rl_courier);
+        rlDelivery = (RelativeLayout) findViewById(R.id.rl_delivery);
+        rlProduct = (RelativeLayout) findViewById(R.id.rl_product);
+
+        rlProduct.setVisibility(View.GONE);
+        rlCourier.setVisibility(View.GONE);
 
         //recyclerView init
-        rcwProduct = (RecyclerView) findViewById(R.id.recycler_view_manager_products);
-        rcwPending = (RecyclerView) findViewById(R.id.recycler_view_manager_panding);
-        rcwCourier = (RecyclerView) findViewById(R.id.recycler_view_manager_courier);
-        rcwInProcess = (RecyclerView) findViewById(R.id.recycler_view_manager_process);
-        rcwDelivered = (RecyclerView) findViewById(R.id.recycler_view_manager_delivered);
+        rcvProduct = (RecyclerView) findViewById(R.id.rcv_manager_product);
+        rcvCourier = (RecyclerView) findViewById(R.id.rcv_manager_courier);
+        rcvDelivery = (RecyclerView) findViewById(R.id.rcv_manager_delivery);
 
-        rcwProduct.setVisibility(View.GONE);
-        rcwPending.setVisibility(View.GONE);
-        rcwCourier.setVisibility(View.GONE);
-        rcwInProcess.setVisibility(View.GONE);
-        rcwDelivered.setVisibility(View.GONE);
+        rcvProduct.setVisibility(View.GONE);
+        rcvCourier.setVisibility(View.GONE);
 
         // float button
         FabSpeedDial fabAdd = (FabSpeedDial) findViewById(R.id.float_add_manager);
@@ -175,54 +191,48 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icProduct.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!btnProduct.isActivated()){
-                    rcwProduct.setVisibility(View.VISIBLE);
-                    if(dbProduct.isEmpty())
-                        noProduct.setVisibility(View.VISIBLE);
-                }else {
-                    rcwProduct.setVisibility(View.GONE);
-                    rcwPending.setVisibility(View.GONE);
-                    rcwCourier.setVisibility(View.GONE);
-                    rcwInProcess.setVisibility(View.GONE);
-                    rcwDelivered.setVisibility(View.GONE);
-                }
-                btnProduct.setActivated(!btnProduct.isActivated());
-                if(btnCourier.isActivated()) btnCourier.setActivated(false);
-                if(btnDelivered.isActivated()) btnDelivered.setActivated(false);
-                if(btnInProcess.isActivated()) btnInProcess.setActivated(false);
-                if(btnPending.isActivated()) btnPending.setActivated(false);
-                noPending.setVisibility(View.GONE);
-                noCourier.setVisibility(View.GONE);
-                noInProcess.setVisibility(View.GONE);
-                noDelivered.setVisibility(View.GONE);
+                // Product show
+                rcvProduct.setVisibility(View.VISIBLE);
+                rlProduct.setVisibility(View.VISIBLE);
+                // Courier Hide
+                rcvCourier.setVisibility(View.GONE);
+                rlCourier.setVisibility(View.GONE);
+                // Delivery Hide
+                rcvDelivery.setVisibility(View.GONE);
+                rlDelivery.setVisibility(View.GONE);
             }
         }));
 
-        btnProduct.setOnClickListener((new View.OnClickListener() {
+        icDelivery.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!btnProduct.isActivated()){
-                    rcwProduct.setVisibility(View.VISIBLE);
-                    if(dbProduct.isEmpty())
-                        noProduct.setVisibility(View.VISIBLE);
-                }else {
-                    rcwProduct.setVisibility(View.GONE);
-                    rcwPending.setVisibility(View.GONE);
-                    rcwCourier.setVisibility(View.GONE);
-                    rcwInProcess.setVisibility(View.GONE);
-                    rcwDelivered.setVisibility(View.GONE);
-                }
-                btnProduct.setActivated(!btnProduct.isActivated());
-                if(btnCourier.isActivated()) btnCourier.setActivated(false);
-                if(btnDelivered.isActivated()) btnDelivered.setActivated(false);
-                if(btnInProcess.isActivated()) btnInProcess.setActivated(false);
-                if(btnPending.isActivated()) btnPending.setActivated(false);
-                noPending.setVisibility(View.GONE);
-                noCourier.setVisibility(View.GONE);
-                noInProcess.setVisibility(View.GONE);
-                noDelivered.setVisibility(View.GONE);
+                // Product hide
+                rcvProduct.setVisibility(View.GONE);
+                rlProduct.setVisibility(View.GONE);
+                // Courier Hide
+                rcvCourier.setVisibility(View.GONE);
+                rlCourier.setVisibility(View.GONE);
+                // Delivery show
+                rcvDelivery.setVisibility(View.VISIBLE);
+                rlDelivery.setVisibility(View.VISIBLE);
             }
         }));
+
+        icCourier.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Product hide
+                rcvProduct.setVisibility(View.GONE);
+                rlProduct.setVisibility(View.GONE);
+                // Courier show
+                rcvCourier.setVisibility(View.VISIBLE);
+                rlCourier.setVisibility(View.VISIBLE);
+                // Delivery hide
+                rcvDelivery.setVisibility(View.GONE);
+                rlDelivery.setVisibility(View.GONE);
+            }
+        }));
+
     }
 
     private void initRecyclerItems(){
@@ -233,7 +243,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     }
 
     private void initProductsRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_manager_products);
+        RecyclerView recyclerView = findViewById(R.id.rcv_manager_product);
         RecyclerViewManagerProduct adapter = new RecyclerViewManagerProduct(this, dbProduct);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

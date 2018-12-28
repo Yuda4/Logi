@@ -31,128 +31,102 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_pending_approval"
-                        style="@style/Widget.AppCompat.Button.Borderless"
+                    <RelativeLayout
+                        android:id="@+id/rl_delivery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:drawableEnd="@drawable/expended_button"
-                        android:gravity="start"
-                        android:text="@string/pending_approval"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textSize="20sp" />
+                        android:layout_gravity="center">
+
+                        <Spinner
+                            android:id="@+id/spinner_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_toStartOf="@+id/btn_new_delivery"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp" />
+
+                        <Button
+                            android:id="@+id/btn_new_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="29dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/colorPrimaryDark"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/new_delivery" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_courier"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <Button
+                            android:id="@+id/btn_new_courier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="29dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/colorPrimaryDark"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/new_courier" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <Button
+                            android:id="@+id/btn_new_product"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="29dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/colorPrimaryDark"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="New Product" />
+                    </RelativeLayout>
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/recycler_view_manager_panding"/>
-
-                    <TextView
-                        android:id="@+id/no_panding_approval"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_panding"
-                        android:gravity="center"
-                        android:visibility="gone"/>
-
-                    <Button
-                        android:id="@+id/btn_in_process"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:drawableEnd="@drawable/expended_button"
-                        android:gravity="start"
-                        android:text="@string/in_process"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textSize="20sp" />
+                        android:id="@+id/rcv_manager_delivery"/>
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/recycler_view_manager_process"/>
-
-                    <TextView
-                        android:id="@+id/no_in_process"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_panding"
-                        android:gravity="center"
-                        android:visibility="gone"/>
-
-                    <Button
-                        android:id="@+id/btn_delivered"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:drawableEnd="@drawable/expended_button"
-                        android:gravity="start"
-                        android:text="@string/delivered"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textSize="20sp" />
+                        android:id="@+id/rcv_manager_courier"/>
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/recycler_view_manager_delivered"/>
+                        android:id="@+id/rcv_manager_product" />
 
                     <TextView
-                        android:id="@+id/no_delivered"
+                        android:id="@+id/no_item_to_show"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/no_panding"
-                        android:gravity="center"
-                        android:visibility="gone"/>
-
-                    <Button
-                        android:id="@+id/btn_courier"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:drawableEnd="@drawable/expended_button"
-                        android:gravity="start"
-                        android:text="@string/courier"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textSize="20sp" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recycler_view_manager_courier"/>
-
-                    <TextView
-                        android:id="@+id/no_Courier"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_courier_associate"
-                        android:gravity="center"
-                        android:visibility="gone"/>
-
-                    <Button
-                        android:id="@+id/btn_products"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:drawableEnd="@drawable/expended_button"
-                        android:gravity="start"
-                        android:text="@string/products"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textSize="20sp" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recycler_view_manager_products" />
-
-                    <TextView
-                        android:id="@+id/no_products"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_products"
+                        android:text="@string/no_item_to_show"
                         android:gravity="center"
                         android:visibility="gone"/>
 
