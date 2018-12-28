@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class RecyclerViewProfile extends RecyclerView.Adapter<RecyclerViewProfile.ViewHolder> {
+
     private ArrayList<String> mLable;
     private ArrayList<String> mContent;
     private Context context;

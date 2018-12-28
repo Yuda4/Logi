@@ -1,14 +1,25 @@
 package com.ariel.DeliverySystem;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Delivery {
 	
 	private String deliveryId;
-	private String courierId, customerId, productId;
+
+	private String courierEmail;
+	private String courierPhone;
+	private String customerEmail;
+	private String customerPhone;
+	private String productId;
 	private Date date;
 	private String status;
-	private String productName;
+
+    public Delivery() {
+		// Default constructor required for calls to DataSnapshot.getValue(User.class)
+	}
 
     public String getDeliveryId() {
         return deliveryId;
@@ -18,20 +29,36 @@ public class Delivery {
         this.deliveryId = deliveryId;
     }
 
-    public String getCourierId() {
-        return courierId;
+    public String getCourierEmail() {
+        return courierEmail;
     }
 
-    public void setCourierId(String courierId) {
-        this.courierId = courierId;
+    public void setCourierEmail(String courierEmail) {
+        this.courierEmail = courierEmail;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getCourierPhone() {
+        return courierPhone;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setCourierPhone(String courierPhone) {
+        this.courierPhone = courierPhone;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
     }
 
     public String getProductId() {
@@ -42,14 +69,6 @@ public class Delivery {
         this.productId = productId;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Long date) {
-        this.date.setTime(date);
-    }
-
     public String getStatus() {
         return status;
     }
@@ -58,15 +77,17 @@ public class Delivery {
         this.status = status;
     }
 
-    public String getProductName() {
-        return productName;
+    public Date getDate() {
+        return date;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setDate(String date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
+        try {
+            this.date = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Delivery() {
-		// Default constructor required for calls to DataSnapshot.getValue(User.class)
-	}
 }

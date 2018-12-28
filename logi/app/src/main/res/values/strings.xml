@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">logi</string>
+    <string name="app_name">Logi</string>
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
@@ -14,11 +14,13 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
-    <string name="btn_login">LOGIN</string>
-    <string name="btn_link_to_register">Not a member? Get registered in Logi now!</string>
-    <string name="btn_link_to_login">Already registered. Login Me!</string>
+    <string name="btn_login">Login</string>
+    <string name="sub_logo_first">Get the content ready</string>
+    <string name="sub_logo_second">we will do the rest</string>
+    <string name="btn_link_to_register">Not register? Sign up</string>
+    <string name="btn_link_to_login">Already registered? Log me in!</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
-    <string name="btn_forgot_password">Forgot your password?</string>
+    <string name="btn_forgot_password">Forgot Password?</string>
     <string name="btn_reset_password">Reset Password</string>
     <string name="btn_back"><![CDATA[<< Back]]></string>
     <string name="hint_new_email">New Email</string>
@@ -47,13 +49,13 @@
     <string name="hour">hour</string>
     <string name="your_favorite_date">favorite_date</string>
     <string name="date">date</string>
-    <string name="CustomerActivity">CustomerActivity</string>
+    <string name="CustomerActivity">Customer</string>
+    <string name="CourierActivity">Courier</string>
     <string name="recycler_content">content</string>
     <string name="recycler_label">label:</string>
-    <string name="panding_approval">Panding Approval</string>
+    <string name="pending_approval">Pending Approval</string>
     <string name="in_process">In Process</string>
     <string name="delivered">Delivered</string>
-    <string name="courier">Courier</string>
     <string name="recycler_delivery_name">recycler_delivery_name</string>
     <string name="recycler_delivery_id">recycler_delivery_id</string>
     <string name="delivery_info_button">delivery info button</string>
@@ -65,4 +67,9 @@
     <string name="courier_icon">courier icon</string>
     <string name="delivery">Delivery</string>
     <string name="products">Products</string>
+    <string name="courier">Couriers</string>
+    <string name="name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="manager_radio_btn">Manager</string>
+    <string name="customer_radio_btn">Customer</string>
 </resources>

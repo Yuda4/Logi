@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,8 +22,8 @@ import android.widget.Toast;
 
 import com.ariel.DeliverySystem.Delivery;
 import com.ariel.Storage.Product;
-import com.ariel.User.Manager;
 import com.ariel.User.User;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +43,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private DatabaseReference mDatabaseDelivery;
     private DatabaseReference mDatabaseProduct;
     private DatabaseReference mDatabaseCourier;
+
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     private DrawerLayout drawerLayout;
@@ -153,7 +155,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                         Toast.makeText(ManagerActivity.this, "Add Delivery Press!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_courier:
-                        Toast.makeText(ManagerActivity.this, "Add Courier Press!", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(ManagerActivity.this, CreateCourier.class));
+//                        Toast.makeText(ManagerActivity.this, "Add Courier Press!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_product:
                         Toast.makeText(ManagerActivity.this, "Add Product Press!", Toast.LENGTH_SHORT).show();
@@ -325,4 +329,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     public void signOut() {
         auth.signOut();
     }
+
+
 }

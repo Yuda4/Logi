@@ -61,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         emailTextView = (TextView) findViewById(R.id.email_textView);
 
         user = new User();
+
         mContent = new ArrayList<String>();
         mLable = new ArrayList<String>();
         initRecyclerItems();
@@ -170,11 +171,11 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 emailTextView.setText(user.getEmail());
                 nameTextView.setText(user.getName());
                 Toast.makeText(ProfileActivity.this, "Your email is " + user.getEmail(), Toast.LENGTH_SHORT ).show();
-
             }
         }
         //}
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -47,6 +47,9 @@
             android:label="@string/CustomerActivity" />
         <activity android:name=".ManagerActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".CourierActivity"
+            android:label="@string/CourierActivity" />
+        <activity android:name=".CreateCourier"></activity>
     </application>
 
 </manifest>

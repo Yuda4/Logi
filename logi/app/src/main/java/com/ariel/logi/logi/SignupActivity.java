@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,8 +28,8 @@ public class SignupActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseDatabase database;
 
-    private EditText inputEmail, inputPassword;
-    private Button btnSignIn, btnSignUp, btnResetPassword;
+    private EditText inputEmail, inputPassword, inputName, inputPhoneNumber;
+    private Button btnSignIn, btnSignUp;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
 
@@ -45,15 +48,12 @@ public class SignupActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
+        inputName = (EditText) findViewById(R.id.name);
+        inputPhoneNumber = (EditText) findViewById(R.id.phone_number);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
+        final AlphaAnimation buttonClicked = new AlphaAnimation(0.2F, 0.8F);
 
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignupActivity.this, ResetPasswordActivity.class));
-            }
-        });
+        final RadioGroup rg = (RadioGroup) findViewById(R.id.type_radio_group);
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,9 +65,14 @@ public class SignupActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(buttonClicked);
+                RadioButton selectedButton = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
 
+                final String type = selectedButton.getText().toString();
                 final String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                final String name = inputName.getText().toString().trim();
+                final String phoneNumber = inputPhoneNumber.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -83,6 +88,22 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if (TextUtils.isEmpty(name)) {
+                    Toast.makeText(getApplicationContext(), "Enter your name!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(phoneNumber)) {
+                    Toast.makeText(getApplicationContext(), "Enter phone!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (phoneNumber.length() != 10 ) {
+                    Toast.makeText(getApplicationContext(), "Invalid phone number!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 progressBar.setVisibility(View.VISIBLE);
                 //create user
@@ -102,6 +123,13 @@ public class SignupActivity extends AppCompatActivity {
                                     // Write to database
                                     String userUid = auth.getCurrentUser().getUid();
                                     mDatabase.child("users").child(userUid).child("email").setValue(email);
+                                    mDatabase.child("users").child(userUid).child("name").setValue(name);
+                                    mDatabase.child("users").child(userUid).child("phone").setValue(phoneNumber);
+                                    mDatabase.child("users").child(userUid).child("type").setValue(type);
+                                    mDatabase.child("users").child(userUid).child("address").setValue("Please fill");
+                                    mDatabase.child("users").child(userUid).child("city").setValue("Please fill");
+                                    mDatabase.child("users").child(userUid).child("country").setValue("Please fill");
+                                    mDatabase.child("users").child(userUid).child("zip_code").setValue(0);
                                     Log.i(TAG, "Add data to database succeded!");
                                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                     finish();

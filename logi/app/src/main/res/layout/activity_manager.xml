@@ -46,7 +46,7 @@
                     android:layout_marginTop="16dp"
                     android:drawableEnd="@drawable/expended_button"
                     android:gravity="start"
-                    android:text="@string/panding_approval"
+                    android:text="@string/pending_approval"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
 
