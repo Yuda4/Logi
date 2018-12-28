@@ -52,6 +52,17 @@
     <string name="recycler_label">label:</string>
     <string name="panding_approval">Panding Approval</string>
     <string name="in_process">In Process</string>
-    <string name="deliverd">Deliverd</string>
+    <string name="delivered">Delivered</string>
     <string name="courier">Courier</string>
+    <string name="recycler_delivery_name">recycler_delivery_name</string>
+    <string name="recycler_delivery_id">recycler_delivery_id</string>
+    <string name="delivery_info_button">delivery info button</string>
+    <string name="no_panding">No Panding</string>
+    <string name="product_name">product name</string>
+    <string name="product_id">product id</string>
+    <string name="product_description">product description</string>
+    <string name="no_courier_associate">No Courier Associate</string>
+    <string name="courier_icon">courier icon</string>
+    <string name="delivery">Delivery</string>
+    <string name="products">Products</string>
 </resources>

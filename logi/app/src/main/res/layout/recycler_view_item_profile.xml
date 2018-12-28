@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/parent_recycler_profile_card_view"
     android:padding="15dp"
-    android:id="@+id/parent_recycler_profile">
+    card_view:cardCornerRadius="5dp"
+    android:layout_gravity="top"
+    card_view:contentPadding="15dp"
+    android:layout_margin="3dp"
+    card_view:cardElevation="3dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/recycler_label"
-        android:id="@+id/label_item"
-        android:layout_centerVertical="true"
-        android:textSize="18sp"/>
+        android:orientation="horizontal"
+        android:id="@+id/child_recycler_profile_linear_layout">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recycler_content"
-        android:textSize="18sp"
-        android:layout_toEndOf="@id/label_item"
-        android:layout_marginStart="10dp"
-        android:layout_centerVertical="true"
-        android:id="@+id/content_item"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recycler_label"
+            android:id="@+id/label_item"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recycler_content"
+            android:textSize="18sp"
+            android:layout_toEndOf="@id/label_item"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/content_item"/>
+    </LinearLayout>
 
-</RelativeLayout>
+</android.support.v7.widget.CardView>

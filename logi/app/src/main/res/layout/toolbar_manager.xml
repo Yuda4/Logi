@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/toolbar_manager"
+    android:minHeight="?attr/actionBarSize">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+    <TextView
+        android:id="@+id/ic_product"
+        android:drawableTop="@drawable/ic_product"
+        android:paddingStart="10dp"
+        android:paddingEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/products"/>
+
+    <TextView
+        android:id="@+id/ic_courier"
+        android:paddingStart="10dp"
+        android:paddingEnd="40dp"
+        android:drawableTop="@drawable/ic_courier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/courier"/>
+
+    <TextView
+        android:id="@+id/ic_delivery"
+        android:paddingStart="10dp"
+        android:paddingEnd="40dp"
+        android:drawableTop="@drawable/ic_delivery_truck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delivery"/>
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

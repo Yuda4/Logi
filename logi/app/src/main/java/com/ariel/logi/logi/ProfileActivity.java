@@ -41,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     private ArrayList<String> mLable;
     private ArrayList<String> mContent;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         nameTextView = (TextView) findViewById(R.id.name_textView);
         emailTextView = (TextView) findViewById(R.id.email_textView);
 
+        user = new User();
         mContent = new ArrayList<String>();
         mLable = new ArrayList<String>();
         initRecyclerItems();
@@ -75,8 +77,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
+                FirebaseUser fuser = firebaseAuth.getCurrentUser();
+                if (fuser == null) {
                     // user auth state is changed - user is null
                     // launch login activity
                     startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
@@ -151,22 +153,27 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     }
 
     private void ShowData(DataSnapshot dataSnapshot) {
-        User user = new User();
         //for (DataSnapshot ds: dataSnapshot.getChildren()){
         String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        user = dataSnapshot.child(userID).getValue(User.class);
-        if (user != null) {
-            user.setUserId(userID);
-            mContent.set(0, user.getName());
-            mContent.set(1, user.getEmail());
-            mContent.set(2, user.getPhone());
-            emailTextView.setText(user.getEmail());
-            nameTextView.setText(user.getName());
+        if(dataSnapshot.exists() && dataSnapshot.child(userID).exists()){
+            user = dataSnapshot.child(userID).getValue(User.class);
+            if (user != null) {
+                user.setUserId(userID);
+                mContent.set(0, user.getName());
+                mContent.set(1, user.getEmail());
+                mContent.set(2, user.getPhone());
+                mContent.set(3, user.getType());
+                mContent.set(4, user.getCountry());
+                mContent.set(5, user.getCity());
+                mContent.set(6, user.getAddress());
+                mContent.set(7, user.getZip_code().toString());
+                emailTextView.setText(user.getEmail());
+                nameTextView.setText(user.getName());
+                Toast.makeText(ProfileActivity.this, "Your email is " + user.getEmail(), Toast.LENGTH_SHORT ).show();
+
+            }
         }
         //}
-        if (user != null)
-            Toast.makeText(ProfileActivity.this, "Your email is " + user.getEmail(), Toast.LENGTH_SHORT ).show();
-
     }
 
     @Override

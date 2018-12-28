@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp"
+    android:id="@+id/recycler_parent_card_view"
+    card_view:cardCornerRadius="5dp"
+    android:layout_gravity="top"
+    card_view:contentPadding="15dp"
+    android:layout_margin="3dp"
+    card_view:cardElevation="5dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/recycler_child_linear_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recycler_delivery_name"
+            android:id="@+id/recycler_delivery_name_item"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recycler_delivery_id"
+            android:id="@+id/recycler_delivery_id_item"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_info_outline_black_24dp"
+        android:contentDescription="@string/delivery_info_button"
+        android:id="@+id/recycler_info_imag"/>
+
+</android.support.v7.widget.CardView>

@@ -1,80 +1,36 @@
 package com.ariel.Storage;
 
 public class Product {
-	static long PRODUCTID = 102172;
-	long productId;
-	String name, desc;
-	int amount;
+	private String product_id;
+	private String name, description;
 
+	public String getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(String product_id) {
+		this.product_id = product_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public Product() {
 		// Default constructor required for calls to DataSnapshot.getValue(User.class)
 	}
 
-
-	Product(String name, String desc, int amount){
-		this.productId = this.PRODUCTID;
-		this.PRODUCTID++;
-		if(setName(name)) this.name = name;
-		if(setAmount(amount)) this.amount = amount;
-		this.desc = desc;
-	}
-	
-	Product (Product other){
-		this.PRODUCTID = other.PRODUCTID;
-		this.name = other.name;
-		this.desc = other.desc;
-		this.amount = other.amount;
-	}
-	
-	public long getProductId() {
-		return this.productId;
-	}
-	
-	public String getName() {
-		return this.name;
-	}
-	
-	public String getDesc() {
-		return this.desc;
-	}
-	
-	public int getAmount() {
-		return this.amount;
-	}
-	
-	public boolean setName(String name) {
-		if(name == null || name.isEmpty() || name.trim().isEmpty()) {
-			System.out.println("You should enter a valid name");
-			return false;
-		}
-		this.name = name;
-		return true;
-	}
-	
-	public boolean setDesc(String desc) {
-		if(desc == null || desc.isEmpty() || desc.trim().isEmpty()) {
-			System.out.println("You should enter a valid description");
-			return false;
-		}
-		this.desc = desc;
-		return true;
-	}
-	
-	public boolean setAmount(int amount) {
-		if(amount < 0) {
-			return false;
-		}
-		this.amount = amount;
-		return true;
-	}
-	
-	public String getDetails() {
-		return ("Product name: " + this.name + ", desc: "+ this.desc + ", amount: "+ this.amount);
-	}
-	
-	public String toString() {
-		return ("Product name: " + this.name + ", desc: "+ this.desc + ", amount: "+ this.amount);
-	}
 	
 }

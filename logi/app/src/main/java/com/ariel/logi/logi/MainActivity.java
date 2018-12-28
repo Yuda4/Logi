@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private  NavigationView navigationView;
     TextView viewName;
     TextView viewEmail;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         viewName = (TextView) findViewById(R.id.navigator_name);
         viewEmail = (TextView) findViewById(R.id.navigator_email);
+        user = new User();
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -59,13 +61,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDatabaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
         //get current user
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
+                FirebaseUser fuser = firebaseAuth.getCurrentUser();
+                if (fuser == null) {
                     // user auth state is changed - user is null
                     // launch login activity
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -113,18 +115,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void ShowData(DataSnapshot dataSnapshot) {
-        User user = new User();
         //for (DataSnapshot ds: dataSnapshot.getChildren()){
         String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        user = dataSnapshot.child(userID).getValue(User.class);
-        if (user != null) {
-            user.setUserId(userID);
+        if(dataSnapshot.exists()){
+            user = dataSnapshot.child(userID).getValue(User.class);
+            if (user != null) {
+                user.setUserId(userID);
 //            viewName.setText(user.getName());
 //            viewEmail.setText(user.getEmail());
-            if(user.getType().equalsIgnoreCase("manager")){
-                startActivity(new Intent(MainActivity.this, ManagerActivity.class));
+                getIntent();
+                if(user.getType() != null && user.getType().equalsIgnoreCase("manager")){
+                    startActivity(new Intent(MainActivity.this, ManagerActivity.class));
+                }
             }
         }
+
         //}
     }
 

@@ -26,8 +26,11 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+
     // float button design
     implementation 'io.github.yavski:fab-speed-dial:1.0.6'
+
     // firebase features
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
     implementation 'com.google.firebase:firebase-core:16.0.1'

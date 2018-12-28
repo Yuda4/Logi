@@ -4,56 +4,69 @@ import java.util.Date;
 
 public class Delivery {
 	
-	private long DELIVERYID = 4652822;
-	long deliveryId;
-	private long courierId, customerId, productId;
+	private String deliveryId;
+	private String courierId, customerId, productId;
 	private Date date;
-	private String status = "Order placed";
+	private String status;
+	private String productName;
 
-	public Delivery() {
+    public String getDeliveryId() {
+        return deliveryId;
+    }
+
+    public void setDeliveryId(String deliveryId) {
+        this.deliveryId = deliveryId;
+    }
+
+    public String getCourierId() {
+        return courierId;
+    }
+
+    public void setCourierId(String courierId) {
+        this.courierId = courierId;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Long date) {
+        this.date.setTime(date);
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Delivery() {
 		// Default constructor required for calls to DataSnapshot.getValue(User.class)
 	}
-	
-	Delivery(long courierId, long customerId, long productId, Date date, String status){
-		this.deliveryId = this.DELIVERYID;
-		this.DELIVERYID++;
-		
-	}
-	
-	public long getDeliveryId() {
-		return 1;
-	}
-	
-	public boolean setCourierId(long courierId){
-		return true;
-	}
-	
-	public boolean setProductId(long productId){
-		return true;
-	}
-	
-	public boolean setDate(Date date) {
-		if(this.date.before(date)) {
-			System.out.println("Invalid date");
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean setStatus(long deliveryId) {
-		return true;
-	}
-	
-	public String getDetails() {
-		return "s";
-	}
-	
-	
-	public static void main(String[] args) {
-		Date today = new Date();
-		System.out.println(today);
-		
-	}
-	
-
 }

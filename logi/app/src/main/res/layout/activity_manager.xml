@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayoutManager"
-    tools:context=".ManagerActivity">
+    tools:context=".ManagerActivity"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
@@ -14,14 +15,21 @@
         android:layout_width="wrap_content"
         app:menu="@menu/navigation_menu"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         android:background="@color/white"
         app:itemIconTint="@color/darkgray"
         app:itemTextColor="@color/darkgray"/>
+
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar_manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ScrollView
+            android:paddingTop="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -42,6 +50,19 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_view_manager_panding"/>
+
+                <TextView
+                    android:id="@+id/no_panding_approval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_panding"
+                    android:gravity="center"
+                    android:visibility="gone"/>
+
                 <Button
                     android:id="@+id/btn_in_process"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -54,17 +75,43 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_view_manager_process"/>
+
+                <TextView
+                    android:id="@+id/no_in_process"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_panding"
+                    android:gravity="center"
+                    android:visibility="gone"/>
+
                 <Button
-                    android:id="@+id/btn_deliverd"
+                    android:id="@+id/btn_delivered"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:drawableEnd="@drawable/expended_button"
                     android:gravity="start"
-                    android:text="@string/deliverd"
+                    android:text="@string/delivered"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_view_manager_delivered"/>
+
+                <TextView
+                    android:id="@+id/no_delivered"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_panding"
+                    android:gravity="center"
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/btn_courier"
@@ -78,6 +125,19 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_view_manager_courier"/>
+
+                <TextView
+                    android:id="@+id/no_Courier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_courier_associate"
+                    android:gravity="center"
+                    android:visibility="gone"/>
+
                 <Button
                     android:id="@+id/btn_products"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -86,9 +146,22 @@
                     android:layout_marginTop="16dp"
                     android:drawableEnd="@drawable/expended_button"
                     android:gravity="start"
-                    android:text="Products"
+                    android:text="@string/products"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_view_manager_products" />
+
+                <TextView
+                    android:id="@+id/no_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Products"
+                    android:gravity="center"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
@@ -103,6 +176,7 @@
             app:miniFabBackgroundTint="@android:color/white"
             app:miniFabDrawableTint="@color/colorPrimaryDark"
             app:miniFabTitleTextColor="@color/colorPrimaryDark" />
+
     </FrameLayout>
 
 </android.support.v4.widget.DrawerLayout>

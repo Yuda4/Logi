@@ -2,11 +2,15 @@ package com.ariel.logi.logi;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -47,11 +51,16 @@ public class RecyclerViewProfile extends RecyclerView.Adapter<RecyclerViewProfil
         private TextView label;
         private TextView content;
         RelativeLayout relativeLayout;
+        CardView cardView;
+        LinearLayout linearLayout;
+        ImageButton imageButton;
         public ViewHolder(View itemView) {
             super(itemView);
             label = (TextView) itemView.findViewById(R.id.label_item);
             content = (TextView) itemView.findViewById(R.id.content_item);
-            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.parent_recycler_profile);
+            cardView = (CardView) itemView.findViewById(R.id.parent_recycler_profile_card_view);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.child_recycler_profile_linear_layout);
+
         }
     }
 }

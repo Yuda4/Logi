@@ -40,7 +40,7 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="180dp">
 
                 <android.support.v7.widget.AppCompatImageView
                     android:src="@drawable/user_blank_512"
@@ -67,6 +67,13 @@
                     android:layout_marginStart="2dp"/>
 
             </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="?android:attr/listDivider"
+                android:layout_gravity="bottom"/>
         </FrameLayout>
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
