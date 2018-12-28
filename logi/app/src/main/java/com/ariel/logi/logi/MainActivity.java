@@ -124,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(user.getType().equalsIgnoreCase("manager")){
                 startActivity(new Intent(MainActivity.this, ManagerActivity.class));
             }
+            if(user.getType().equalsIgnoreCase("courier")){
+                startActivity(new Intent(MainActivity.this, CourierActivity.class));
+            }
         }
         //}
     }
@@ -131,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) return true;
-
         return super.onOptionsItemSelected(item);
     }
 

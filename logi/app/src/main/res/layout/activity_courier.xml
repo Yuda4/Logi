@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawerLayoutManager"
-    tools:context=".ManagerActivity">
+    android:id="@+id/drawerLayoutCourier"
+    tools:context=".CourierActivity">
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
-        android:id="@+id/navigation_view_manager"
+        android:id="@+id/navigation_view_courier"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
         app:menu="@menu/navigation_menu"
@@ -17,6 +17,7 @@
         android:background="@color/white"
         app:itemIconTint="@color/darkgray"
         app:itemTextColor="@color/darkgray"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,7 +41,15 @@
                     android:gravity="start"
                     android:text="@string/pending_approval"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/recycler_view_pendding"
+                    android:orientation="horizontal"/>
+
+
 
                 <Button
                     android:id="@+id/btn_in_process"
@@ -54,8 +63,14 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/recycler_view_in_process"
+                    android:orientation="horizontal"/>
+
                 <Button
-                    android:id="@+id/btn_deliverd"
+                    android:id="@+id/btn_delivered"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,43 +81,15 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textSize="20sp" />
 
-                <Button
-                    android:id="@+id/btn_courier"
-                    style="@style/Widget.AppCompat.Button.Borderless"
+                <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableEnd="@drawable/expended_button"
-                    android:gravity="start"
-                    android:text="@string/courier"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:id="@+id/btn_products"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableEnd="@drawable/expended_button"
-                    android:gravity="start"
-                    android:text="Products"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/recycler_view_delivered"
+                    android:orientation="horizontal"/>
 
             </LinearLayout>
 
         </ScrollView>
-        <io.github.yavski.fabspeeddial.FabSpeedDial
-            android:id="@+id/float_add_manager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:fabGravity="bottom_end"
-            app:fabMenu="@menu/float_button_manager"
-            app:miniFabBackgroundTint="@android:color/white"
-            app:miniFabDrawableTint="@color/colorPrimaryDark"
-            app:miniFabTitleTextColor="@color/colorPrimaryDark" />
     </FrameLayout>
 
 </android.support.v4.widget.DrawerLayout>

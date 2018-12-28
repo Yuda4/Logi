@@ -8,10 +8,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-import com.ariel.User.Manager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +26,7 @@ import java.util.Objects;
 import io.github.yavski.fabspeeddial.FabSpeedDial;
 
 public class ManagerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
@@ -81,7 +86,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                         Toast.makeText(ManagerActivity.this, "Add Delivery Press!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_courier:
-                        Toast.makeText(ManagerActivity.this, "Add Courier Press!", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(ManagerActivity.this, CreateCourier.class));
+//                        Toast.makeText(ManagerActivity.this, "Add Courier Press!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_product:
                         Toast.makeText(ManagerActivity.this, "Add Product Press!", Toast.LENGTH_SHORT).show();
@@ -151,4 +158,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     public void signOut() {
         auth.signOut();
     }
+
+
 }

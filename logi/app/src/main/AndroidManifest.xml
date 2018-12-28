@@ -45,7 +45,11 @@
         <activity
             android:name=".CustomerActivity"
             android:label="@string/CustomerActivity" />
-        <activity android:name=".ManagerActivity"></activity>
+        <activity android:name=".ManagerActivity" />
+        <activity
+            android:name=".CourierActivity"
+            android:label="@string/CourierActivity" />
+        <activity android:name=".CreateCourier"></activity>
     </application>
 
 </manifest>

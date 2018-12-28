@@ -6,41 +6,40 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+import com.ariel.DeliverySystem.Delivery;
+
 import java.util.ArrayList;
 
-public class RecyclerViewProfile extends RecyclerView.Adapter<RecyclerViewProfile.ViewHolder> {
+public class RecyclerViewCourier extends RecyclerView.Adapter<RecyclerViewCourier.ViewHolder> {
 
-    private ArrayList<String> mLable;
-    private ArrayList<String> mContent;
+    private ArrayList<Delivery> mContent;
     private Context context;
 
-    public RecyclerViewProfile(Context context, ArrayList<String> mLable, ArrayList<String> mContent) {
+    public RecyclerViewCourier(Context context, ArrayList<Delivery> mContent) {
         this.mContent = mContent;
-        this.mLable = mLable;
         this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item_profile, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item_courier, parent, false);
+        return  new RecyclerViewCourier.ViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.label.setText(mLable.get(position));
-        holder.content.setText(mContent.get(position));
+       // holder.content.setText(mContent.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mLable.size();
+        return mContent.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -52,7 +51,7 @@ public class RecyclerViewProfile extends RecyclerView.Adapter<RecyclerViewProfil
             super(itemView);
             label = (TextView) itemView.findViewById(R.id.label_item);
             content = (TextView) itemView.findViewById(R.id.content_item);
-            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.parent_recycler_profile);
+            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.parent_recycler_courier);
         }
     }
 }

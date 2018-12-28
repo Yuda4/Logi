@@ -1,59 +1,91 @@
 package com.ariel.DeliverySystem;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Delivery {
 	
-	private long DELIVERYID = 4652822;
-	long deliveryId;
-	private long courierId, customerId, productId;
+	private String deliveryId;
+	private String courierEmail;
+	private String courierPhone;
+	private String customerEmail;
+	private String customerPhone;
+	private String productId;
 	private Date date;
-	private String status = "Order placed";
+	private String status;
 
 	public Delivery() {
 		// Default constructor required for calls to DataSnapshot.getValue(User.class)
 	}
-	
-	Delivery(long courierId, long customerId, long productId, Date date, String status){
-		this.deliveryId = this.DELIVERYID;
-		this.DELIVERYID++;
-		
-	}
-	
-	public long getDeliveryId() {
-		return 1;
-	}
-	
-	public boolean setCourierId(long courierId){
-		return true;
-	}
-	
-	public boolean setProductId(long productId){
-		return true;
-	}
-	
-	public boolean setDate(Date date) {
-		if(this.date.before(date)) {
-			System.out.println("Invalid date");
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean setStatus(long deliveryId) {
-		return true;
-	}
-	
-	public String getDetails() {
-		return "s";
-	}
-	
-	
-	public static void main(String[] args) {
-		Date today = new Date();
-		System.out.println(today);
-		
-	}
-	
 
+    public String getDeliveryId() {
+        return deliveryId;
+    }
+
+    public void setDeliveryId(String deliveryId) {
+        this.deliveryId = deliveryId;
+    }
+
+    public String getCourierEmail() {
+        return courierEmail;
+    }
+
+    public void setCourierEmail(String courierEmail) {
+        this.courierEmail = courierEmail;
+    }
+
+    public String getCourierPhone() {
+        return courierPhone;
+    }
+
+    public void setCourierPhone(String courierPhone) {
+        this.courierPhone = courierPhone;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
+        try {
+            this.date = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

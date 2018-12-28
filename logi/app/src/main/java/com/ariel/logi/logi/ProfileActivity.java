@@ -59,6 +59,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         nameTextView = (TextView) findViewById(R.id.name_textView);
         emailTextView = (TextView) findViewById(R.id.email_textView);
 
+
         mContent = new ArrayList<String>();
         mLable = new ArrayList<String>();
         initRecyclerItems();
@@ -160,6 +161,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             mContent.set(0, user.getName());
             mContent.set(1, user.getEmail());
             mContent.set(2, user.getPhone());
+            mContent.set(3, user.getType());
+            mContent.set(4, user.getCountry());
+            mContent.set(5, user.getCity());
+            mContent.set(6, user.getAddress());
+            mContent.set(7, Long.toString(user.getZip_code()));
+
             emailTextView.setText(user.getEmail());
             nameTextView.setText(user.getName());
         }
@@ -168,6 +175,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             Toast.makeText(ProfileActivity.this, "Your email is " + user.getEmail(), Toast.LENGTH_SHORT ).show();
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
