@@ -7,6 +7,172 @@
     android:id="@+id/drawerLayoutManager"
     tools:context=".ManagerActivity"
     android:fitsSystemWindows="true">
+    <!--tools:openDrawer="start"-->
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_pending_approval"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawableEnd="@drawable/expended_button"
+                        android:gravity="start"
+                        android:text="@string/pending_approval"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textSize="20sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recycler_view_manager_panding"/>
+
+                    <TextView
+                        android:id="@+id/no_panding_approval"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_panding"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_in_process"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawableEnd="@drawable/expended_button"
+                        android:gravity="start"
+                        android:text="@string/in_process"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textSize="20sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recycler_view_manager_process"/>
+
+                    <TextView
+                        android:id="@+id/no_in_process"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_panding"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_delivered"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawableEnd="@drawable/expended_button"
+                        android:gravity="start"
+                        android:text="@string/delivered"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textSize="20sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recycler_view_manager_delivered"/>
+
+                    <TextView
+                        android:id="@+id/no_delivered"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_panding"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_courier"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawableEnd="@drawable/expended_button"
+                        android:gravity="start"
+                        android:text="@string/courier"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textSize="20sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recycler_view_manager_courier"/>
+
+                    <TextView
+                        android:id="@+id/no_Courier"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_courier_associate"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_products"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawableEnd="@drawable/expended_button"
+                        android:gravity="start"
+                        android:text="@string/products"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textSize="20sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recycler_view_manager_products" />
+
+                    <TextView
+                        android:id="@+id/no_products"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_products"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+            <io.github.yavski.fabspeeddial.FabSpeedDial
+                android:id="@+id/float_add_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                app:fabGravity="bottom_end"
+                app:fabMenu="@menu/float_button_manager"
+                app:miniFabBackgroundTint="@color/colorPrimary"
+                app:miniFabDrawableTint="@color/colorPrimaryDark"
+                app:miniFabTitleTextColor="@color/colorPrimaryDark" />
+
+        </FrameLayout>
+    </LinearLayout>
+
 
     <android.support.design.widget.NavigationView
         app:headerLayout="@layout/header"
@@ -20,163 +186,5 @@
         app:itemIconTint="@color/darkgray"
         app:itemTextColor="@color/darkgray"/>
 
-    <FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-        <include layout="@layout/toolbar_manager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ScrollView
-            android:paddingTop="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_pending_approval"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableEnd="@drawable/expended_button"
-                    android:gravity="start"
-                    android:text="@string/pending_approval"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler_view_manager_panding"/>
-
-                <TextView
-                    android:id="@+id/no_panding_approval"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_panding"
-                    android:gravity="center"
-                    android:visibility="gone"/>
-
-                <Button
-                    android:id="@+id/btn_in_process"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableEnd="@drawable/expended_button"
-                    android:gravity="start"
-                    android:text="@string/in_process"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler_view_manager_process"/>
-
-                <TextView
-                    android:id="@+id/no_in_process"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_panding"
-                    android:gravity="center"
-                    android:visibility="gone"/>
-
-                <Button
-                    android:id="@+id/btn_delivered"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableEnd="@drawable/expended_button"
-                    android:gravity="start"
-                    android:text="@string/delivered"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler_view_manager_delivered"/>
-
-                <TextView
-                    android:id="@+id/no_delivered"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_panding"
-                    android:gravity="center"
-                    android:visibility="gone"/>
-
-                <Button
-                    android:id="@+id/btn_courier"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableEnd="@drawable/expended_button"
-                    android:gravity="start"
-                    android:text="@string/courier"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler_view_manager_courier"/>
-
-                <TextView
-                    android:id="@+id/no_Courier"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_courier_associate"
-                    android:gravity="center"
-                    android:visibility="gone"/>
-
-                <Button
-                    android:id="@+id/btn_products"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableEnd="@drawable/expended_button"
-                    android:gravity="start"
-                    android:text="@string/products"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textSize="20sp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recycler_view_manager_products" />
-
-                <TextView
-                    android:id="@+id/no_products"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="No Products"
-                    android:gravity="center"
-                    android:visibility="gone"/>
-
-            </LinearLayout>
-
-        </ScrollView>
-        <io.github.yavski.fabspeeddial.FabSpeedDial
-            android:id="@+id/float_add_manager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:fabGravity="bottom_end"
-            app:fabMenu="@menu/float_button_manager"
-            app:miniFabBackgroundTint="@android:color/white"
-            app:miniFabDrawableTint="@color/colorPrimaryDark"
-            app:miniFabTitleTextColor="@color/colorPrimaryDark" />
-
-    </FrameLayout>
 
 </android.support.v4.widget.DrawerLayout>

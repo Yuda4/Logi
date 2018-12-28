@@ -36,7 +36,7 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewManagerDelivery.ViewHolder holder, int position) {
-        holder.name.setText(mDelivery.get(position).getProductName());
+        holder.name.setText(mDelivery.get(position).getDeliveryId());
         holder.id.setText(mDelivery.get(position).getDeliveryId());
     }
 
