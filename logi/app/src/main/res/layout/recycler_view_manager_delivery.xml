@@ -12,16 +12,16 @@
     android:layout_margin="3dp"
     card_view:cardElevation="5dp" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/recycler_child_linear_layout">
+            android:id="@+id/recycler_child_linear_layout"
+            android:layout_alignParentStart="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,7 +63,9 @@
             android:textSize="20sp"
             android:layout_gravity="center"
             android:paddingStart="20dp"
-            android:paddingEnd="10dp"/>
+            android:paddingEnd="20dp"
+            android:paddingTop="25dp"
+            android:layout_toEndOf="@+id/recycler_child_linear_layout"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -71,7 +73,9 @@
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:paddingStart="30dp"
-            android:paddingEnd="5dp">
+            android:paddingEnd="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp">
 
             <ImageButton
                 android:id="@+id/recycler_call_imag"
@@ -85,9 +89,9 @@
                 android:layout_height="50dp"
                 android:src="@drawable/ic_info_outline_black_24dp"
                 android:contentDescription="@string/delivery_info_button"
-                android:id="@+id/recycler_info_imag"/>
+                android:id="@+id/recycler_info_imag" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 
 
