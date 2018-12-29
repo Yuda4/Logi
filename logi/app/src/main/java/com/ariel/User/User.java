@@ -14,6 +14,11 @@ public class User implements Parcelable {
     protected String city;
     protected String address;
     protected Long zip_code;
+    protected String type;
+
+    public User() {
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
 
     public Long getZip_code() {
         return zip_code;
@@ -22,9 +27,6 @@ public class User implements Parcelable {
     public void setZip_code(Long zip_code) {
         this.zip_code = zip_code;
     }
-
-    protected String type;
-
 
 
     public String getCountry() {
@@ -68,9 +70,7 @@ public class User implements Parcelable {
 		
 	}
 
-	public User() {
-		// Default constructor required for calls to DataSnapshot.getValue(User.class)
-	}
+
 
 	// getter
 	public String getEmail() {
