@@ -1,6 +1,9 @@
 package com.ariel.logi.logi;
 
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,11 +15,18 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Adapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariel.User.User;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,16 +34,29 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "ProfileActivity";
+    private static final int IMAGE_REQUEST = 1;
 
     private DatabaseReference mDatabaseUsers;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private StorageReference storageRef;
+    private StorageTask uploadTask;
+
+    private Uri imageUri;
+    private CircleImageView profileImg;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private  NavigationView navigationView;
@@ -59,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
         nameTextView = (TextView) findViewById(R.id.name_textView);
         emailTextView = (TextView) findViewById(R.id.email_textView);
+        profileImg = (CircleImageView) findViewById(R.id.profile_image);
 
         user = new User();
 
@@ -72,6 +96,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         //get firebase database instance
         mDatabaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
+        // get firebase storage instance
+        storageRef = FirebaseStorage.getInstance().getReference("uploads");
+
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -80,8 +107,6 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser fuser = firebaseAuth.getCurrentUser();
                 if (fuser == null) {
-                    // user auth state is changed - user is null
-                    // launch login activity
                     startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
                     finish();
                 }
@@ -143,6 +168,89 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+        profileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openImage();
+            }
+        });
+    }
+
+    private void openImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, IMAGE_REQUEST);
+    }
+
+    private String getFileExtension(Uri uri){
+        ContentResolver contentResolver = ProfileActivity.this.getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private void uploadImage(){
+        final ProgressDialog progressDialog = new ProgressDialog(ProfileActivity.this);
+        progressDialog.setTitle("Uploading");
+        progressDialog.show();
+
+        if(imageUri != null){
+            final StorageReference fileReference = storageRef.child(System.currentTimeMillis()
+                    + '.' + getFileExtension(imageUri));
+
+            uploadTask = fileReference.putFile(imageUri);
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task task) throws Exception {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+                    return fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()){
+                        Uri downloadUri = task.getResult();
+                        String mUri = downloadUri.toString();
+
+                        mDatabaseUsers = FirebaseDatabase.getInstance().getReference("users");
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("image_uri", mUri);
+                        mDatabaseUsers.updateChildren(map);
+
+                        progressDialog.dismiss();
+                    }else{
+                        Toast.makeText(ProfileActivity.this, "Failed to upload", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            });
+        }else{
+            Toast.makeText(ProfileActivity.this, "No image selected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null){
+            imageUri = data.getData();
+            if(uploadTask != null && uploadTask.isInProgress()){
+                Toast.makeText(ProfileActivity.this,"Upload is in progress", Toast.LENGTH_SHORT).show();
+            }else{
+                uploadImage();
+            }
+        }
     }
 
     @Override
@@ -170,7 +278,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 mContent.set(7, user.getZip_code().toString());
                 emailTextView.setText(user.getEmail());
                 nameTextView.setText(user.getName());
-                Toast.makeText(ProfileActivity.this, "Your email is " + user.getEmail(), Toast.LENGTH_SHORT ).show();
+                if(user.getImage_uri().equalsIgnoreCase("default")){
+                    profileImg.setImageResource(R.drawable.user_blank_512);
+                }else{
+                    Glide.with(ProfileActivity.this).load(user.getImage_uri()).into(profileImg);
+                }
+                Toast.makeText(ProfileActivity.this, "Welcom " + user.getName(), Toast.LENGTH_SHORT ).show();
             }
         }
         //}

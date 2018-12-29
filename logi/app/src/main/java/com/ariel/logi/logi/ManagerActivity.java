@@ -42,12 +42,15 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 
 import io.github.yavski.fabspeeddial.FabSpeedDial;
 
 public class ManagerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "ManagerActivity";
+
+    private User mUser;
 
     private DatabaseReference mDatabaseDelivery;
     private DatabaseReference mDatabaseProduct;
@@ -62,8 +65,12 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private ArrayList<Product> dbProduct;
     private ArrayList<Delivery> dbDelivery;
 
-    private Button btnNewProduct, btnNewCourier, btnNewDelivery;
     private RecyclerView rcvProduct, rcvCourier, rcvDelivery;
+    private RecyclerViewManagerDelivery adapterDelivery;
+    private RecyclerViewManagerProduct adapterProduct;
+    private RecyclerViewManagerCourier adapterCourier;
+
+    private Button btnNewProduct, btnNewCourier, btnNewDelivery;
     private TextView nothogToShow;
     private TextView icProduct, icDelivery, icCourier;
     private RelativeLayout rlDelivery, rlCourier, rlProduct;
@@ -92,22 +99,12 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         navigationView.bringToFront();
 
+
+
         spinnerDelivery = (Spinner) findViewById(R.id.spinner_delivery);
         adapterDeliverySpinner = ArrayAdapter.createFromResource(this, R.array.filter_delivery, android.R.layout.simple_list_item_1);
         adapterDeliverySpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDelivery.setAdapter(adapterDeliverySpinner);
-        spinnerDelivery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                Toast.makeText(ManagerActivity.this, parent.getItemAtPosition(position) + " selected!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
 
         icCourier = (TextView) findViewById(R.id.ic_toolbar_couriers);
         icDelivery = (TextView) findViewById(R.id.ic_toolbar_deliveries);
@@ -136,11 +133,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         rcvCourier.setVisibility(View.GONE);
 
 
-        initRecyclerItems();
-        initProductsRecyclerView();
-        initDeliveryRecyclerView();
-        initCourierRecyclerView();
-
         if (rcvDelivery.getChildCount() == 0)
             nothogToShow.setVisibility(View.VISIBLE);
         else nothogToShow.setVisibility(View.GONE);
@@ -150,18 +142,14 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
-
-        //get firebase database instance
-        mDatabaseDelivery = FirebaseDatabase.getInstance().getReference("deliveries");
-        mDatabaseProduct = FirebaseDatabase.getInstance().getReference("products");
-        mDatabaseCourier =  FirebaseDatabase.getInstance().getReference("users");
+        mUser = new User();
 
         //get current user
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                mUser.setUserId(user.getUid());
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
@@ -170,6 +158,46 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 }
             }
         };
+
+        initRecyclerItems();
+        initDeliveryRecyclerView();
+        initProductsRecyclerView();
+        initCourierRecyclerView();
+
+        //get firebase database instance
+        mDatabaseDelivery = FirebaseDatabase.getInstance().getReference("deliveries").child(auth.getCurrentUser().getUid());
+        mDatabaseProduct = FirebaseDatabase.getInstance().getReference("products");
+        mDatabaseCourier =  FirebaseDatabase.getInstance().getReference("users");
+
+
+        // Read from the database
+        mDatabaseProduct.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                ShowProductsData(dataSnapshot);
+                adapterProduct.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(ManagerActivity.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        mDatabaseDelivery.addValueEventListener(valueEventListenerDelivery);
+
+        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+
+        mDatabaseCourier.addValueEventListener(valueEventListenerCourier);
+        Query queryCourier = FirebaseDatabase.getInstance().getReference("users")
+                .orderByChild("storage_id")
+                .equalTo(userID);
+
+        queryCourier.addListenerForSingleValueEvent(valueEventListenerCourier);
 
         fabAdd.setMenuListener(new FabSpeedDial.MenuListener() {
             @Override
@@ -256,6 +284,50 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             }
         }));
 
+        spinnerDelivery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                Toast.makeText(ManagerActivity.this, parent.getItemAtPosition(position) + " selected!", Toast.LENGTH_SHORT).show();
+                Query queryDelivery = FirebaseDatabase.getInstance().getReference("users");
+                switch (parent.getItemAtPosition(position).toString()){
+                    case "Pending":
+                        queryDelivery = mDatabaseDelivery.orderByChild("status")
+                                .equalTo("pending");
+
+                        queryDelivery.addListenerForSingleValueEvent(valueEventListenerDelivery);
+
+                        break;
+                    case "In Process":
+                        queryDelivery = mDatabaseDelivery.orderByChild("status")
+                                .equalTo("in process");
+
+                        queryDelivery.addListenerForSingleValueEvent(valueEventListenerDelivery);
+                        break;
+                    case "Delivered":
+                        queryDelivery = mDatabaseDelivery.orderByChild("status")
+                                .equalTo("delivered");
+
+                        queryDelivery.addListenerForSingleValueEvent(valueEventListenerDelivery);
+                        break;
+                    case "By Courier":
+                        queryDelivery = mDatabaseDelivery.orderByChild("courier_email");
+
+                        queryDelivery.addListenerForSingleValueEvent(valueEventListenerDelivery);
+                        break;
+                    case "By Date":
+                        queryDelivery = mDatabaseDelivery.orderByChild("date");
+
+                        queryDelivery.addListenerForSingleValueEvent(valueEventListenerDelivery);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     private void initRecyclerItems(){
@@ -267,22 +339,22 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
     private void initProductsRecyclerView(){
         recyclerViewProduct = findViewById(R.id.rcv_manager_product);
-        RecyclerViewManagerProduct adapter = new RecyclerViewManagerProduct(this, dbProduct);
-        recyclerViewProduct.setAdapter(adapter);
+        adapterProduct = new RecyclerViewManagerProduct(this, dbProduct);
+        recyclerViewProduct.setAdapter(adapterProduct);
         recyclerViewProduct.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void initDeliveryRecyclerView(){
         recyclerViewDelivery = findViewById(R.id.rcv_manager_delivery);
-        RecyclerViewManagerDelivery adapter = new RecyclerViewManagerDelivery(this, dbDelivery);
-        recyclerViewDelivery.setAdapter(adapter);
+        adapterDelivery = new RecyclerViewManagerDelivery(this, dbDelivery);
+        recyclerViewDelivery.setAdapter(adapterDelivery);
         recyclerViewDelivery.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void initCourierRecyclerView(){
         recyclerViewCourier = findViewById(R.id.rcv_manager_courier);
-        RecyclerViewManagerCourier adapter = new RecyclerViewManagerCourier(this, dbCourier);
-        recyclerViewCourier.setAdapter(adapter);
+        adapterCourier = new RecyclerViewManagerCourier(this, dbCourier);
+        recyclerViewCourier.setAdapter(adapterCourier);
         recyclerViewCourier.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -304,50 +376,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
-
-        // Read from the database
-        mDatabaseProduct.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                ShowProductsData(dataSnapshot);
-                initProductsRecyclerView();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Failed to read value
-                Toast.makeText(ManagerActivity.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-        mDatabaseDelivery.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                ShowDeliveryData(dataSnapshot);
-                initDeliveryRecyclerView();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Failed to read value
-                Toast.makeText(ManagerActivity.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-
-        mDatabaseCourier.addValueEventListener(valueEventListenerCourier);
-        Query queryCourier = FirebaseDatabase.getInstance().getReference("users")
-                .orderByChild("storage_id")
-                .equalTo(userID);
-
-        queryCourier.addListenerForSingleValueEvent(valueEventListenerCourier);
     }
 
     ValueEventListener valueEventListenerCourier = new ValueEventListener() {
@@ -356,7 +384,24 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             // This method is called once with the initial value and again
             // whenever data at this location is updated.
             ShowCourierData(dataSnapshot);
-            initCourierRecyclerView();
+            adapterCourier.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            // Failed to read value
+            Toast.makeText(ManagerActivity.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
+            Log.w(TAG, "Failed to read value.", error.toException());
+        }
+    };
+
+    ValueEventListener valueEventListenerDelivery = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            // This method is called once with the initial value and again
+            // whenever data at this location is updated.
+            ShowDeliveryData(dataSnapshot);
+            adapterDelivery.notifyDataSetChanged();
         }
 
         @Override
@@ -368,7 +413,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     };
 
     private void ShowProductsData(DataSnapshot dataSnapshot) {
-        //for (DataSnapshot ds: dataSnapshot.getChildren()){
+        dbProduct.clear();
         String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         if(dataSnapshot.exists() && dataSnapshot.child(userID).exists()){
             for (DataSnapshot ds: dataSnapshot.child(userID).getChildren()){
@@ -376,19 +421,17 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 dbProduct.add(product);
             }
         }
-        //}
     }
 
     private void ShowDeliveryData(DataSnapshot dataSnapshot) {
-        //for (DataSnapshot ds: dataSnapshot.getChildren()){
+        dbDelivery.clear();
         String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        if(dataSnapshot.exists() && dataSnapshot.child(userID).exists()){
-            for (DataSnapshot ds: dataSnapshot.child(userID).getChildren()){
+        if(dataSnapshot.exists()){
+            for (DataSnapshot ds: dataSnapshot.getChildren()){
                 Delivery delivery = ds.getValue(Delivery.class);
                 dbDelivery.add(delivery);
             }
         }
-        //}
     }
 
     private void ShowCourierData(DataSnapshot dataSnapshot) {

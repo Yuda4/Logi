@@ -85,5 +85,5 @@
     <string name="call_courier">call courier</string>
     <string name="courier_phone">Courier Phone</string>
     <string name="courier_email">Courier Email</string>
-
+    <string name="edit_profile_image">Edit profile image</string>
 </resources>

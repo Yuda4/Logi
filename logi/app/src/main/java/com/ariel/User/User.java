@@ -1,9 +1,6 @@
 package com.ariel.User;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class User implements Parcelable {
+public class User {
 
 	//private static long USERID = 17942;
     protected String userId;
@@ -15,9 +12,19 @@ public class User implements Parcelable {
     protected String address;
     protected Long zip_code;
     protected String type;
+    protected String image_uri;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
+
+    public String getImage_uri() {
+        return image_uri;
+    }
+
+    public void setImage_uri(String image_uri) {
+        this.image_uri = image_uri;
+
     }
 
     public Long getZip_code() {
@@ -27,7 +34,6 @@ public class User implements Parcelable {
     public void setZip_code(Long zip_code) {
         this.zip_code = zip_code;
     }
-
 
     public String getCountry() {
         return country;
@@ -61,17 +67,6 @@ public class User implements Parcelable {
         this.type = type;
     }
 
-	User(String name, String email, String phone){
-		//this.userId = this.USERID;
-		//this.USERID++;
-		this.email = email;
-		this.name = name;
-		this.phone = phone;
-		
-	}
-
-
-
 	// getter
 	public String getEmail() {
 		return this.email;
@@ -102,39 +97,4 @@ public class User implements Parcelable {
 
     public void setPhone(String phone) { this.phone = phone; }
 
-	public String toString() {
-		return (this.name + ", " + this.email + ", " + this.phone );
-	}
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(userId);
-        parcel.writeString(email);
-        parcel.writeString(name);
-        parcel.writeString(phone);
-    }
-
-    protected User(Parcel in) {
-        userId = in.readString();
-        email = in.readString();
-        name = in.readString();
-        phone = in.readString();
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 }
