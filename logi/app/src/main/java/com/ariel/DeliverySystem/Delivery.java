@@ -8,12 +8,11 @@ import java.util.Date;
 public class Delivery {
 	
 	private String deliveryId;
-
-	private String courierEmail;
-	private String courierPhone;
-	private String customerEmail;
-	private String customerPhone;
-	private String productId;
+    private String productId;
+    private String courierEmail;
+    private String courierPhone;
+    private String customerEmail;
+    private String customerPhone;
 	private Date date;
 	private String status;
 
@@ -77,8 +76,9 @@ public class Delivery {
         this.status = status;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
+            return dateFormat.format(this.date);
     }
 
     public void setDate(String date) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,7 +15,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 
 import com.ariel.DeliverySystem.Delivery;
 import com.ariel.Storage.Product;
+import com.ariel.User.Courier;
 import com.ariel.User.User;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +38,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -53,18 +58,20 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
 
-    private ArrayList<User> dbCourier;
+    private ArrayList<Courier> dbCourier;
     private ArrayList<Product> dbProduct;
     private ArrayList<Delivery> dbDelivery;
 
     private Button btnNewProduct, btnNewCourier, btnNewDelivery;
-    private  RecyclerView rcvProduct, rcvCourier, rcvDelivery;
+    private RecyclerView rcvProduct, rcvCourier, rcvDelivery;
     private TextView nothogToShow;
     private TextView icProduct, icDelivery, icCourier;
     private RelativeLayout rlDelivery, rlCourier, rlProduct;
+    private RecyclerView recyclerViewProduct, recyclerViewDelivery, recyclerViewCourier;
 
     private Spinner spinnerDelivery;
     private ArrayAdapter<CharSequence> adapterDeliverySpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +99,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         spinnerDelivery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                Toast.makeText(ManagerActivity.this, parent.getItemAtPosition(position) + "selected!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ManagerActivity.this, parent.getItemAtPosition(position) + " selected!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -128,6 +135,16 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         rcvProduct.setVisibility(View.GONE);
         rcvCourier.setVisibility(View.GONE);
 
+
+        initRecyclerItems();
+        initProductsRecyclerView();
+        initDeliveryRecyclerView();
+        initCourierRecyclerView();
+
+        if (rcvDelivery.getChildCount() == 0)
+            nothogToShow.setVisibility(View.VISIBLE);
+        else nothogToShow.setVisibility(View.GONE);
+
         // float button
         FabSpeedDial fabAdd = (FabSpeedDial) findViewById(R.id.float_add_manager);
 
@@ -138,10 +155,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         mDatabaseDelivery = FirebaseDatabase.getInstance().getReference("deliveries");
         mDatabaseProduct = FirebaseDatabase.getInstance().getReference("products");
         mDatabaseCourier =  FirebaseDatabase.getInstance().getReference("users");
-
-        //
-        initRecyclerItems();
-        initProductsRecyclerView();
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -191,6 +204,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icProduct.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (rcvProduct.getChildCount() == 0)
+                    nothogToShow.setVisibility(View.VISIBLE);
+                else nothogToShow.setVisibility(View.GONE);
                 // Product show
                 rcvProduct.setVisibility(View.VISIBLE);
                 rlProduct.setVisibility(View.VISIBLE);
@@ -206,6 +222,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icDelivery.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (rcvDelivery.getChildCount() == 0)
+                    nothogToShow.setVisibility(View.VISIBLE);
+                else nothogToShow.setVisibility(View.GONE);
                 // Product hide
                 rcvProduct.setVisibility(View.GONE);
                 rlProduct.setVisibility(View.GONE);
@@ -221,6 +240,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icCourier.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (rcvCourier.getChildCount() == 0)
+                    nothogToShow.setVisibility(View.VISIBLE);
+                else nothogToShow.setVisibility(View.GONE);
                 // Product hide
                 rcvProduct.setVisibility(View.GONE);
                 rlProduct.setVisibility(View.GONE);
@@ -230,6 +252,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 // Delivery hide
                 rcvDelivery.setVisibility(View.GONE);
                 rlDelivery.setVisibility(View.GONE);
+
             }
         }));
 
@@ -243,10 +266,24 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     }
 
     private void initProductsRecyclerView(){
-        RecyclerView recyclerView = findViewById(R.id.rcv_manager_product);
+        recyclerViewProduct = findViewById(R.id.rcv_manager_product);
         RecyclerViewManagerProduct adapter = new RecyclerViewManagerProduct(this, dbProduct);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewProduct.setAdapter(adapter);
+        recyclerViewProduct.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void initDeliveryRecyclerView(){
+        recyclerViewDelivery = findViewById(R.id.rcv_manager_delivery);
+        RecyclerViewManagerDelivery adapter = new RecyclerViewManagerDelivery(this, dbDelivery);
+        recyclerViewDelivery.setAdapter(adapter);
+        recyclerViewDelivery.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void initCourierRecyclerView(){
+        recyclerViewCourier = findViewById(R.id.rcv_manager_courier);
+        RecyclerViewManagerCourier adapter = new RecyclerViewManagerCourier(this, dbCourier);
+        recyclerViewCourier.setAdapter(adapter);
+        recyclerViewCourier.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -285,15 +322,82 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+        mDatabaseDelivery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                ShowDeliveryData(dataSnapshot);
+                initDeliveryRecyclerView();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Toast.makeText(ManagerActivity.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+
+        mDatabaseCourier.addValueEventListener(valueEventListenerCourier);
+        Query queryCourier = FirebaseDatabase.getInstance().getReference("users")
+                .orderByChild("storage_id")
+                .equalTo(userID);
+
+        queryCourier.addListenerForSingleValueEvent(valueEventListenerCourier);
     }
+
+    ValueEventListener valueEventListenerCourier = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            // This method is called once with the initial value and again
+            // whenever data at this location is updated.
+            ShowCourierData(dataSnapshot);
+            initCourierRecyclerView();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            // Failed to read value
+            Toast.makeText(ManagerActivity.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
+            Log.w(TAG, "Failed to read value.", error.toException());
+        }
+    };
 
     private void ShowProductsData(DataSnapshot dataSnapshot) {
         //for (DataSnapshot ds: dataSnapshot.getChildren()){
         String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        if(dataSnapshot.exists()){
+        if(dataSnapshot.exists() && dataSnapshot.child(userID).exists()){
             for (DataSnapshot ds: dataSnapshot.child(userID).getChildren()){
                 Product product = ds.getValue(Product.class);
                 dbProduct.add(product);
+            }
+        }
+        //}
+    }
+
+    private void ShowDeliveryData(DataSnapshot dataSnapshot) {
+        //for (DataSnapshot ds: dataSnapshot.getChildren()){
+        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+        if(dataSnapshot.exists() && dataSnapshot.child(userID).exists()){
+            for (DataSnapshot ds: dataSnapshot.child(userID).getChildren()){
+                Delivery delivery = ds.getValue(Delivery.class);
+                dbDelivery.add(delivery);
+            }
+        }
+        //}
+    }
+
+    private void ShowCourierData(DataSnapshot dataSnapshot) {
+        //for (DataSnapshot ds: dataSnapshot.getChildren()){
+        dbCourier.clear();
+        if(dataSnapshot.exists()){
+            for (DataSnapshot ds: dataSnapshot.getChildren()){
+                Courier courier = ds.getValue(Courier.class);
+                dbCourier.add(courier);
             }
         }
         //}
@@ -339,6 +443,4 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     public void signOut() {
         auth.signOut();
     }
-
-
 }
