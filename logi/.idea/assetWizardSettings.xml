@@ -77,9 +77,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="228519" />
-                            <entry key="outputName" value="ic_call_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\adiel\Downloads\product.svg" />
+                            <entry key="outputName" value="ic_toolbar_products" />
+                            <entry key="sourceFile" value="F:\הורדות\toolbar_products.svg" />
                           </map>
                         </option>
                       </PersistentState>

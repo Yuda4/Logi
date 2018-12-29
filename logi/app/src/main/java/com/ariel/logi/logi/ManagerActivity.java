@@ -109,9 +109,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         });
 
 
-        icCourier = (TextView) findViewById(R.id.ic_courier);
-        icDelivery = (TextView) findViewById(R.id.ic_delivery);
-        icProduct = (TextView) findViewById(R.id.ic_product);
+        icCourier = (TextView) findViewById(R.id.ic_toolbar_couriers);
+        icDelivery = (TextView) findViewById(R.id.ic_toolbar_deliveries);
+        icProduct = (TextView) findViewById(R.id.ic_toolbar_products);
 
         nothogToShow = (TextView) findViewById(R.id.no_item_to_show);
         nothogToShow.setVisibility(View.GONE);

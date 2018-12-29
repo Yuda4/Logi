@@ -6,38 +6,36 @@
     android:layout_height="wrap_content"
     android:id="@+id/toolbar_manager"
     android:minHeight="?attr/actionBarSize">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:gravity="center">
 
     <TextView
-        android:id="@+id/ic_product"
-        android:drawableTop="@drawable/ic_product"
-        android:paddingStart="10dp"
-        android:paddingEnd="40dp"
+        android:id="@+id/ic_toolbar_products"
+        android:drawableTop="@drawable/ic_toolbar_products"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/products"/>
+        android:text="@string/products"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"/>
 
     <TextView
-        android:id="@+id/ic_courier"
-        android:paddingStart="10dp"
-        android:paddingEnd="40dp"
-        android:drawableTop="@drawable/ic_courier"
+        android:id="@+id/ic_toolbar_couriers"
+        android:drawableTop="@drawable/ic_toolbar_couriers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/courier"/>
+        android:text="@string/courier"
+        android:layout_toStartOf="@+id/ic_toolbar_products"
+        android:layout_marginStart="30dp"/>
 
     <TextView
-        android:id="@+id/ic_delivery"
-        android:paddingStart="10dp"
-        android:paddingEnd="40dp"
-        android:drawableTop="@drawable/ic_delivery_truck"
+        android:id="@+id/ic_toolbar_deliveries"
+        android:drawableTop="@drawable/ic_toolbar_deliveries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delivery"/>
-    </LinearLayout>
+        android:text="@string/delivery"
+        android:layout_toStartOf="@+id/ic_toolbar_couriers"/>
+    </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>
