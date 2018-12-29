@@ -7,12 +7,12 @@ import java.util.Date;
 
 public class Delivery {
 	
-	private String deliveryId;
-    private String productId;
-    private String courierEmail;
-    private String courierPhone;
-    private String customerEmail;
-    private String customerPhone;
+	private String delivery_id;
+    private String product_id;
+    private String courier_email;
+    private String courier_phone;
+    private String customer_email;
+    private String customer_phone;
 	private Date date;
 	private String status;
 
@@ -20,52 +20,52 @@ public class Delivery {
 		// Default constructor required for calls to DataSnapshot.getValue(User.class)
 	}
 
-    public String getDeliveryId() {
-        return deliveryId;
+    public String getDelivery_id() {
+        return delivery_id;
     }
 
-    public void setDeliveryId(String deliveryId) {
-        this.deliveryId = deliveryId;
+    public void setDelivery_id(String delivery_id) {
+        this.delivery_id = delivery_id;
     }
 
-    public String getCourierEmail() {
-        return courierEmail;
+    public String getCourier_email() {
+        return courier_email;
     }
 
-    public void setCourierEmail(String courierEmail) {
-        this.courierEmail = courierEmail;
+    public void setCourier_email(String courier_email) {
+        this.courier_email = courier_email;
     }
 
-    public String getCourierPhone() {
-        return courierPhone;
+    public String getCourier_phone() {
+        return courier_phone;
     }
 
-    public void setCourierPhone(String courierPhone) {
-        this.courierPhone = courierPhone;
+    public void setCourier_phone(String courier_phone) {
+        this.courier_phone = courier_phone;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public String getCustomer_email() {
+        return customer_email;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setCustomer_email(String customer_email) {
+        this.customer_email = customer_email;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getCustomer_phone() {
+        return customer_phone;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setCustomer_phone(String customer_phone) {
+        this.customer_phone = customer_phone;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getProduct_id() {
+        return product_id;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
     }
 
     public String getStatus() {

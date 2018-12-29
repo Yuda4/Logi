@@ -1,7 +1,14 @@
 package com.ariel.logi.logi;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +23,8 @@ import com.ariel.DeliverySystem.Delivery;
 import java.util.ArrayList;
 
 public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerViewManagerDelivery.ViewHolder> {
+    private static final int REQUEST_CALL = 1;
+
     private ArrayList<Delivery> mDelivery;
     private Context context;
 
@@ -32,12 +41,24 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewManagerDelivery.ViewHolder holder, int position) {
-        holder.courierName.setText(mDelivery.get(position).getCourierEmail());
-        holder.customerName.setText(mDelivery.get(position).getCustomerEmail());
+    public void onBindViewHolder(@NonNull RecyclerViewManagerDelivery.ViewHolder holder, final int position) {
+        holder.courierName.setText(mDelivery.get(position).getCourier_email());
+        holder.customerName.setText(mDelivery.get(position).getCustomer_email());
         holder.status.setText(mDelivery.get(position).getStatus());
-        holder.deliveryId.setText(mDelivery.get(position).getDeliveryId());
+        holder.deliveryId.setText(mDelivery.get(position).getDelivery_id());
         holder.deliveryDate.setText(mDelivery.get(position).getDate());
+        holder.imgBtnDial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!mDelivery.get(position).getCustomer_phone().isEmpty() && ContextCompat.checkSelfPermission(context,
+                        android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions((Activity) context,new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+                }else{
+                    String dial = "tel:" + mDelivery.get(position).getCustomer_phone().trim();
+                    context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                }
+            }
+        });
     }
 
     @Override
@@ -54,7 +75,9 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
         private TextView deliveryDate;
         CardView cardView;
         LinearLayout linearLayout;
-        ImageButton imageButton;
+        ImageButton imgBtnInfo;
+        ImageButton imgBtnDial;
+
         public ViewHolder(View itemView) {
             super(itemView);
             courierName = (TextView) itemView.findViewById(R.id.recycler_delivery_courier_name);
@@ -64,7 +87,8 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
             deliveryDate = (TextView) itemView.findViewById(R.id.recycler_delivery_date);
             cardView = (CardView) itemView.findViewById(R.id.recycler_parent_card_view);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.recycler_child_linear_layout);
-            imageButton = (ImageButton) itemView.findViewById(R.id.recycler_info_imag);
+            imgBtnInfo = (ImageButton) itemView.findViewById(R.id.recycler_info_imag);
+            imgBtnDial = (ImageButton) itemView.findViewById(R.id.recycler_call_imag);
         }
     }
 }
