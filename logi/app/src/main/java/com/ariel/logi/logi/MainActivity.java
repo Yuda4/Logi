@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ariel.User.Customer;
 import com.ariel.User.Manager;
 import com.ariel.User.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -121,15 +122,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             user = dataSnapshot.child(userID).getValue(User.class);
             if (user != null) {
                 user.setUserId(userID);
-//            viewName.setText(user.getName());
-//            viewEmail.setText(user.getEmail());
                 getIntent();
                 if(user.getType() != null && user.getType().equalsIgnoreCase("manager")){
                     startActivity(new Intent(MainActivity.this, ManagerActivity.class));
+                } else if(user.getType().equalsIgnoreCase("courier")){
+                    startActivity(new Intent(MainActivity.this, CourierActivity.class));
+                }else{
+                    startActivity(new Intent(MainActivity.this, CustomerActivity.class));
                 }
-            }
-            if(user.getType().equalsIgnoreCase("courier")){
-                startActivity(new Intent(MainActivity.this, CourierActivity.class));
             }
         }
 

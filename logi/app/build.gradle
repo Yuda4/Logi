@@ -31,10 +31,16 @@ dependencies {
     // float button design
     implementation 'io.github.yavski:fab-speed-dial:1.0.6'
 
+    // circle image
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
     // firebase features
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.3'
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

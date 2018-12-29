@@ -83,5 +83,6 @@
     <string name="new_product">New Product</string>
     <string name="courier_name">Courier Name</string>
     <string name="call_courier">call courier</string>
+    <string name="edit_profile_image">Edit profile image</string>
 
 </resources>
