@@ -122,13 +122,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             user = dataSnapshot.child(userID).getValue(User.class);
             if (user != null) {
                 user.setUserId(userID);
-                getIntent();
-                if(user.getType() != null && user.getType().equalsIgnoreCase("manager")){
-                    startActivity(new Intent(MainActivity.this, ManagerActivity.class));
-                } else if(user.getType().equalsIgnoreCase("courier")){
-                    startActivity(new Intent(MainActivity.this, CourierActivity.class));
-                }else{
-                    startActivity(new Intent(MainActivity.this, CustomerActivity.class));
+//                getIntent();
+                switch (user.getType()){
+                    case "manager":
+                        startActivity(new Intent(MainActivity.this, ManagerActivity.class));
+                        break;
+                    case "courier":
+                        startActivity(new Intent(MainActivity.this, CourierActivity.class));
+                        break;
+                    case "customer":
+                        startActivity(new Intent(MainActivity.this, CustomerActivity.class));
+                        break;
                 }
             }
         }
