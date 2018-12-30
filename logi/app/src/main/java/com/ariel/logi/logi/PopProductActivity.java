@@ -2,7 +2,6 @@ package com.ariel.logi.logi;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -15,7 +14,7 @@ import com.ariel.Storage.Product;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class PopActivity extends Activity {
+public class PopProductActivity extends Activity {
 
     Button btnNewProduct;
     private EditText inputPrdId, inputPrdDesc, inputPrdName;
@@ -24,7 +23,7 @@ public class PopActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop);
+        setContentView(R.layout.activity_pop_product);
 
         Intent intentStorageId = getIntent();
         storage_id = intentStorageId.getStringExtra("storage_id");

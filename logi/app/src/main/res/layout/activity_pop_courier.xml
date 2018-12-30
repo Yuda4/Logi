@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/pop_bg"
-    tools:context=".PopActivity">
+    tools:context=".PopCourierActivity">
 
 
     <LinearLayout
@@ -36,12 +36,12 @@
                         android:paddingEnd="20dp">
 
                         <EditText
-                            android:id="@+id/inputProductId"
+                            android:id="@+id/inputName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:layout_marginBottom="10dp"
-                            android:hint="@string/productId"
+                            android:hint="@string/name_of_courier"
                             android:importantForAutofill="no"
                             android:inputType="textMultiLine|textEmailAddress"
                             android:textColor="@android:color/black"
@@ -57,12 +57,12 @@
                         android:paddingEnd="20dp">
 
                         <EditText
-                            android:id="@+id/inputProductName"
+                            android:id="@+id/inputEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:layout_marginBottom="10dp"
-                            android:hint="@string/productName"
+                            android:hint="@string/email_of_courier"
                             android:importantForAutofill="no"
                             android:inputType="textMultiLine|textEmailAddress"
                             android:textColor="@android:color/black"
@@ -77,27 +77,47 @@
                         android:paddingEnd="20dp">
 
                         <EditText
-                            android:id="@+id/inputProductDesc"
+                            android:id="@+id/inputPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:layout_marginBottom="10dp"
-                            android:hint="@string/productDesc"
+                            android:hint="@string/phone_of_courier"
                             android:importantForAutofill="no"
                             android:inputType="textMultiLine|textEmailAddress"
+                            android:textColor="@android:color/black"
+                            android:textColorHint="@android:color/black"
+                            tools:targetApi="o" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp">
+
+                        <EditText
+                            android:id="@+id/inputPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginBottom="10dp"
+                            android:hint="@string/password_of_courier"
+                            android:importantForAutofill="no"
+                            android:inputType="textPassword"
                             android:textColor="@android:color/black"
                             android:textColorHint="@android:color/black"
                             tools:targetApi="o" />
                     </android.support.design.widget.TextInputLayout>
 
                     <Button
-                        android:id="@+id/btn_createNewProduct"
+                        android:id="@+id/btn_createNewCourier"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dip"
                         android:background="@drawable/corner_rounded_button"
-                        android:text="@string/createNewProduct"
+                        android:text="@string/createNewCourier"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textAllCaps="false"
@@ -105,14 +125,8 @@
                         android:typeface="normal" />
 
                 </LinearLayout>
-
             </ScrollView>
-
         </FrameLayout>
-
-
-
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

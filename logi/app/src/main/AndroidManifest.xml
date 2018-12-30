@@ -55,9 +55,12 @@
             android:name=".CourierActivity"
             android:label="@string/CourierActivity" />
         <activity android:name=".CreateCourier" />
-
-        <activity android:name=".PopActivity"
+        <activity
+            android:name=".PopProductActivity"
             android:theme="@style/AppTheme.Popup" />
+
+        <activity android:name=".PopCourierActivity"
+            android:theme="@style/AppTheme.Popup"/>
     </application>
 
 </manifest>

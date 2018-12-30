@@ -94,12 +94,12 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (TextUtils.isEmpty(phoneNumber)) {
-                    Toast.makeText(getApplicationContext(), "Enter phone!", Toast.LENGTH_SHORT).show();
+                if (phoneNumber.length() != 10 ) {
+                    Toast.makeText(getApplicationContext(), "Invalid phone number!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (phoneNumber.length() != 10 ) {
+                if (TextUtils.isEmpty(phoneNumber) || phoneNumber.length() != 10 || !isOnlyNumbers(phoneNumber)) {
                     Toast.makeText(getApplicationContext(), "Invalid phone number!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -145,5 +145,14 @@ public class SignupActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         progressBar.setVisibility(View.GONE);
+    }
+
+    public static boolean isOnlyNumbers(String str){
+        try{
+            Integer.parseInt(str);
+        }catch(NumberFormatException exception){
+            return false;
+        }
+        return true;
     }
 }

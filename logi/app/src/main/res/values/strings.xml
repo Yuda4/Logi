@@ -90,6 +90,11 @@
     <string name="productName">Product name</string>
     <string name="productDesc">Product description</string>
     <string name="createNewProduct">New Product</string>
+    <string name="createNewCourier">New Courier</string>
+    <string name="name_of_courier">Courier Name</string>
+    <string name="email_of_courier">Courier Email</string>
+    <string name="phone_of_courier">Courier Phone</string>
+    <string name="password_of_courier">Courier Password</string>
 
 
 </resources>

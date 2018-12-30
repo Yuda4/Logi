@@ -7,6 +7,7 @@ public class User {
 	protected String email;
 	protected String name;
 	protected String phone;
+
     protected String country;
     protected String city;
     protected String address;
@@ -16,6 +17,12 @@ public class User {
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
+
+    public User(String name, String email, String phone) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
     }
 
     public String getImage_uri() {
