@@ -47,6 +47,8 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
         holder.status.setText(mDelivery.get(position).getStatus());
         holder.deliveryId.setText(mDelivery.get(position).getDelivery_id());
         holder.deliveryDate.setText(mDelivery.get(position).getDate());
+        holder.textViewNothing.setVisibility(View.GONE);
+        if (getItemCount() == 0) holder.textViewNothing.setVisibility(View.VISIBLE);
         holder.imgBtnDial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,10 +75,11 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
         private TextView status;
         private TextView deliveryId;
         private TextView deliveryDate;
-        CardView cardView;
-        LinearLayout linearLayout;
-        ImageButton imgBtnInfo;
-        ImageButton imgBtnDial;
+        private CardView cardView;
+        private LinearLayout linearLayout;
+        private ImageButton imgBtnInfo;
+        private ImageButton imgBtnDial;
+        private TextView textViewNothing;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -89,6 +92,7 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
             linearLayout = (LinearLayout) itemView.findViewById(R.id.recycler_child_linear_layout);
             imgBtnInfo = (ImageButton) itemView.findViewById(R.id.recycler_info_imag);
             imgBtnDial = (ImageButton) itemView.findViewById(R.id.recycler_call_imag);
+            textViewNothing = (TextView) itemView.findViewById(R.id.no_item_to_show_delivery);
         }
     }
 }

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/toolbar_manager"
-    android:minHeight="?attr/actionBarSize">
+    android:minHeight="?attr/actionBarSize"
+    android:elevation="20dp"
+    android:translationZ="10dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
