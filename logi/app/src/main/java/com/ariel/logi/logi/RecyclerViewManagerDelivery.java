@@ -48,7 +48,8 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
         holder.status.setText(mDelivery.get(position).getStatus());
         holder.deliveryId.setText(mDelivery.get(position).getDelivery_id());
         holder.deliveryDate.setText(mDelivery.get(position).getDate());
-
+        holder.address.setText(mDelivery.get(position).getAddress());
+        holder.city.setText(mDelivery.get(position).getCity());
         holder.textViewNothing.setVisibility(View.GONE);
         if (getItemCount() == 0) holder.textViewNothing.setVisibility(View.VISIBLE);
         holder.imgBtnDial.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +70,8 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
                 try
                 {
                     // Launch Waze to look
-                    String address = "";
+                    String address = mDelivery.get(position).getAddress().trim().replace(" ", "%20")
+                            + "%20" + mDelivery.get(position).getCity().trim().replace(" ", "%20");
                     String url = String.format("https://waze.com/ul?q=%s&navigate=yes",address);
                     Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
                     context.startActivity( intent );
@@ -97,6 +99,7 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
         private TextView deliveryId;
         private TextView deliveryDate;
         private TextView address;
+        private TextView city;
         private CardView cardView;
         private LinearLayout linearLayout;
         private ImageButton imgBtnInfo;
@@ -115,6 +118,8 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
             imgBtnInfo = (ImageButton) itemView.findViewById(R.id.recycler_info_imag);
             imgBtnDial = (ImageButton) itemView.findViewById(R.id.recycler_call_imag);
             textViewNothing = (TextView) itemView.findViewById(R.id.no_item_to_show_delivery);
+            address = (TextView) itemView.findViewById(R.id.recycler_delivery_address);
+            city = (TextView) itemView.findViewById(R.id.recycler_delivery_city);
         }
     }
 }

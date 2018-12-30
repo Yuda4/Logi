@@ -215,7 +215,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
 
-                        mDatabaseUsers = FirebaseDatabase.getInstance().getReference("users");
+                        mDatabaseUsers = FirebaseDatabase.getInstance().getReference("users")
+                                .child(auth.getUid());
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("image_uri", mUri);
                         mDatabaseUsers.updateChildren(map);
