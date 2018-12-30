@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,7 +59,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private ActionBarDrawerToggle drawerToggle;
 
     private ArrayList<Courier> dbCourier;
-    private ArrayList<Product> dbProduct;
+    public  ArrayList<Product> dbProduct;
     private ArrayList<Delivery> dbDelivery;
 
     private RecyclerView rcvProduct, rcvCourier, rcvDelivery;
@@ -67,7 +68,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private RecyclerViewManagerCourier adapterCourier;
 
     private Button btnNewProduct, btnNewCourier, btnNewDelivery;
-    private TextView nothogToShow;
     private TextView icProduct, icDelivery, icCourier;
     private RelativeLayout rlDelivery, rlCourier, rlProduct;
     private RecyclerView recyclerViewProduct, recyclerViewDelivery, recyclerViewCourier;
@@ -75,6 +75,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private Spinner spinnerDelivery;
     private ArrayAdapter<CharSequence> adapterDeliverySpinner;
 
+    private SearchView srvProduct, srvCourier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +93,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         drawerLayout.addDrawerListener(drawerToggle);
 
         drawerToggle.syncState();
-        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         navigationView.bringToFront();
-
-
 
         spinnerDelivery = (Spinner) findViewById(R.id.spinner_delivery);
         adapterDeliverySpinner = ArrayAdapter.createFromResource(this, R.array.filter_delivery, android.R.layout.simple_list_item_1);
@@ -106,8 +104,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icDelivery = (TextView) findViewById(R.id.ic_toolbar_deliveries);
         icProduct = (TextView) findViewById(R.id.ic_toolbar_products);
 
-        nothogToShow = (TextView) findViewById(R.id.no_item_to_show);
-        nothogToShow.setVisibility(View.GONE);
 
         btnNewProduct = (Button) findViewById(R.id.btn_new_product);
         btnNewCourier = (Button) findViewById(R.id.btn_new_courier);
@@ -127,11 +123,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
         rcvProduct.setVisibility(View.GONE);
         rcvCourier.setVisibility(View.GONE);
-
-
-        if (rcvDelivery.getChildCount() == 0)
-            nothogToShow.setVisibility(View.VISIBLE);
-        else nothogToShow.setVisibility(View.GONE);
 
         // float button
         FabSpeedDial fabAdd = (FabSpeedDial) findViewById(R.id.float_add_manager);
@@ -159,6 +150,10 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         initDeliveryRecyclerView();
         initProductsRecyclerView();
         initCourierRecyclerView();
+
+        // search view
+        srvProduct = (SearchView) findViewById(R.id.src_product);
+        srvCourier = (SearchView) findViewById(R.id.src_courier);
 
         //get firebase database instance
         mDatabaseDelivery = FirebaseDatabase.getInstance().getReference("deliveries").child(auth.getCurrentUser().getUid());
@@ -208,9 +203,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                         Toast.makeText(ManagerActivity.this, "Add Delivery Press!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_courier:
-
                         startActivity(new Intent(ManagerActivity.this, CreateCourier.class));
-//                        Toast.makeText(ManagerActivity.this, "Add Courier Press!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_product:
                         Toast.makeText(ManagerActivity.this, "Add Product Press!", Toast.LENGTH_SHORT).show();
@@ -228,9 +221,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icProduct.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (rcvProduct.getChildCount() == 0)
-                    nothogToShow.setVisibility(View.VISIBLE);
-                else nothogToShow.setVisibility(View.GONE);
                 // Product show
                 rcvProduct.setVisibility(View.VISIBLE);
                 rlProduct.setVisibility(View.VISIBLE);
@@ -246,9 +236,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icDelivery.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (rcvDelivery.getChildCount() == 0)
-                    nothogToShow.setVisibility(View.VISIBLE);
-                else nothogToShow.setVisibility(View.GONE);
                 // Product hide
                 rcvProduct.setVisibility(View.GONE);
                 rlProduct.setVisibility(View.GONE);
@@ -264,9 +251,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icCourier.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (rcvCourier.getChildCount() == 0)
-                    nothogToShow.setVisibility(View.VISIBLE);
-                else nothogToShow.setVisibility(View.GONE);
                 // Product hide
                 rcvProduct.setVisibility(View.GONE);
                 rlProduct.setVisibility(View.GONE);
@@ -279,6 +263,13 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
             }
         }));
+
+        btnNewCourier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ManagerActivity.this, CreateCourier.class));
+            }
+        });
 
         spinnerDelivery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -324,6 +315,31 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             }
         });
 
+        srvCourier.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterCourier.filterCourierName(newText);
+                return false;
+            }
+        });
+
+        srvProduct.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterProduct.filterProductName(newText);
+                return false;
+            }
+        });
 
         btnNewProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -344,6 +360,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
             }
         });
+
     }
 
     private void initRecyclerItems(){

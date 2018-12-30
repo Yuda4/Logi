@@ -177,8 +177,8 @@ public class CustomerActivity extends AppCompatActivity implements OnItemSelecte
     private void ShowData(DataSnapshot dataSnapshot) {
         for (DataSnapshot ds: dataSnapshot.getChildren()){
             String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-            User user = new User();
-            user.setEmail(ds.child(userID).getValue(User.class).getEmail());
+//            User user = new User();
+//            user.setEmail(ds.child(userID).getValue(User.class).getEmail());
         }
     }
 

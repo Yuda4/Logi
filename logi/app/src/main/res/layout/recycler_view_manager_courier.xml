@@ -39,4 +39,12 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/no_item_to_show_courier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/no_item_to_show"
+        android:visibility="gone" />
+
 </android.support.v7.widget.CardView>

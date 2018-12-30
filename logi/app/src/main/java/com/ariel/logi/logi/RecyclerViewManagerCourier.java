@@ -21,16 +21,20 @@ import android.widget.TextView;
 import com.ariel.User.Courier;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RecyclerViewManagerCourier extends RecyclerView.Adapter<RecyclerViewManagerCourier.ViewHolder> {
     private static final int REQUEST_CALL = 1;
 
     private ArrayList<Courier> mCourier;
+    private Set<Courier> mCourierIsFull;
     private Context context;
 
     public RecyclerViewManagerCourier(Context context, ArrayList<Courier> mCourier) {
         this.mCourier = mCourier;
         this.context = context;
+        this.mCourierIsFull = new HashSet<>(mCourier);
     }
 
     @NonNull
@@ -44,6 +48,8 @@ public class RecyclerViewManagerCourier extends RecyclerView.Adapter<RecyclerVie
     public void onBindViewHolder(@NonNull RecyclerViewManagerCourier.ViewHolder holder, final int position) {
         holder.name.setText(mCourier.get(position).getName());
         holder.phone = mCourier.get(position).getPhone();
+        holder.textViewNothing.setVisibility(View.GONE);
+        if (getItemCount() == 0) holder.textViewNothing.setVisibility(View.VISIBLE);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +69,22 @@ public class RecyclerViewManagerCourier extends RecyclerView.Adapter<RecyclerVie
         return mCourier.size();
     }
 
+    public void filterCourierName (String charText) {
+        mCourierIsFull.addAll(mCourier);
+        mCourier.clear();
+        if(charText == null || charText.length() == 0){
+            mCourier.addAll(mCourierIsFull);
+        }else{
+            String filterPattern = charText.toLowerCase().trim();
+            for(Courier courier : mCourierIsFull){
+                if(courier.getName().toLowerCase().contains(filterPattern)){
+                    mCourier.add(courier);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView name;
@@ -70,6 +92,7 @@ public class RecyclerViewManagerCourier extends RecyclerView.Adapter<RecyclerVie
         private CardView cardView;
         private RelativeLayout linearLayout;
         private String phone;
+        private TextView textViewNothing;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -78,6 +101,7 @@ public class RecyclerViewManagerCourier extends RecyclerView.Adapter<RecyclerVie
             linearLayout = (RelativeLayout) itemView.findViewById(R.id.recycler_courier_manager_child_linear_layout);
             imageView = (ImageView) itemView.findViewById(R.id.call_icon_card_view);
             phone = "";
+            textViewNothing = (TextView) itemView.findViewById(R.id.no_item_to_show_courier);
             }
     }
 }
