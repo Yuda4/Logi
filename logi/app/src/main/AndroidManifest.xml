@@ -58,9 +58,10 @@
         <activity
             android:name=".PopProductActivity"
             android:theme="@style/AppTheme.Popup" />
-
-        <activity android:name=".PopCourierActivity"
-            android:theme="@style/AppTheme.Popup"/>
+        <activity
+            android:name=".PopCourierActivity"
+            android:theme="@style/AppTheme.Popup" />
+        <activity android:name=".PopDeliveryActivity"></activity>
     </application>
 
 </manifest>
