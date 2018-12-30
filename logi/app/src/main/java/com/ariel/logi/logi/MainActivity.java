@@ -119,28 +119,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void ShowData(DataSnapshot dataSnapshot) {
-        //for (DataSnapshot ds: dataSnapshot.getChildren()){
-        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        if(dataSnapshot.exists()){
-            user = dataSnapshot.child(userID).getValue(User.class);
-            if (user != null) {
-                user.setUserId(userID);
-//                getIntent();
-                switch (user.getType().toLowerCase()){
-                    case "manager":
-                        startActivity(new Intent(MainActivity.this, ManagerActivity.class));
-                        break;
-                    case "courier":
-                        startActivity(new Intent(MainActivity.this, CourierActivity.class));
-                        break;
-                    case "customer":
-                        startActivity(new Intent(MainActivity.this, CustomerActivity.class));
-                        break;
+        if(auth.getCurrentUser() != null){
+            String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+            if(dataSnapshot.exists()){
+                user = dataSnapshot.child(userID).getValue(User.class);
+                if (user != null) {
+                    user.setUserId(userID);
+                    switch (user.getType().toLowerCase()){
+                        case "manager":
+                            startActivity(new Intent(MainActivity.this, ManagerActivity.class));
+                            break;
+                        case "courier":
+                            startActivity(new Intent(MainActivity.this, CourierActivity.class));
+                            break;
+                        case "customer":
+                            startActivity(new Intent(MainActivity.this, CustomerActivity.class));
+                            break;
+                    }
                 }
             }
         }
-
-        //}
     }
 
     @Override
@@ -175,5 +173,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //sign out method
     public void signOut() {
         auth.signOut();
+
     }
 }

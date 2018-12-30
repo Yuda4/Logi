@@ -42,7 +42,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import io.github.yavski.fabspeeddial.FabSpeedDial;
 
 public class ManagerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "ManagerActivity";
@@ -124,9 +123,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         rcvProduct.setVisibility(View.GONE);
         rcvCourier.setVisibility(View.GONE);
 
-        // float button
-        FabSpeedDial fabAdd = (FabSpeedDial) findViewById(R.id.float_add_manager);
-
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
         mUser = new User();
@@ -136,13 +132,13 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                mUser.setUserId(user.getUid());
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
                     startActivity(new Intent(ManagerActivity.this, LoginActivity.class));
                     finish();
                 }
+                mUser.setUserId(user.getUid());
             }
         };
 
@@ -189,34 +185,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 .equalTo(userID);
 
         queryCourier.addListenerForSingleValueEvent(valueEventListenerCourier);
-
-        fabAdd.setMenuListener(new FabSpeedDial.MenuListener() {
-            @Override
-            public boolean onPrepareMenu(NavigationMenu navigationMenu) {
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemSelected(MenuItem menuItem) {
-                switch(menuItem.getItemId()){
-                    case R.id.action_delivery:
-                        Toast.makeText(ManagerActivity.this, "Add Delivery Press!", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.action_courier:
-                        startActivity(new Intent(ManagerActivity.this, CreateCourier.class));
-                        break;
-                    case R.id.action_product:
-                        Toast.makeText(ManagerActivity.this, "Add Product Press!", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                return true;
-            }
-
-            @Override
-            public void onMenuClosed() {
-
-            }
-        });
 
         icProduct.setOnClickListener((new View.OnClickListener() {
             @Override
