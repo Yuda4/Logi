@@ -64,9 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //get firebase database instance
         mDatabaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
-        //get current user
-        final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
-
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -79,17 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         };
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        auth.addAuthStateListener(authListener);
 
         // Read from the database
         mDatabaseUsers.addValueEventListener(new ValueEventListener() {
@@ -107,6 +93,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.w("MainActivity", "Failed to read value.", error.toException());
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
     }
 
     @Override

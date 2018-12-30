@@ -132,13 +132,14 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
+                if (user != null) {
+                    mUser.setUserId(user.getUid());
+                }else{
                     // user auth state is changed - user is null
                     // launch login activity
                     startActivity(new Intent(ManagerActivity.this, LoginActivity.class));
                     finish();
                 }
-                mUser.setUserId(user.getUid());
             }
         };
 
