@@ -32,5 +32,9 @@ public class Product {
 		// Default constructor required for calls to DataSnapshot.getValue(User.class)
 	}
 
-	
+	public Product(String product_id, String name, String description) {
+		this.product_id = product_id;
+		this.name = name;
+		this.description = description;
+	}
 }

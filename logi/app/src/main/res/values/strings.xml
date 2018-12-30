@@ -86,4 +86,10 @@
     <string name="courier_phone">Courier Phone</string>
     <string name="courier_email">Courier Email</string>
     <string name="edit_profile_image">Edit profile image</string>
+    <string name="productId">Product id</string>
+    <string name="productName">Product name</string>
+    <string name="productDesc">Product description</string>
+    <string name="createNewProduct">New Product</string>
+
+
 </resources>
