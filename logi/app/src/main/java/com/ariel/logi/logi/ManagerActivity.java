@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-// import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,7 +68,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private RecyclerViewManagerCourier adapterCourier;
 
     private Button btnNewProduct, btnNewCourier, btnNewDelivery;
-//    private TextView nothogToShow;
     private TextView icProduct, icDelivery, icCourier;
     private RelativeLayout rlDelivery, rlCourier, rlProduct;
     private RecyclerView recyclerViewProduct, recyclerViewDelivery, recyclerViewCourier;
@@ -183,7 +181,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
         mDatabaseDelivery.addValueEventListener(valueEventListenerDelivery);
 
-        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+        final String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
         mDatabaseCourier.addValueEventListener(valueEventListenerCourier);
         Query queryCourier = FirebaseDatabase.getInstance().getReference("users")
@@ -340,6 +338,17 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             public boolean onQueryTextChange(String newText) {
                 adapterProduct.filterProductName(newText);
                 return false;
+            }
+        });
+
+        btnNewProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), PopActivity.class);
+
+                i.putExtra("storage_id",userID);
+                startActivity(i);
+
             }
         });
     }

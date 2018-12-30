@@ -59,7 +59,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="29dp"
                             android:layout_marginBottom="5dp"
-                            android:background="@color/colorPrimaryDark"
+                            android:background="@drawable/corner_rounded_orange"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:text="@string/new_delivery" />
@@ -80,7 +80,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="29dp"
                             android:layout_marginBottom="5dp"
-                            android:background="@color/colorPrimaryDark"
+                            android:background="@drawable/corner_rounded_orange"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:text="@string/new_courier" />
@@ -117,7 +117,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="29dp"
                             android:layout_marginBottom="5dp"
-                            android:background="@color/colorPrimaryDark"
+                            android:background="@drawable/corner_rounded_orange"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:text="@string/new_product" />

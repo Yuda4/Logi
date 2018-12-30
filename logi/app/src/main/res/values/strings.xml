@@ -87,4 +87,11 @@
     <string name="courier_email">Courier Email</string>
     <string name="edit_profile_image">Edit profile image</string>
     <string name="products_search_bar">Products Search bar</string>
+    <string name="productId">Product id</string>
+    <string name="productName">Product name</string>
+    <string name="productDesc">Product description</string>
+    <string name="createNewProduct">New Product</string>
+
+
+>>>>>>> e7a0681d685c4f95a235bd20d82d912cd5f0d22c
 </resources>
