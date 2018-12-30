@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,22 +15,30 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ariel.Storage.Product;
+import com.ariel.User.Courier;
 import com.ariel.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class PopCourierActivity extends AppCompatActivity {
 
     Button btnNewCourier;
-    private EditText inputCrName, inputCrEmail, inputCrPhone,inputCrPassword;
+    private EditText inputCrEmail;
     String storage_id;
-    String crName, crEmail, crPhone, crPassword;
+    String crEmail;
     private FirebaseAuth managerAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference ref;
+    private Courier courier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,78 +50,42 @@ public class PopCourierActivity extends AppCompatActivity {
 
         btnNewCourier = (Button) findViewById(R.id.btn_createNewCourier);
 
-        inputCrName = (EditText) findViewById(R.id.inputName);
         inputCrEmail = (EditText) findViewById(R.id.inputEmail);
-        inputCrPassword = (EditText) findViewById(R.id.inputPassword);
-        inputCrPhone = (EditText) findViewById(R.id.inputPhone);
 
         managerAuth = FirebaseAuth.getInstance();
+        ref = FirebaseDatabase.getInstance().getReference("users");
+
+        courier = new Courier();
 
         btnNewCourier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                crName = inputCrName.getText().toString();
                 crEmail = inputCrEmail.getText().toString();
-                crPhone = inputCrPhone.getText().toString();
-                crPassword = inputCrPassword.getText().toString();
 
-                User user = new User(crName, crEmail, crPhone);
-                final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users")
-                        .child(storage_id );
-
-                if (TextUtils.isEmpty(crEmail)) {
+                if (TextUtils.isEmpty(crEmail.trim())) {
                     Toast.makeText(getApplicationContext(), "Invalid email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (TextUtils.isEmpty(crName)) {
-                    Toast.makeText(getApplicationContext(), "Invalid name!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                Query changeStorageId = ref.orderByChild("email").equalTo(crEmail);
 
-                if (TextUtils.isEmpty(crPhone) || crPhone.length() != 10 || !isOnlyNumbers(crPhone)) {
-                    Toast.makeText(getApplicationContext(), "Invalid phone number!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (inputCrPassword.length() < 6) {
-                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                managerAuth.createUserWithEmailAndPassword(crEmail, crPassword)
-                        .addOnCompleteListener(PopCourierActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(PopCourierActivity.this, "createUserWithEmail:onComplete:"
-                                        + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
-                                if (!task.isSuccessful()) {
-                                    Toast.makeText(PopCourierActivity.this, "Authentication failed." + task.getException(),
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                    // Write to database
-
-                                    String courierUid = managerAuth.getUid();
-                                    ref.child(courierUid).child("email").setValue(crEmail);
-                                    ref.child(courierUid).child("name").setValue(crName);
-                                    ref.child(courierUid).child("phone").setValue(crPhone);
-                                    ref.child(courierUid).child("type").setValue("courier");
-                                    ref.child(courierUid).child("address").setValue("Please fill");
-                                    ref.child(courierUid).child("city").setValue("Please fill");
-                                    ref.child(courierUid).child("country").setValue("Please fill");
-                                    ref.child(courierUid).child("zip_code").setValue(0);
-                                    ref.child(courierUid).child("storage_id").setValue(storage_id);
-                                    managerAuth.signOut();
-
-                                    startActivity(new Intent(PopCourierActivity.this, MainActivity.class));
-                                }
+                changeStorageId.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        courier = dataSnapshot.getValue(Courier.class);
+                        if (dataSnapshot.exists())
+                            for(DataSnapshot ds: dataSnapshot.getChildren()) {
+                                ref.child(Objects.requireNonNull(ds.getKey())).child("storage_id").setValue(storage_id);
                             }
-                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
 
                 //ref.child(user.getProduct_id()).setValue(product);

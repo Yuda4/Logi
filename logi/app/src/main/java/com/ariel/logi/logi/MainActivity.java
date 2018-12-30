@@ -47,13 +47,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
 
         viewName = (TextView) findViewById(R.id.navigator_name);
         viewEmail = (TextView) findViewById(R.id.navigator_email);
+
         user = new User();
 
         //get firebase auth instance
@@ -123,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (user != null) {
                 user.setUserId(userID);
 //                getIntent();
-                switch (user.getType()){
+                switch (user.getType().toLowerCase()){
                     case "manager":
                         startActivity(new Intent(MainActivity.this, ManagerActivity.class));
                         break;

@@ -91,12 +91,13 @@
     <string name="productName">Product name</string>
     <string name="productDesc">Product description</string>
     <string name="createNewProduct">New Product</string>
-    <string name="createNewCourier">New Courier</string>
+    <string name="createNewCourier">Submit</string>
     <string name="name_of_courier">Courier Name</string>
     <string name="email_of_courier">Courier Email</string>
     <string name="phone_of_courier">Courier Phone</string>
     <string name="password_of_courier">Courier Password</string>
+    <string name="courier_radio_btn">Courier</string>
 
 
->>>>>>> e7a0681d685c4f95a235bd20d82d912cd5f0d22c
+    >>>>>>> e7a0681d685c4f95a235bd20d82d912cd5f0d22c
 </resources>

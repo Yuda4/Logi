@@ -29,25 +29,7 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp">
 
-                        <EditText
-                            android:id="@+id/inputName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="10dp"
-                            android:hint="@string/name_of_courier"
-                            android:importantForAutofill="no"
-                            android:inputType="textMultiLine|textEmailAddress"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/black"
-                            tools:targetApi="o" />
-                    </android.support.design.widget.TextInputLayout>
 
 
                     <android.support.design.widget.TextInputLayout
@@ -70,45 +52,7 @@
                             tools:targetApi="o" />
                     </android.support.design.widget.TextInputLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp">
 
-                        <EditText
-                            android:id="@+id/inputPhone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="10dp"
-                            android:hint="@string/phone_of_courier"
-                            android:importantForAutofill="no"
-                            android:inputType="textMultiLine|textEmailAddress"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/black"
-                            tools:targetApi="o" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp">
-
-                        <EditText
-                            android:id="@+id/inputPassword"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="10dp"
-                            android:hint="@string/password_of_courier"
-                            android:importantForAutofill="no"
-                            android:inputType="textPassword"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/black"
-                            tools:targetApi="o" />
-                    </android.support.design.widget.TextInputLayout>
 
                     <Button
                         android:id="@+id/btn_createNewCourier"

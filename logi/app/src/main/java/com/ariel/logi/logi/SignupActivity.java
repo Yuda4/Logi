@@ -51,6 +51,7 @@ public class SignupActivity extends AppCompatActivity {
         inputName = (EditText) findViewById(R.id.name);
         inputPhoneNumber = (EditText) findViewById(R.id.phone_number);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
         final AlphaAnimation buttonClicked = new AlphaAnimation(0.2F, 0.8F);
 
         final RadioGroup rg = (RadioGroup) findViewById(R.id.type_radio_group);
@@ -74,7 +75,7 @@ public class SignupActivity extends AppCompatActivity {
                 final String name = inputName.getText().toString().trim();
                 final String phoneNumber = inputPhoneNumber.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
+                if (TextUtils.isEmpty(email.trim())) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -125,11 +126,15 @@ public class SignupActivity extends AppCompatActivity {
                                     mDatabase.child("users").child(userUid).child("email").setValue(email);
                                     mDatabase.child("users").child(userUid).child("name").setValue(name);
                                     mDatabase.child("users").child(userUid).child("phone").setValue(phoneNumber);
-                                    mDatabase.child("users").child(userUid).child("type").setValue(type);
+                                    mDatabase.child("users").child(userUid).child("type").setValue(type.toLowerCase());
                                     mDatabase.child("users").child(userUid).child("address").setValue("Please fill");
                                     mDatabase.child("users").child(userUid).child("city").setValue("Please fill");
                                     mDatabase.child("users").child(userUid).child("country").setValue("Please fill");
                                     mDatabase.child("users").child(userUid).child("zip_code").setValue(0);
+                                    if(type.equalsIgnoreCase("courier"))
+                                        mDatabase.child("users").child(userUid).child("storage_id").setValue("0");
+                                    mDatabase.child("users").child(userUid).child("image_uri").setValue("default");
+
                                     Log.i(TAG, "Add data to database succeded!");
                                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                     finish();

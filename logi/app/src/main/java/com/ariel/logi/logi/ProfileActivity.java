@@ -276,14 +276,16 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 mContent.set(5, user.getCity());
                 mContent.set(6, user.getAddress());
                 mContent.set(7, user.getZip_code().toString());
+
                 emailTextView.setText(user.getEmail());
                 nameTextView.setText(user.getName());
+
                 if(user.getImage_uri().equalsIgnoreCase("default")){
                     profileImg.setImageResource(R.drawable.user_blank_512);
                 }else{
                     Glide.with(ProfileActivity.this).load(user.getImage_uri()).into(profileImg);
                 }
-                Toast.makeText(ProfileActivity.this, "Welcom " + user.getName(), Toast.LENGTH_SHORT ).show();
+                Toast.makeText(ProfileActivity.this, "Wellcome " + user.getName(), Toast.LENGTH_SHORT ).show();
             }
         }
         //}
