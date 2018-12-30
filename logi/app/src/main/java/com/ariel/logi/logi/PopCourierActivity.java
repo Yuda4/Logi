@@ -61,14 +61,12 @@ public class PopCourierActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 crEmail = inputCrEmail.getText().toString();
-
                 if (TextUtils.isEmpty(crEmail.trim())) {
                     Toast.makeText(getApplicationContext(), "Invalid email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 Query changeStorageId = ref.orderByChild("email").equalTo(crEmail);
-
                 changeStorageId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -77,7 +75,6 @@ public class PopCourierActivity extends AppCompatActivity {
                             for(DataSnapshot ds: dataSnapshot.getChildren()) {
                                 ref.child(Objects.requireNonNull(ds.getKey())).child("storage_id").setValue(storage_id);
                             }
-
                     }
 
                     @Override
@@ -85,10 +82,6 @@ public class PopCourierActivity extends AppCompatActivity {
 
                     }
                 });
-
-
-
-                //ref.child(user.getProduct_id()).setValue(product);
                 finish();
             }
         });
@@ -103,7 +96,7 @@ public class PopCourierActivity extends AppCompatActivity {
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
         params.x = 0;
-        params.y = -20;
+        params.y = 0;
         getWindow().setAttributes(params);
 
     }

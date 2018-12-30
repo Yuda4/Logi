@@ -99,7 +99,5 @@
     <string name="courier_radio_btn">Courier</string>
     <string name="city">city</string>
     <string name="delivery_address">delivery address</string>
-
-
-    >>>>>>> e7a0681d685c4f95a235bd20d82d912cd5f0d22c
+    <string name="costumerName">Costumer Name</string>
 </resources>
