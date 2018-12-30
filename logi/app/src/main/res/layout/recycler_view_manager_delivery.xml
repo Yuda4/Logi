@@ -52,6 +52,20 @@
                 android:id="@+id/recycler_delivery_date"
                 android:textSize="15sp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_address"
+                android:id="@+id/recycler_delivery_address"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/city"
+                android:id="@+id/recycler_delivery_city"
+                android:textSize="15sp"/>
+
 
         </LinearLayout>
 
@@ -61,21 +75,19 @@
             android:text="@string/recycler_status"
             android:id="@+id/recycler_staus"
             android:textSize="20sp"
-            android:layout_gravity="center"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:paddingTop="25dp"
+            android:paddingTop="40dp"
             android:layout_toEndOf="@+id/recycler_child_linear_layout"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:paddingStart="30dp"
+            android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="30dp">
 
             <ImageButton
                 android:id="@+id/recycler_call_imag"

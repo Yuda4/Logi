@@ -2,6 +2,7 @@ package com.ariel.logi.logi;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -47,6 +48,7 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
         holder.status.setText(mDelivery.get(position).getStatus());
         holder.deliveryId.setText(mDelivery.get(position).getDelivery_id());
         holder.deliveryDate.setText(mDelivery.get(position).getDate());
+
         holder.textViewNothing.setVisibility(View.GONE);
         if (getItemCount() == 0) holder.textViewNothing.setVisibility(View.VISIBLE);
         holder.imgBtnDial.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +60,25 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
                 }else{
                     String dial = "tel:" + mDelivery.get(position).getCustomer_phone().trim();
                     context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                }
+            }
+        });
+        holder.imgBtnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try
+                {
+                    // Launch Waze to look
+                    String address = "";
+                    String url = String.format("https://waze.com/ul?q=%s&navigate=yes",address);
+                    Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
+                    context.startActivity( intent );
+                }
+                catch ( ActivityNotFoundException ex  )
+                {
+                    // If Waze is not installed, open it in Google Play:
+                    Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
+                    context.startActivity(intent);
                 }
             }
         });
@@ -75,6 +96,7 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
         private TextView status;
         private TextView deliveryId;
         private TextView deliveryDate;
+        private TextView address;
         private CardView cardView;
         private LinearLayout linearLayout;
         private ImageButton imgBtnInfo;
