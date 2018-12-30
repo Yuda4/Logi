@@ -109,7 +109,10 @@ public class CourierActivity extends AppCompatActivity implements NavigationView
                         query.addListenerForSingleValueEvent(eventListenerCourier);
                         break;
                     case "By Date":
+                        query = mDatabaseDelivery.child(courier.getStorage_id())
+                                .orderByChild("date");
 
+                        query.addListenerForSingleValueEvent(eventListenerCourier);
                         break;
                 }
             }
