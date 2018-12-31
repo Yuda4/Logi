@@ -1,9 +1,16 @@
 package com.ariel.logi.logi;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class RecyclerViewDate extends RecyclerView.Adapter<RecyclerViewDate.ViewHolder>{
-
+    private static final int REQUEST_CALL = 1;
 //    private ArrayList<String> dNames;
 //    private ArrayList<String> dDates;
 //    private ArrayList<String> dDelID;
@@ -61,7 +68,19 @@ public class RecyclerViewDate extends RecyclerView.Adapter<RecyclerViewDate.View
         holder.stat.setText(mDelivery.get(position).getStatus());
         holder.id.setText(mDelivery.get(position).getDelivery_id());
         holder.cour.setText(mDelivery.get(position).getCourier_email());
-       holder.datebtn.setOnClickListener(new View.OnClickListener() {
+        holder.btnDial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!mDelivery.get(position).getCustomer_phone().isEmpty() && ContextCompat.checkSelfPermission(iContext,
+                        android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions((Activity) iContext,new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+                }else{
+                    String dial = "tel:" + mDelivery.get(position).getCourier_phone().trim();
+                    iContext.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                }
+            }
+        });
+        holder.datebtn.setOnClickListener(new View.OnClickListener() {
             final Calendar myCalendar = Calendar.getInstance();
             DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -95,6 +114,7 @@ public class RecyclerViewDate extends RecyclerView.Adapter<RecyclerViewDate.View
         CardView parentLayout;
         private TextView name, date, id, cour, stat;
         private ImageView datebtn;
+        private ImageView btnDial;
         public ViewHolder(View itemView){
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.recycler_delivery_product_name);
@@ -104,6 +124,7 @@ public class RecyclerViewDate extends RecyclerView.Adapter<RecyclerViewDate.View
             stat = (TextView) itemView.findViewById(R.id.recycler_staus);
             datebtn = (ImageView) itemView.findViewById(R.id.recycler_setD_img);
             parentLayout = (CardView)itemView.findViewById(R.id.recycler_cust_del);
+            btnDial = (ImageView) itemView.findViewById(R.id.recycler_dial_icon);
         }
 
         @Override

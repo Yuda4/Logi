@@ -78,6 +78,15 @@
                 android:paddingTop="25dp"
                 android:text="Set date:"/-->
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_002_telephone_handle_silhouette"
+            android:contentDescription="@string/delivery_changeD_button"
+            android:id="@+id/recycler_dial_icon"
+            android:layout_marginTop="20dp"
+            android:layout_toStartOf="@+id/recycler_setD_img"/>
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
