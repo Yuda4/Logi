@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,7 +94,7 @@ public class RecyclerViewDate extends RecyclerView.Adapter<RecyclerViewDate.View
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CardView parentLayout;
         private TextView name, date, id, cour, stat;
-        private ImageButton datebtn;
+        private ImageView datebtn;
         public ViewHolder(View itemView){
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.recycler_delivery_product_name);
@@ -101,7 +102,7 @@ public class RecyclerViewDate extends RecyclerView.Adapter<RecyclerViewDate.View
             id = (TextView) itemView.findViewById(R.id.recycler_delivery_id);
             cour = (TextView) itemView.findViewById(R.id.recycler_courier_name);
             stat = (TextView) itemView.findViewById(R.id.recycler_staus);
-            datebtn = (ImageButton) itemView.findViewById(R.id.recycler_setD_img);
+            datebtn = (ImageView) itemView.findViewById(R.id.recycler_setD_img);
             parentLayout = (CardView)itemView.findViewById(R.id.recycler_cust_del);
         }
 

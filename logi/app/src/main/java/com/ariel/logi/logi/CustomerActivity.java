@@ -128,10 +128,11 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         // Read from the database
         mDatabaseDeliveries.addValueEventListener(valueEventListenerDelivery);
-        Query queryPend = mDatabaseDeliveries.orderByChild("customer_email")
-                .equalTo(auth.getCurrentUser().getEmail());
 
-        queryPend.addListenerForSingleValueEvent(valueEventListenerDelivery);
+//        Query queryPend = mDatabaseDeliveries.orderByChild("customer_email")
+//                .equalTo(auth.getCurrentUser().getEmail());
+//
+//        queryPend.addListenerForSingleValueEvent(valueEventListenerDelivery);
 
         DelsRecyclerView.setVisibility(View.GONE);
         DateRecyclerView.setVisibility(View.GONE);
@@ -273,7 +274,6 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
 
     private void ShowData(DataSnapshot dataSnapshot) {
         aDelivery.clear();
-        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         if(dataSnapshot.exists()){
             for (DataSnapshot ds: dataSnapshot.getChildren()){
                 for(DataSnapshot dsnp: ds.getChildren()){
@@ -287,7 +287,6 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
 
     private void ShowDataPend(DataSnapshot dataSnapshot) {
         aDeliveryPend.clear();
-        String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         if(dataSnapshot.exists()){
             for (DataSnapshot ds: dataSnapshot.getChildren()){
                 for(DataSnapshot dsnp: ds.getChildren()){

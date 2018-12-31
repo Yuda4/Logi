@@ -62,23 +62,11 @@
             android:id="@+id/recycler_staus"
             android:textSize="20sp"
             android:layout_gravity="center"
-            android:paddingStart="25dp"
-            android:paddingEnd="20dp"
-            android:paddingTop="25dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="30dp"
             android:layout_toEndOf="@+id/recycler_child_linear_layout"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:paddingStart="30dp"
-            android:paddingEnd="5dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="25dp">
 
-            <TextView
+            <!--TextView
                 android:id="@+id/recycler_staus2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -88,15 +76,16 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingTop="25dp"
-                android:text="Set date:"/>
+                android:text="Set date:"/-->
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:src="@drawable/ic_edit_black_24dp"
                 android:contentDescription="@string/delivery_changeD_button"
-                android:id="@+id/recycler_setD_img" />
-        </LinearLayout>
+                android:id="@+id/recycler_setD_img"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 
 
