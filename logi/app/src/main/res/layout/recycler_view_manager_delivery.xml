@@ -75,9 +75,9 @@
             android:text="@string/recycler_status"
             android:id="@+id/recycler_staus"
             android:textSize="20sp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingTop="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="40dp"
             android:layout_toEndOf="@+id/recycler_child_linear_layout"/>
 
         <LinearLayout
@@ -89,20 +89,21 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/recycler_call_imag"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:contentDescription="@string/delivery_info_button"
-                android:src="@drawable/ic_call_black_24dp"
-                />
+                android:src="@drawable/ic_002_telephone_handle_silhouette"
+                android:layout_marginEnd="10dp"/>
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_info_outline_black_24dp"
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_001_waze"
                 android:contentDescription="@string/delivery_info_button"
-                android:id="@+id/recycler_info_imag" />
+                android:id="@+id/recycler_info_imag"
+                android:layout_marginEnd="10dp"/>
         </LinearLayout>
     </RelativeLayout>
 

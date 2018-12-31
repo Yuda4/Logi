@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -102,8 +103,8 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
         private TextView city;
         private CardView cardView;
         private LinearLayout linearLayout;
-        private ImageButton imgBtnInfo;
-        private ImageButton imgBtnDial;
+        private ImageView imgBtnInfo;
+        private ImageView imgBtnDial;
         private TextView textViewNothing;
 
         public ViewHolder(View itemView) {
@@ -115,8 +116,8 @@ public class RecyclerViewManagerDelivery extends RecyclerView.Adapter<RecyclerVi
             deliveryDate = (TextView) itemView.findViewById(R.id.recycler_delivery_date);
             cardView = (CardView) itemView.findViewById(R.id.recycler_parent_card_view);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.recycler_child_linear_layout);
-            imgBtnInfo = (ImageButton) itemView.findViewById(R.id.recycler_info_imag);
-            imgBtnDial = (ImageButton) itemView.findViewById(R.id.recycler_call_imag);
+            imgBtnInfo = (ImageView) itemView.findViewById(R.id.recycler_info_imag);
+            imgBtnDial = (ImageView) itemView.findViewById(R.id.recycler_call_imag);
             textViewNothing = (TextView) itemView.findViewById(R.id.no_item_to_show_delivery);
             address = (TextView) itemView.findViewById(R.id.recycler_delivery_address);
             city = (TextView) itemView.findViewById(R.id.recycler_delivery_city);

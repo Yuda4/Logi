@@ -77,9 +77,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="dfc839" />
-                            <entry key="outputName" value="ic_clear_all_black_24dp" />
-                            <entry key="sourceFile" value="F:\הורדות\toolbar_products.svg" />
+                            <entry key="outputName" value="ic_icon_orders" />
+                            <entry key="sourceFile" value="C:\Users\adiel\Downloads\icon-02.svg" />
                           </map>
                         </option>
                       </PersistentState>

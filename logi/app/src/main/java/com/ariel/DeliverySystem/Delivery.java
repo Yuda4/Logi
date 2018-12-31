@@ -104,8 +104,8 @@ public class Delivery {
     }
 
     public String getDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-            return dateFormat.format(this.date);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return dateFormat.format(this.date);
     }
 
     public void setDate(String date) {

@@ -340,7 +340,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 //bundle.putStringArray("MyArray", array);
 
                 bundle.putParcelableArrayList("dbProducts", dbProduct);
-                bundle.putParcelableArrayList("dbCouriers", dbCourier);
+//                bundle.putParcelableArrayList("dbCouriers", dbCourier);
                 i.putExtras(bundle);
                 startActivity(i);
             }
