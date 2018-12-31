@@ -1,6 +1,9 @@
 package com.ariel.Storage;
 
-public class Product {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Product implements Parcelable {
 	private String product_id;
 	private String name, description;
 
@@ -37,4 +40,37 @@ public class Product {
 		this.name = name;
 		this.description = description;
 	}
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(product_id);
+        parcel.writeString(name);
+        parcel.writeString(description);
+    }
+
+	protected Product(Parcel in) {
+		product_id = in.readString();
+		name = in.readString();
+		description = in.readString();
+	}
+
+	public static final Creator<Product> CREATOR = new Creator<Product>() {
+		@Override
+		public Product createFromParcel(Parcel in) {
+			return new Product(in);
+		}
+
+		@Override
+		public Product[] newArray(int size) {
+			return new Product[size];
+		}
+	};
+
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+
 }

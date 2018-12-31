@@ -91,12 +91,12 @@ public class PopCourierActivity extends AppCompatActivity {
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.9), (int)(height*.6));
+        getWindow().setLayout((int)(width*.9), (int)(height*.3));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
         params.x = 0;
-        params.y = 0;
+        params.y = -20;
         getWindow().setAttributes(params);
 
     }

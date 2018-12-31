@@ -40,6 +40,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 
@@ -58,7 +59,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private ActionBarDrawerToggle drawerToggle;
 
     private ArrayList<Courier> dbCourier;
-    public  ArrayList<Product> dbProduct;
+    private  ArrayList<Product> dbProduct;
     private ArrayList<Delivery> dbDelivery;
 
     private RecyclerView rcvProduct, rcvCourier, rcvDelivery;
@@ -233,12 +234,12 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             }
         }));
 
-        btnNewCourier.setOnClickListener(new View.OnClickListener() {
+       /* btnNewCourier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ManagerActivity.this, CreateCourier.class));
             }
-        });
+        });*/
 
         spinnerDelivery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -327,6 +328,21 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 i.putExtra("storage_id",userID);
                 startActivity(i);
 
+            }
+        });
+
+        btnNewDelivery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), PopDeliveryActivity.class);
+
+                Bundle bundle = new Bundle();
+                //bundle.putStringArray("MyArray", array);
+
+                bundle.putParcelableArrayList("dbProducts", dbProduct);
+                bundle.putParcelableArrayList("dbCouriers", dbCourier);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
 

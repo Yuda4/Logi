@@ -130,7 +130,7 @@ public class SignupActivity extends AppCompatActivity {
                                     mDatabase.child("users").child(userUid).child("address").setValue("Please fill");
                                     mDatabase.child("users").child(userUid).child("city").setValue("Please fill");
                                     mDatabase.child("users").child(userUid).child("country").setValue("Please fill");
-                                    mDatabase.child("users").child(userUid).child("zip_code").setValue(0);
+                                    mDatabase.child("users").child(userUid).child("zip_code").setValue(1);
                                     if(type.equalsIgnoreCase("courier"))
                                         mDatabase.child("users").child(userUid).child("storage_id").setValue("0");
                                     mDatabase.child("users").child(userUid).child("image_uri").setValue("default");

@@ -1,117 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/pop_bg"
+tools:context=".PopDeliveryActivity">
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pop_bg"
-    tools:context=".PopDeliveryActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:layout_height="match_parent">
 
-        <FrameLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
 
-                <LinearLayout
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp">
 
-                    <android.support.design.widget.TextInputLayout
+                    <EditText
+                        android:id="@+id/inputCustomerEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp">
-
-                        <EditText
-                            android:id="@+id/inputCostumerName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="10dp"
-                            android:hint="@string/costumerName"
-                            android:importantForAutofill="no"
-                            android:inputType="textMultiLine|textEmailAddress"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/black"
-                            tools:targetApi="o" />
-                    </android.support.design.widget.TextInputLayout>
-
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp">
-
-                        <EditText
-                            android:id="@+id/inputProductName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="10dp"
-                            android:hint="@string/productName"
-                            android:importantForAutofill="no"
-                            android:inputType="textMultiLine|textEmailAddress"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/black"
-                            tools:targetApi="o" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp">
-
-                        <EditText
-                            android:id="@+id/inputProductDesc"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="0dp"
-                            android:layout_marginBottom="10dp"
-                            android:hint="@string/productDesc"
-                            android:importantForAutofill="no"
-                            android:inputType="textMultiLine|textEmailAddress"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/black"
-                            tools:targetApi="o" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <Button
-                        android:id="@+id/btn_createNewProduct"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dip"
-                        android:background="@drawable/corner_rounded_button"
-                        android:text="@string/createNewProduct"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/customerEmail"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine|textEmailAddress"
                         android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:textAllCaps="false"
-                        android:gravity="center"
-                        android:typeface="normal" />
+                        android:textColorHint="@android:color/black"
+                        tools:targetApi="o" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp">
+
+                    <EditText
+                        android:id="@+id/inputCustomerPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/customerPhone"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine|textEmailAddress"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black"
+                        tools:targetApi="o" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp">
+
+                    <EditText
+                        android:id="@+id/inputCustomerAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/customerAddress"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine|textEmailAddress"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black"
+                        tools:targetApi="o" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp">
+
+                    <EditText
+                        android:id="@+id/inputCustomerCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/customerCity"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine|textEmailAddress"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black"
+                        tools:targetApi="o" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp">
+
+                    <EditText
+                        android:id="@+id/inputDeliveryId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/deliveryId"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine|textEmailAddress"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black"
+                        tools:targetApi="o" />
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <Spinner
+                        android:id="@+id/spinner_products"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:hint="@string/deliveryId"/>
 
                 </LinearLayout>
-            </ScrollView>
-        </FrameLayout>
+                <LinearLayout
+                    android:id="@+id/layoutCouriers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <Spinner
+                        android:id="@+id/spinner_couriers"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_createNewDelivery"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:background="@drawable/corner_rounded_button"
+                    android:text="@string/createNewDelivery"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textAllCaps="false"
+                    android:gravity="center"
+                    android:typeface="normal" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </FrameLayout>
 
 
 
-    </LinearLayout>
-
-
+</LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

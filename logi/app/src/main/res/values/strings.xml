@@ -101,7 +101,6 @@
     <string name="delivery_address">delivery address</string>
     <string name="costumerName">Costumer Name</string>
 
-
     <!-- FCM Related Strings -->
     <string name="default_notification_channel_id" translatable="false">com.ariel.logi.logi.default_notification_channel_id</string>
     <string name="data_type">data_type</string>
@@ -109,4 +108,13 @@
     <string name="data_message">message</string>
     <string name="data_title">title</string>
     <string name="data_message_id">message_id</string>
+    <string name="customerName">Customer Name</string>
+    <string name="customerPhone">Customer Phone</string>
+    <string name="customerAddress">Customer Address</string>
+    <string name="customerCity">CustomerCity</string>
+    <string name="deliveryId">Delivery Id</string>
+    <string name="createNewDelivery">New Delivery</string>
+    <string name="customerEmail">Customer Email</string>
+    <string name="cust_del_product_name">cust_del_product_name</string>
+    <string name="delivery_changeD_button">delivery_changeD_button</string>
 </resources>

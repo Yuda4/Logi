@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayoutItem"
+    tools:context=".CustomerActivity">
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view_Setting"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:headerLayout="@layout/header"
+        app:itemIconTint="@color/darkgray"
+        app:itemTextColor="@color/darkgray"
+        app:menu="@menu/navigation_menu">
+
+    </android.support.design.widget.NavigationView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/show_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/holo_orange_light"
+            android:drawableEnd="@drawable/expended_button"
+            android:gravity="start"
+            android:text="Your deliveries:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="20sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/recveiwDels" />
+
+        <Button
+            android:id="@+id/date_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawableEnd="@drawable/expended_button"
+            android:background="@android:color/holo_orange_light"
+            android:gravity="start"
+            android:text="Deliveries_pending_for_date:"
+            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/recveiwDates"/>
+
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

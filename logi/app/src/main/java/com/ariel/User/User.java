@@ -104,4 +104,53 @@ public class User {
 
     public void setPhone(String phone) { this.phone = phone; }
 
+/*
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };*/
+
+ /*   @Override
+    public int describeContents() {
+        return 0;
+    }
+*/
+   // @Override
+/*    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(userId);
+        parcel.writeString(email);
+        parcel.writeString(name);
+        parcel.writeString(phone);
+        parcel.writeString(country);
+        parcel.writeString(city);
+        parcel.writeString(address);
+        parcel.writeLong(zip_code);
+        parcel.writeString(type);
+        parcel.writeString(image_uri);
+
+    }*/
+
+ /*   protected User(Parcel in) {
+        userId = in.readString();
+        email = in.readString();
+        name = in.readString();
+        phone = in.readString();
+        country = in.readString();
+        city = in.readString();
+        address = in.readString();
+        if (in.readByte() == 0) {
+            zip_code = null;
+        } else {
+            zip_code = in.readLong();
+        }
+        type = in.readString();
+        image_uri = in.readString();
+    }*/
 }
