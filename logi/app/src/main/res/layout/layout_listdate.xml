@@ -80,10 +80,9 @@
 
             <TextView
                 android:id="@+id/recycler_staus2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_toEndOf="@+id/recycler_child_linear_layout"
                 android:layout_weight="1"
                 android:textSize="20sp"
                 android:paddingStart="20dp"

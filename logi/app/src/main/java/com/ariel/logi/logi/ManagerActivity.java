@@ -59,7 +59,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private ActionBarDrawerToggle drawerToggle;
 
     private ArrayList<Courier> dbCourier;
-    public  ArrayList<Product> dbProduct;
+    private  ArrayList<Product> dbProduct;
     private ArrayList<Delivery> dbDelivery;
 
     private RecyclerView rcvProduct, rcvCourier, rcvDelivery;
@@ -335,19 +335,13 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), PopDeliveryActivity.class);
-                ArrayList<String> courierName  = new ArrayList<>();
-                ArrayList<String> productName  = new ArrayList<>();
 
-                for (Product product: dbProduct ){
-                    productName.add(product.getName());
-                }
+                Bundle bundle = new Bundle();
+                //bundle.putStringArray("MyArray", array);
 
-                for (Courier courier: dbCourier ){
-                    courierName.add(courier.describeName());
-                }
-
-                i.putExtra("productName", productName);
-                i.putExtra("courierName", courierName);
+                bundle.putParcelableArrayList("dbProducts", dbProduct);
+                bundle.putParcelableArrayList("dbCouriers", dbCourier);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });

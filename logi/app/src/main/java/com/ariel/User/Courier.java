@@ -42,13 +42,11 @@ public class Courier extends User implements Parcelable {
         this.company = company;
     }
 
-    public String describeName(){
-        return this.name;
-    }
-
-    public Courier(String storage_id, String company) {
+    public Courier(String name, String email, String phone, String storage_id, String company) {
+        super(name, email, phone);
         this.storage_id = storage_id;
         this.company = company;
+
     }
 
     @Override
@@ -58,15 +56,13 @@ public class Courier extends User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
         parcel.writeString(storage_id);
         parcel.writeString(company);
     }
 
-    public Courier(String name, String email, String phone, String storage_id, String company) {
-        super(name, email, phone);
-        this.storage_id = storage_id;
-        this.company = company;
-
+    public String getCourierInfo(){
+        //String em = ;
+        //String ph = super.getPhone();
+        return this.email;
     }
 }

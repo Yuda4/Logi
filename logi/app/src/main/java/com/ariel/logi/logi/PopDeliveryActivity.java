@@ -11,16 +11,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.ariel.DeliverySystem.Delivery;
 import com.ariel.Storage.Product;
 import com.ariel.User.Courier;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class PopDeliveryActivity extends AppCompatActivity {
 
     Button btnNewDelivery;
-    private EditText inputCstmName,inputCstmPhone, inputCstmAddress, inputCstmCity, inputDlivId;
+    private EditText inputCstmEmail ,inputCstmPhone, inputCstmAddress, inputCstmCity, inputDlivId;
     private Spinner spinnerProducts, spinnerCouriers;
 
 
@@ -29,26 +33,42 @@ public class PopDeliveryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_delivery);
 
-        ArrayList<String> productsName = getIntent().getStringArrayListExtra("productName");
-        ArrayList<String> couriersName = getIntent().getStringArrayListExtra("courierName");
+        ArrayList<Product> dbProduct;
+        ArrayList<Courier> dbCourier;
+
+        Bundle bundle = getIntent().getExtras();
+        dbProduct = bundle.getParcelableArrayList("dbProducts");
+        dbCourier = bundle.getParcelableArrayList("dbCouriers");
+
+        ArrayList<String> courierName  = new ArrayList<>();
+        ArrayList<String> productName  = new ArrayList<>();
+
+        for (Product product: dbProduct ){
+            productName.add(product.getName());
+        }
+
+        for (Courier courier: dbCourier ){
+            courierName.add(courier.getStorage_id());
+            //Toast.makeText(this, courierName.get()., Toast.LENGTH_SHORT).show();
+        }
 
 
         spinnerProducts = (Spinner) findViewById(R.id.spinner_products);
         ArrayAdapter<String> adapterProductsSpinner = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, productsName);
+                android.R.layout.simple_spinner_item, productName);
         adapterProductsSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProducts.setAdapter(adapterProductsSpinner);
 
         spinnerCouriers = (Spinner) findViewById(R.id.spinner_couriers);
         ArrayAdapter<String> adapterCouriersSpinner = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, couriersName);
+                android.R.layout.simple_spinner_item, courierName);
         adapterCouriersSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCouriers.setAdapter(adapterCouriersSpinner);
 
 
         btnNewDelivery = (Button) findViewById(R.id.btn_createNewDelivery);
 
-        inputCstmName = (EditText) findViewById(R.id.inputCustomerName);
+        inputCstmEmail = (EditText) findViewById(R.id.inputCustomerEmail);
         inputCstmPhone = (EditText) findViewById(R.id.inputCustomerPhone);
         inputCstmAddress = (EditText) findViewById(R.id.inputCustomerAddress);
         inputCstmCity = (EditText) findViewById(R.id.inputCustomerCity);
@@ -57,6 +77,19 @@ public class PopDeliveryActivity extends AppCompatActivity {
         btnNewDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Delivery delivery = new Delivery();
+                //delivery.setC
+                delivery.setCustomer_email(inputCstmEmail.getText().toString());
+                delivery.setCustomer_phone(inputCstmPhone.getText().toString());
+                delivery.setAddress(inputCstmAddress.getText().toString());
+
+
+                /*Product product = new Product(inputPrdId.getText().toString(), inputPrdName.getText().toString()
+                        , inputPrdDesc.getText().toString());
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("products")
+                        .child(storage_id );
+                ref.child(product.getProduct_id()).setValue(product);*/
+                finish();
 
             }
         });

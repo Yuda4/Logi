@@ -106,4 +106,7 @@
     <string name="customerCity">CustomerCity</string>
     <string name="deliveryId">Delivery Id</string>
     <string name="createNewDelivery">New Delivery</string>
+    <string name="customerEmail">Customer Email</string>
+    <string name="cust_del_product_name">cust_del_product_name</string>
+    <string name="delivery_changeD_button">delivery_changeD_button</string>
 </resources>

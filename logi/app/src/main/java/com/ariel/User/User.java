@@ -1,9 +1,6 @@
 package com.ariel.User;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class User implements Parcelable {
+public class User {
 
 	//private static long USERID = 17942;
     protected String userId;
@@ -107,13 +104,26 @@ public class User implements Parcelable {
 
     public void setPhone(String phone) { this.phone = phone; }
 
-    @Override
+/*
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };*/
+
+ /*   @Override
     public int describeContents() {
         return 0;
     }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
+*/
+   // @Override
+/*    public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(userId);
         parcel.writeString(email);
         parcel.writeString(name);
@@ -121,9 +131,26 @@ public class User implements Parcelable {
         parcel.writeString(country);
         parcel.writeString(city);
         parcel.writeString(address);
+        parcel.writeLong(zip_code);
         parcel.writeString(type);
         parcel.writeString(image_uri);
-        parcel.writeLong(zip_code);
 
-    }
+    }*/
+
+ /*   protected User(Parcel in) {
+        userId = in.readString();
+        email = in.readString();
+        name = in.readString();
+        phone = in.readString();
+        country = in.readString();
+        city = in.readString();
+        address = in.readString();
+        if (in.readByte() == 0) {
+            zip_code = null;
+        } else {
+            zip_code = in.readLong();
+        }
+        type = in.readString();
+        image_uri = in.readString();
+    }*/
 }

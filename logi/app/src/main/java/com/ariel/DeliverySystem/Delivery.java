@@ -17,6 +17,15 @@ public class Delivery {
 	private String status;
 	private String address;
 	private String city;
+	private String company_name;
+
+    public String getCompanyName() {
+        return company_name;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.company_name = companyName;
+    }
 
     public String getAddress() {
         return address;
