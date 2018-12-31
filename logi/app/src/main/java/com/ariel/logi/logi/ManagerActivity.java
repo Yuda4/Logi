@@ -40,6 +40,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 
@@ -334,8 +335,19 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), PopDeliveryActivity.class);
-                i.putParcelableArrayListExtra("dbProduct", dbProduct);
-                i.putParcelableArrayListExtra("dbCourier", dbCourier);
+                ArrayList<String> courierName  = new ArrayList<>();
+                ArrayList<String> productName  = new ArrayList<>();
+
+                for (Product product: dbProduct ){
+                    productName.add(product.getName());
+                }
+
+                for (Courier courier: dbCourier ){
+                    courierName.add(courier.describeName());
+                }
+
+                i.putExtra("productName", productName);
+                i.putExtra("courierName", courierName);
                 startActivity(i);
             }
         });

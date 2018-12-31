@@ -29,32 +29,18 @@ public class PopDeliveryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_delivery);
 
-        ArrayList<Product> dbProducts = new ArrayList<>();
-        ArrayList<Courier> dbCouriers = new ArrayList<>();
+        ArrayList<String> productsName = getIntent().getStringArrayListExtra("productName");
+        ArrayList<String> couriersName = getIntent().getStringArrayListExtra("courierName");
 
-        //Intent db = getIntent();
-        dbProducts = getIntent().getParcelableArrayListExtra("dbProduct");
-        dbCouriers = getIntent().getParcelableArrayListExtra("dbCourier");
-
-        ArrayList<String> productsName = new ArrayList<>();
-        ArrayList<String> couriersName = new ArrayList<>();
-
-        for (int i = 0 ; i < dbProducts.size(); i++ ){
-            productsName.add(dbProducts.get(i).getName());
-        }
-
-        for (int i = 0 ; i < dbCouriers.size(); i++ ){
-            couriersName.add(dbCouriers.get(i).getStorage_id());
-        }
 
         spinnerProducts = (Spinner) findViewById(R.id.spinner_products);
-        ArrayAdapter<String> adapterProductsSpinner = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapterProductsSpinner = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, productsName);
         adapterProductsSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProducts.setAdapter(adapterProductsSpinner);
 
         spinnerCouriers = (Spinner) findViewById(R.id.spinner_couriers);
-        ArrayAdapter<String> adapterCouriersSpinner = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapterCouriersSpinner = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, couriersName);
         adapterCouriersSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCouriers.setAdapter(adapterCouriersSpinner);

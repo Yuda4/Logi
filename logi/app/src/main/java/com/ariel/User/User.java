@@ -1,6 +1,9 @@
 package com.ariel.User;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
 
 	//private static long USERID = 17942;
     protected String userId;
@@ -104,4 +107,23 @@ public class User {
 
     public void setPhone(String phone) { this.phone = phone; }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(userId);
+        parcel.writeString(email);
+        parcel.writeString(name);
+        parcel.writeString(phone);
+        parcel.writeString(country);
+        parcel.writeString(city);
+        parcel.writeString(address);
+        parcel.writeString(type);
+        parcel.writeString(image_uri);
+        parcel.writeLong(zip_code);
+
+    }
 }

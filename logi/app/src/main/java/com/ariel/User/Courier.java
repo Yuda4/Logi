@@ -42,6 +42,10 @@ public class Courier extends User implements Parcelable {
         this.company = company;
     }
 
+    public String describeName(){
+        return this.name;
+    }
+
     public Courier(String storage_id, String company) {
         this.storage_id = storage_id;
         this.company = company;
@@ -54,6 +58,7 @@ public class Courier extends User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
         parcel.writeString(storage_id);
         parcel.writeString(company);
     }
@@ -64,8 +69,4 @@ public class Courier extends User implements Parcelable {
         this.company = company;
 
     }
-
-    /*public String getName() {
-        return super.name;
-    }*/
 }
