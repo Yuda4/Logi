@@ -100,4 +100,13 @@
     <string name="city">city</string>
     <string name="delivery_address">delivery address</string>
     <string name="costumerName">Costumer Name</string>
+
+
+    <!-- FCM Related Strings -->
+    <string name="default_notification_channel_id" translatable="false">com.ariel.logi.logi.default_notification_channel_id</string>
+    <string name="data_type">data_type</string>
+    <string name="direct_message">direct_message</string>
+    <string name="data_message">message</string>
+    <string name="data_title">title</string>
+    <string name="data_message_id">message_id</string>
 </resources>

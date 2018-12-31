@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.Objects;
 
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         };
+
+        initFCM();
 
         // Read from the database
         mDatabaseUsers.addValueEventListener(new ValueEventListener() {
@@ -170,6 +173,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //sign out method
     public void signOut() {
         auth.signOut();
+
+    }
+
+    private void sendRegistrationToServer(String token) {
+        Log.d("MainActivity", "sendRegistrationToServer: sending token to server: " + token);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("messages");
+        reference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '1'))
+                .child("messaging_token")
+                .setValue(token);
+    }
+
+
+    private void initFCM(){
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d("MainActivity", "initFCM: token: " + token);
+        sendRegistrationToServer(token);
 
     }
 }
