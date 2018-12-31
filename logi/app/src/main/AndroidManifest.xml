@@ -61,7 +61,8 @@
         <activity
             android:name=".PopCourierActivity"
             android:theme="@style/AppTheme.Popup" />
-        <activity android:name=".PopDeliveryActivity"></activity>
+        <activity android:name=".PopDeliveryActivity"
+            android:theme="@style/AppTheme.Popup" />
     </application>
 
 </manifest>

@@ -52,7 +52,7 @@
 
                         <Button
                             android:id="@+id/btn_new_delivery"
-                            android:layout_width="wrap_content"
+                            android:layout_width="120dp"
                             android:layout_height="match_parent"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="10dp"
@@ -62,6 +62,7 @@
                             android:background="@drawable/corner_rounded_orange"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
+                            android:textAllCaps="false"
                             android:text="@string/new_delivery" />
                     </RelativeLayout>
 
@@ -73,7 +74,7 @@
 
                         <Button
                             android:id="@+id/btn_new_courier"
-                            android:layout_width="wrap_content"
+                            android:layout_width="120dp"
                             android:layout_height="match_parent"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="10dp"
@@ -83,6 +84,7 @@
                             android:background="@drawable/corner_rounded_orange"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
+                            android:textAllCaps="false"
                             android:text="@string/new_courier" />
 
                         <android.support.v7.widget.SearchView
@@ -110,7 +112,7 @@
 
                         <Button
                             android:id="@+id/btn_new_product"
-                            android:layout_width="wrap_content"
+                            android:layout_width="120dp"
                             android:layout_height="match_parent"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="10dp"
@@ -120,6 +122,7 @@
                             android:background="@drawable/corner_rounded_orange"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
+                            android:textAllCaps="false"
                             android:text="@string/new_product" />
 
                         <android.support.v7.widget.SearchView
@@ -159,6 +162,16 @@
                 </LinearLayout>
 
             </ScrollView>
+            <io.github.yavski.fabspeeddial.FabSpeedDial
+                android:id="@+id/float_add_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                app:fabGravity="bottom_end"
+                app:fabMenu="@menu/float_button_manager"
+                app:miniFabBackgroundTint="@color/colorPrimary"
+                app:miniFabDrawableTint="@color/colorPrimaryDark"
+                app:miniFabTitleTextColor="@color/colorPrimaryDark" />
 
         </FrameLayout>
     </LinearLayout>

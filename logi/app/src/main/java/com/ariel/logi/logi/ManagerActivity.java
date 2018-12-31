@@ -232,12 +232,12 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             }
         }));
 
-        btnNewCourier.setOnClickListener(new View.OnClickListener() {
+       /* btnNewCourier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ManagerActivity.this, CreateCourier.class));
             }
-        });
+        });*/
 
         spinnerDelivery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -326,6 +326,16 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 i.putExtra("storage_id",userID);
                 startActivity(i);
 
+            }
+        });
+
+        btnNewDelivery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), PopDeliveryActivity.class);
+                i.putParcelableArrayListExtra("dbProduct", dbProduct);
+                i.putParcelableArrayListExtra("dbCourier", dbCourier);
+                startActivity(i);
             }
         });
 
