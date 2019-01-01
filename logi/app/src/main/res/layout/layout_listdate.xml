@@ -19,82 +19,96 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:id="@+id/recycler_child_linear_layout"
             android:layout_alignParentStart="true">
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cust_del_product_name"
-                android:id="@+id/recycler_delivery_product_name"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-            <TextView
+                android:orientation="vertical"
+                android:id="@+id/recycler_child_layout"
+                android:layout_alignParentStart="true">
+                <ImageButton
+                    android:id="@+id/recycler_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_delivery" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/recycler_courier_name"
-                android:id="@+id/recycler_courier_name"
-                android:textSize="15sp"/>
+                android:orientation="vertical"
+                android:id="@+id/recycler_child_two_layout"
+                android:layout_alignParentStart="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cust_del_product_name"
+                    android:id="@+id/recycler_delivery_product_name"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/recycler_delivery_id"
-                android:id="@+id/recycler_delivery_id"
-                android:textSize="15sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recycler_courier_name"
+                    android:id="@+id/recycler_courier_name"
+                    android:textSize="15sp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/delivery_date"
-                android:id="@+id/recycler_delivery_date"
-                android:textSize="15sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recycler_delivery_id"
+                    android:id="@+id/recycler_delivery_id"
+                    android:textSize="15sp"/>
 
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delivery_date"
+                    android:id="@+id/recycler_delivery_date"
+                    android:textSize="15sp"/>
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
+            android:id="@+id/recycler_staus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/recycler_status"
-            android:id="@+id/recycler_staus"
-            android:textSize="20sp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:layout_toEndOf="@+id/recycler_child_linear_layout"/>
+            android:layout_marginStart="-8dp"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/recycler_child_linear_layout"
+            android:paddingStart="25dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="20dp"
+            android:text="@string/recycler_status"
+            android:textSize="15sp" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingStart="30dp"
+            android:paddingEnd="5dp">
 
-            <!--TextView
-                android:id="@+id/recycler_staus2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingTop="25dp"
-                android:text="Set date:"/-->
+            <ImageButton
+                android:id="@+id/recycler_setA_img"
+                android:layout_width="36dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_toolbar_deliveries" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_002_telephone_handle_silhouette"
-            android:contentDescription="@string/delivery_changeD_button"
-            android:id="@+id/recycler_dial_icon"
-            android:layout_marginTop="20dp"
-            android:layout_toStartOf="@+id/recycler_setD_img"/>
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/ic_edit_black_24dp"
-                android:contentDescription="@string/delivery_changeD_button"
+            <ImageButton
                 android:id="@+id/recycler_setD_img"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentEnd="true"/>
+                android:layout_width="38dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/delivery_changeD_button"
+                android:src="@drawable/ic_edit_black_24dp" />
+        </LinearLayout>
     </RelativeLayout>
 
 
