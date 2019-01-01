@@ -35,7 +35,11 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="5dp"
             android:contentDescription="@string/call_courier"
-            android:src="@drawable/ic_call_black_24dp" />
+            android:src="@drawable/ic_002_telephone_handle_silhouette" />
+
+
+
+
 
     </RelativeLayout>
 
