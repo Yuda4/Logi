@@ -53,7 +53,7 @@
             android:drawableEnd="@drawable/expended_button"
             android:background="@android:color/holo_orange_light"
             android:gravity="start"
-            android:text="Deliveries_pending_for_date:"
+            android:text="@string/deliveries_pending_for_date"
             android:textSize="20sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
@@ -63,4 +63,5 @@
             android:id="@+id/recveiwDates"/>
 
     </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>

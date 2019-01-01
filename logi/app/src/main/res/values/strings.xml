@@ -117,4 +117,6 @@
     <string name="customerEmail">Customer Email</string>
     <string name="cust_del_product_name">cust_del_product_name</string>
     <string name="delivery_changeD_button">delivery_changeD_button</string>
+    <string name="apply">Apply</string>
+    <string name="deliveries_pending_for_date">Pending Deliveries:</string>
 </resources>

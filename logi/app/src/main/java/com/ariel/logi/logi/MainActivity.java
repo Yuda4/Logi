@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+       /* navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.bringToFront();
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);*/
 
         viewName = (TextView) findViewById(R.id.navigator_name);
         viewEmail = (TextView) findViewById(R.id.navigator_email);

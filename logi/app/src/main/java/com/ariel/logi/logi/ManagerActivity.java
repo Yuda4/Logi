@@ -2,7 +2,6 @@ package com.ariel.logi.logi;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,9 +19,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ariel.DeliverySystem.Delivery;
@@ -40,7 +39,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Objects;
 
 
@@ -59,7 +57,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private ActionBarDrawerToggle drawerToggle;
 
     private ArrayList<Courier> dbCourier;
-    private  ArrayList<Product> dbProduct;
+    private ArrayList<Product> dbProduct;
     private ArrayList<Delivery> dbDelivery;
 
     private RecyclerView rcvProduct, rcvCourier, rcvDelivery;
@@ -68,7 +66,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     private RecyclerViewManagerCourier adapterCourier;
 
     private Button btnNewProduct, btnNewCourier, btnNewDelivery;
-    private TextView icProduct, icDelivery, icCourier;
+    private ImageView icProduct, icDelivery, icCourier;
     private RelativeLayout rlDelivery, rlCourier, rlProduct;
     private RecyclerView recyclerViewProduct, recyclerViewDelivery, recyclerViewCourier;
 
@@ -100,9 +98,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         adapterDeliverySpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDelivery.setAdapter(adapterDeliverySpinner);
 
-        icCourier = (TextView) findViewById(R.id.ic_toolbar_couriers);
-        icDelivery = (TextView) findViewById(R.id.ic_toolbar_deliveries);
-        icProduct = (TextView) findViewById(R.id.ic_toolbar_products);
+        icCourier = (ImageView) findViewById(R.id.ic_toolbar_couriers);
+        icDelivery = (ImageView) findViewById(R.id.ic_toolbar_deliveries);
+        icProduct = (ImageView) findViewById(R.id.ic_toolbar_products);
 
 
         btnNewProduct = (Button) findViewById(R.id.btn_new_product);
@@ -191,6 +189,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icProduct.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                icDelivery.setImageResource(R.drawable.ic_icon_orders);
+                icCourier.setImageResource(R.drawable.ic_icon_couriers);
+                icProduct.setImageResource(R.drawable.ic_icon_clicked_products);
                 // Product show
                 rcvProduct.setVisibility(View.VISIBLE);
                 rlProduct.setVisibility(View.VISIBLE);
@@ -206,6 +207,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icDelivery.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                icDelivery.setImageResource(R.drawable.ic_icon_clicked_orders);
+                icCourier.setImageResource(R.drawable.ic_icon_couriers);
+                icProduct.setImageResource(R.drawable.ic_icon_products);
                 // Product hide
                 rcvProduct.setVisibility(View.GONE);
                 rlProduct.setVisibility(View.GONE);
@@ -215,12 +219,16 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 // Delivery show
                 rcvDelivery.setVisibility(View.VISIBLE);
                 rlDelivery.setVisibility(View.VISIBLE);
+
             }
         }));
 
         icCourier.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                icDelivery.setImageResource(R.drawable.ic_icon_orders);
+                icCourier.setImageResource(R.drawable.ic_icon_clicked_couriers);
+                icProduct.setImageResource(R.drawable.ic_icon_products);
                 // Product hide
                 rcvProduct.setVisibility(View.GONE);
                 rlProduct.setVisibility(View.GONE);

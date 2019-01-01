@@ -6,38 +6,97 @@
     android:layout_height="wrap_content"
     android:id="@+id/toolbar_manager"
     android:minHeight="?attr/actionBarSize">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:elevation="20dp"
-        android:translationZ="10dp">
+        android:translationZ="10dp"
+        >
 
-    <TextView
-        android:id="@+id/ic_toolbar_products"
-        android:drawableTop="@drawable/ic_toolbar_products"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/products"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"/>
+        <LinearLayout
+            android:id="@+id/layoutProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@+id/btn_new_delivery"
+            >
+            <ImageView
+                android:id="@+id/ic_toolbar_products"
+                android:src="@drawable/ic_icon_products"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                />
 
-    <TextView
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutCouriers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@+id/layoutProducts"
+            >
+            <ImageView
+                android:id="@+id/ic_toolbar_couriers"
+                android:src="@drawable/ic_icon_couriers"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:cropToPadding="true"
+                android:layout_alignParentEnd="true"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutDeliveries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@+id/layoutCouriers"
+            >
+            <ImageView
+                android:id="@+id/ic_toolbar_deliveries"
+                android:src="@drawable/ic_icon_clicked_orders"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                />
+
+        </LinearLayout>
+
+
+
+
+
+   <!-- <TextView
         android:id="@+id/ic_toolbar_couriers"
         android:drawableTop="@drawable/ic_toolbar_couriers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/courier"
         android:layout_toStartOf="@+id/ic_toolbar_products"
-        android:layout_marginStart="30dp"/>
+        android:layout_marginStart="30dp"/>-->
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/ic_toolbar_deliveries"
         android:drawableTop="@drawable/ic_toolbar_deliveries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delivery"
-        android:layout_toStartOf="@+id/ic_toolbar_couriers"/>
+        android:layout_toStartOf="@+id/ic_toolbar_couriers"/>-->
     </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

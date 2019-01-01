@@ -60,9 +60,4 @@ public class Courier extends User implements Parcelable {
         parcel.writeString(company);
     }
 
-    public String getCourierInfo(){
-        //String em = ;
-        //String ph = super.getPhone();
-        return this.email;
-    }
 }

@@ -49,14 +49,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_profile" >
+            android:theme="@style/AppTheme.NoActionBar"
+             >
             <intent-filter>
                 <action android:name="MAINACTIVITY"/>
+                android:theme="@style/AppTheme.NoActionBar"
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SignupActivity"
             android:label="@string/title_activity_login"
@@ -81,14 +85,22 @@
             android:name=".CourierActivity"
             android:label="@string/CourierActivity" />
         <activity android:name=".CreateCourier" />
+
         <activity
             android:name=".PopProductActivity"
             android:theme="@style/AppTheme.Popup" />
         <activity
             android:name=".PopCourierActivity"
             android:theme="@style/AppTheme.Popup" />
+
         <activity android:name=".PopDeliveryActivity"
             android:theme="@style/AppTheme.Popup" />
+
+
+        <!--<activity android:name="PopDeliveryActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.Transparent"/>-->
+
     </application>
 
 </manifest>
