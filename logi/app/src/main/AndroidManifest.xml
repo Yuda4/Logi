@@ -71,9 +71,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_Settings" />
         <activity
             android:name=".ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/ProfileActivity" />
         <activity
             android:name=".CustomerActivity"

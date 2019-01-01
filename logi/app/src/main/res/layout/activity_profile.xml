@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:adjustViewBounds="true"
-                android:background="@drawable/ic_navigator_800px"
+                android:background="@drawable/profile_bg"
                 android:contentDescription="@string/ProfileHeaderImage" />
 
             <LinearLayout

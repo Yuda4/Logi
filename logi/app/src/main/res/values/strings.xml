@@ -111,7 +111,7 @@
     <string name="customerName">Customer Name</string>
     <string name="customerPhone">Customer Phone</string>
     <string name="customerAddress">Customer Address</string>
-    <string name="customerCity">CustomerCity</string>
+    <string name="customerCity">Customer City</string>
     <string name="deliveryId">Delivery Id</string>
     <string name="createNewDelivery">New Delivery</string>
     <string name="customerEmail">Customer Email</string>

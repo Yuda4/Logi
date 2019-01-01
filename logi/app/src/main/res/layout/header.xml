@@ -4,12 +4,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="@drawable/profile_bg">
+    android:background="@drawable/navigator_bg">
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
-        android:src="@drawable/user_blank_512"
+        android:src="@drawable/ic_user"
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:layout_marginTop="30dp"
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_name_template"
-        android:textColor="@color/darkgray"
+        android:textColor="#ffff"
         android:textStyle="bold"
         android:layout_marginTop="2dp"
         android:layout_marginStart="20dp"/>
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email_template"
-        android:textColor="@color/darkgray"
+        android:textColor="#ffff"
         android:layout_marginStart="20dp"/>
 
 </android.support.v7.widget.LinearLayoutCompat>
