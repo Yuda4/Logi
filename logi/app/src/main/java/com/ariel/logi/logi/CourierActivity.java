@@ -101,6 +101,7 @@ public class CourierActivity extends AppCompatActivity implements NavigationView
                                 .orderByChild("status").equalTo("in process");
 
                         query.addListenerForSingleValueEvent(eventListenerCourier);
+
                         break;
                     case "Delivered":
                        query = mDatabaseDelivery.child(courier.getStorage_id())
@@ -112,7 +113,8 @@ public class CourierActivity extends AppCompatActivity implements NavigationView
                         query = mDatabaseDelivery.child(courier.getStorage_id())
                                 .orderByChild("date");
 
-                        query.addListenerForSingleValueEvent(eventListenerCourier);
+
+                        query.addListenerForSingleValueEvent(eventListenerCourierByDate);
                         break;
                 }
             }
@@ -178,7 +180,6 @@ public class CourierActivity extends AppCompatActivity implements NavigationView
                 // Failed to read value
             }
         });
-
 
     }
 
@@ -260,8 +261,8 @@ public class CourierActivity extends AppCompatActivity implements NavigationView
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Delivery delivery = ds.getValue(Delivery.class);
                     dbDeliveryContent.add(delivery);
-                    adapter.notifyDataSetChanged();
                 }
+                adapter.notifyDataSetChanged();
             }
         }
 
@@ -271,6 +272,24 @@ public class CourierActivity extends AppCompatActivity implements NavigationView
         }
     };
 
+    ValueEventListener eventListenerCourierByDate = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()) {
+                dbDeliveryContent.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Delivery delivery = ds.getValue(Delivery.class);
+                    if(delivery.getCourier_email().equalsIgnoreCase(auth.getCurrentUser().getEmail()))
+                        dbDeliveryContent.add(delivery);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }
 
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
 
 }

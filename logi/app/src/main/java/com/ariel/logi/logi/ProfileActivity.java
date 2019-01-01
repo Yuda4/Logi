@@ -75,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         navigationView = (NavigationView) findViewById(R.id.navigation_view_profile);
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);

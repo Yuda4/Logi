@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/corner_rounded_orange"
                 android:text="@string/btn_change"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/corner_rounded_orange"
                 android:text="@string/btn_change"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -132,6 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/corner_rounded_button"
                 android:text="@string/send_password_reset_email"
                 android:textStyle="bold" />
 
@@ -141,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/corner_rounded_orange"
                 android:text="@string/btn_send"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -152,6 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/corner_rounded_button"
                 android:text="@string/remove_user"
                 android:textStyle="bold" />
 
@@ -161,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/corner_rounded_orange"
                 android:text="@string/btn_remove"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
@@ -170,15 +172,17 @@
                 android:id="@+id/progressBar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                />
 
             <Button
                 android:id="@+id/sign_out"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/corner_rounded_orange"
                 android:text="@string/btn_sign_out"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
