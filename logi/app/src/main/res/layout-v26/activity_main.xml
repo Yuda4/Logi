@@ -7,18 +7,23 @@
     android:id="@+id/drawerLayout"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/fui_bgGitHub"
+        >
 
+        <ImageView
+            android:id="@+id/ic_toolbar_couriers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:cropToPadding="true"
+            android:src="@drawable/splash" />
 
-      <android.support.design.widget.NavigationView
-          app:headerLayout="@layout/header"
-          android:id="@+id/navigation_view"
-          android:layout_height="match_parent"
-          android:layout_width="wrap_content"
-          app:menu="@menu/navigation_menu"
-          android:layout_gravity="start"
-          android:background="@color/white"
-          app:itemIconTint="@color/darkgray"
-          app:itemTextColor="@color/darkgray"/>
+    </LinearLayout>
 
 
 

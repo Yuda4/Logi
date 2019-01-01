@@ -174,8 +174,14 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
+        Query pend;
         mDatabaseDelivery.addValueEventListener(valueEventListenerDelivery);
+        pend = mDatabaseDelivery.orderByChild("status")
+                .equalTo("pending");
+
+        pend.addListenerForSingleValueEvent(valueEventListenerDelivery);
+
+
 
         final String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
@@ -189,9 +195,10 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icProduct.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icDelivery.setImageResource(R.drawable.ic_icon_orders);
-                icCourier.setImageResource(R.drawable.ic_icon_couriers);
-                icProduct.setImageResource(R.drawable.ic_icon_clicked_products);
+                icDelivery.setImageResource(R.drawable.ic_toolbar_black_orders);
+                icCourier.setImageResource(R.drawable.ic_toolbar_black_couriers);
+                icProduct.setImageResource(R.drawable.ic_toolbar_clicked_products);
+
                 // Product show
                 rcvProduct.setVisibility(View.VISIBLE);
                 rlProduct.setVisibility(View.VISIBLE);
@@ -207,9 +214,10 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icDelivery.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icDelivery.setImageResource(R.drawable.ic_icon_clicked_orders);
-                icCourier.setImageResource(R.drawable.ic_icon_couriers);
-                icProduct.setImageResource(R.drawable.ic_icon_products);
+                icDelivery.setImageResource(R.drawable.ic_toolbar_clicked_orders);
+                icCourier.setImageResource(R.drawable.ic_toolbar_black_couriers);
+                icProduct.setImageResource(R.drawable.ic_toolbar_black_products);
+
                 // Product hide
                 rcvProduct.setVisibility(View.GONE);
                 rlProduct.setVisibility(View.GONE);
@@ -226,9 +234,10 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         icCourier.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icDelivery.setImageResource(R.drawable.ic_icon_orders);
-                icCourier.setImageResource(R.drawable.ic_icon_clicked_couriers);
-                icProduct.setImageResource(R.drawable.ic_icon_products);
+                icDelivery.setImageResource(R.drawable.ic_toolbar_black_orders);
+                icCourier.setImageResource(R.drawable.ic_toolbar_clicked_couriers);
+                icProduct.setImageResource(R.drawable.ic_toolbar_black_products);
+
                 // Product hide
                 rcvProduct.setVisibility(View.GONE);
                 rlProduct.setVisibility(View.GONE);
@@ -242,18 +251,13 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             }
         }));
 
-       /* btnNewCourier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ManagerActivity.this, CreateCourier.class));
-            }
-        });*/
-
         spinnerDelivery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                Toast.makeText(ManagerActivity.this, parent.getItemAtPosition(position) + " selected!", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(ManagerActivity.this, parent.getItemAtPosition(position).toString() + " is selected", Toast.LENGTH_SHORT).show();
                 Query queryDelivery = FirebaseDatabase.getInstance().getReference("users");
+
                 switch (parent.getItemAtPosition(position).toString()){
                     case "Pending":
                         queryDelivery = mDatabaseDelivery.orderByChild("status")
@@ -402,6 +406,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
+
     }
 
     ValueEventListener valueEventListenerCourier = new ValueEventListener() {
@@ -426,6 +431,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             // This method is called once with the initial value and again
             // whenever data at this location is updated.
+
             ShowDeliveryData(dataSnapshot);
             adapterDelivery.notifyDataSetChanged();
         }
@@ -458,6 +464,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 dbDelivery.add(delivery);
             }
         }
+
     }
 
     private void ShowCourierData(DataSnapshot dataSnapshot) {

@@ -27,7 +27,7 @@
             >
             <ImageView
                 android:id="@+id/ic_toolbar_products"
-                android:src="@drawable/ic_icon_products"
+                android:src="@drawable/ic_toolbar_black_products"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_alignParentEnd="true"
@@ -48,7 +48,7 @@
             >
             <ImageView
                 android:id="@+id/ic_toolbar_couriers"
-                android:src="@drawable/ic_icon_couriers"
+                android:src="@drawable/ic_toolbar_black_couriers"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:cropToPadding="true"
@@ -70,7 +70,7 @@
             >
             <ImageView
                 android:id="@+id/ic_toolbar_deliveries"
-                android:src="@drawable/ic_icon_clicked_orders"
+                android:src="@drawable/ic_toolbar_clicked_orders"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_alignParentEnd="true"
@@ -78,25 +78,6 @@
 
         </LinearLayout>
 
-
-
-
-
-   <!-- <TextView
-        android:id="@+id/ic_toolbar_couriers"
-        android:drawableTop="@drawable/ic_toolbar_couriers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/ic_toolbar_products"
-        android:layout_marginStart="30dp"/>-->
-
-   <!-- <TextView
-        android:id="@+id/ic_toolbar_deliveries"
-        android:drawableTop="@drawable/ic_toolbar_deliveries"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delivery"
-        android:layout_toStartOf="@+id/ic_toolbar_couriers"/>-->
     </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

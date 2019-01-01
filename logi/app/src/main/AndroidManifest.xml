@@ -84,7 +84,6 @@
         <activity
             android:name=".CourierActivity"
             android:label="@string/CourierActivity" />
-        <activity android:name=".CreateCourier" />
 
         <activity
             android:name=".PopProductActivity"
