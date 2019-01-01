@@ -46,6 +46,7 @@ public class PopDeliveryActivity extends AppCompatActivity {
 
     User selectedCourier;
     Product selectedProduct;
+    String storage_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +123,8 @@ public class PopDeliveryActivity extends AppCompatActivity {
                 delivery.setStatus("pending");
                 delivery.setDate(getCurrentTimeStamp());
                 delivery.setDelivery_id(inputDlivId.getText().toString());
+                delivery.setStorage_id(auth.getCurrentUser().getUid());
+
 
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("deliveries")
                         .child(Objects.requireNonNull(auth.getCurrentUser()).getUid());

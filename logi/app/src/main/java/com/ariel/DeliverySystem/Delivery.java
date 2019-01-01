@@ -17,14 +17,14 @@ public class Delivery {
 	private String status;
 	private String address;
 	private String city;
-	private String company_name;
+	private String storage_id;
 
-    public String getCompanyName() {
-        return company_name;
+    public String getStorage_id() {
+        return storage_id;
     }
 
-    public void setCompanyName(String companyName) {
-        this.company_name = companyName;
+    public void setStorage_id(String storage_id) {
+        this.storage_id = storage_id;
     }
 
     public String getAddress() {
