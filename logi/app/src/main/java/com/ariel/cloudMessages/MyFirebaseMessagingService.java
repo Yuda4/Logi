@@ -21,7 +21,7 @@ import java.util.Map;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
-    private static final int BROADCAST_NOTIFICATION_ID = 1;
+//    private static final int BROADCAST_NOTIFICATION_ID = 1;
 
     @Override
     public void onDeletedMessages() {
@@ -38,9 +38,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if(remoteMessage.getData().size() >0){
 
             try{
-                Map<String, String> data = remoteMessage.getData();
                 Map<String, String> notification = remoteMessage.getData();
-                showNotification(data, notification);
+                showNotification(notification);
 
             }catch (NullPointerException e){
                 Log.e(TAG, "onMessageReceived: NullPointerException: " + e.getMessage() );
@@ -48,7 +47,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
-    private void showNotification(Map<String,String> data, Map<String,String> notification){
+    private void showNotification(Map<String,String> notification){
         try{
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
                     getString(R.string.default_notification_channel_id));

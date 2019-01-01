@@ -37,7 +37,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private void sendRegistrationToServer(String token) {
         Log.d("MainActivity", "sendRegistrationToServer: sending token to server: " + token);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("messages");
-        reference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '1'))
+        reference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_'))
                 .child("messaging_token")
                 .setValue(token);
     }
