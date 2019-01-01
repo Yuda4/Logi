@@ -27,38 +27,17 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabaseUsers;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle drawerToggle;
-    private  NavigationView navigationView;
-    TextView viewName;
-    TextView viewEmail;
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(drawerToggle);
-        drawerToggle.syncState();
-
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.bringToFront();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        viewName = (TextView) findViewById(R.id.navigator_name);
-        viewEmail = (TextView) findViewById(R.id.navigator_email);
-
-        user = new User();
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -96,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.w("MainActivity", "Failed to read value.", error.toException());
             }
         });
+
     }
 
     @Override
@@ -116,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             auth.removeAuthStateListener(authListener);
         }
     }
-
 
     private void ShowData(DataSnapshot dataSnapshot) {
         if(auth.getCurrentUser() != null){
@@ -141,40 +120,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) return true;
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.home:
-                Toast.makeText(MainActivity.this, "Home Press!", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.profile:
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                finish();
-                break;
-            case R.id.setting:
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                finish();
-                break;
-            case R.id.logout:
-                signOut();
-                finish();
-                break;
-        }
-        return false;
-    }
-
-    //sign out method
-    public void signOut() {
-        auth.signOut();
-
-    }
 
     private void sendRegistrationToServer(String token) {
         Log.d("MainActivity", "sendRegistrationToServer: sending token to server: " + token);
@@ -183,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .child("messaging_token")
                 .setValue(token);
     }
-
 
     private void initFCM(){
         String token = FirebaseInstanceId.getInstance().getToken();

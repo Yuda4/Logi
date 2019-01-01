@@ -33,14 +33,15 @@ tools:context=".PopDeliveryActivity">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
-                    android:paddingEnd="20dp">
+                    android:paddingEnd="20dp"
+                    android:paddingTop="20dp">
 
                     <EditText
                         android:id="@+id/inputCustomerEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="5dp"
                         android:hint="@string/customerEmail"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine|textEmailAddress"
@@ -61,7 +62,7 @@ tools:context=".PopDeliveryActivity">
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="5dp"
                         android:hint="@string/customerPhone"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine|textEmailAddress"
@@ -81,7 +82,7 @@ tools:context=".PopDeliveryActivity">
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="5dp"
                         android:hint="@string/customerAddress"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine|textEmailAddress"
@@ -101,7 +102,7 @@ tools:context=".PopDeliveryActivity">
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="5dp"
                         android:hint="@string/customerCity"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine|textEmailAddress"
@@ -121,7 +122,7 @@ tools:context=".PopDeliveryActivity">
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="5dp"
                         android:hint="@string/deliveryId"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine|textEmailAddress"
@@ -132,39 +133,45 @@ tools:context=".PopDeliveryActivity">
 
                 <LinearLayout
                     android:id="@+id/layoutProducts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/spinner_for_popup"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="5dp"
+                    >
 
                     <Spinner
                         android:id="@+id/spinner_products"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:hint="@string/deliveryId"/>
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="5dp"
+                        />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/layoutCouriers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/spinner_for_popup">
 
                     <Spinner
                         android:id="@+id/spinner_couriers"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp" />
+                        android:layout_marginBottom="5dp"
+                         />
 
                 </LinearLayout>
 
@@ -173,9 +180,9 @@ tools:context=".PopDeliveryActivity">
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dip"
+                    android:layout_marginTop="50dip"
                     android:background="@drawable/corner_rounded_button"
-                    android:text="@string/createNewDelivery"
+                    android:text="@string/apply"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textAllCaps="false"

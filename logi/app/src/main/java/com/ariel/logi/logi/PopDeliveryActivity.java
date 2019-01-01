@@ -136,7 +136,7 @@ public class PopDeliveryActivity extends AppCompatActivity {
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.9), (int)(height*.6));
+        getWindow().setLayout((int)(width*.9), (int)(height*.7));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
