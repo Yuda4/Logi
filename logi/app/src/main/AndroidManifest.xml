@@ -85,7 +85,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CourierActivity"
-            android:label="@string/CourierActivity" />
+            android:label="@string/CourierActivity"
+            />
 
         <activity
             android:name=".PopProductActivity"

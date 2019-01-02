@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -53,9 +54,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class CustomerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "CustomerActivity";
 
+    private CircleImageView profileImg;
     private ArrayList<Delivery> aDelivery,aDeliveryPend;
     private DatabaseReference mDatabaseDeliveries;
     private FirebaseDatabase database;
@@ -64,14 +68,16 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private Button btnshowDel, btndateDel;
-    private ImageButton btnSetDate;
-    private ArrayList<String> iNames, iDates, dNames, iStat, iId, iCur, dDates, dStat, dId, dCur;
     private NavigationView navigationView;
     private RecyclerView DelsRecyclerView, DateRecyclerView;
     private RecyclerViewAdapter recShow;
     private RecyclerViewDate recSet;
     private DatePickerDialog datePicker;
     private Calendar calendar;
+    private Uri imageUri;
+    private TextView nameTextView, emailTextView;
+    private static final int IMAGE_REQUEST = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,23 +95,16 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
 
+        profileImg = (CircleImageView) findViewById(R.id.profile_image);
+        nameTextView = (TextView) findViewById(R.id.name_textView);
         btnshowDel = (Button) findViewById(R.id.show_button);
         btndateDel = (Button) findViewById(R.id.date_button);
-        iNames = new ArrayList<String>();
-        iDates = new ArrayList<String >();
-        iCur = new ArrayList<String >();
-        iStat = new ArrayList<String >();
-        iId = new ArrayList<String >();
-        dNames = new ArrayList<String >();
-        dDates = new ArrayList<String >();
-        dCur = new ArrayList<String >();
-        dStat = new ArrayList<String >();
-        dId = new ArrayList<String >();
-        btnSetDate = (ImageButton) findViewById(R.id.recycler_setD_img);
+        //btnSetDate = (ImageButton) findViewById(R.id.recycler_setD_img);
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+        nameTextView.setText(user.getDisplayName());
+        nameTextView.setText(user.getEmail());
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -128,11 +127,9 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         String userID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         // Read from the database
         mDatabaseDeliveries.addValueEventListener(valueEventListenerDelivery);
+        Query queryPend = mDatabaseDeliveries;
 
-//        Query queryPend = mDatabaseDeliveries.orderByChild("customer_email")
-//                .equalTo(auth.getCurrentUser().getEmail());
-//
-//        queryPend.addListenerForSingleValueEvent(valueEventListenerDelivery);
+        queryPend.addListenerForSingleValueEvent(valueEventListenerDelivery);
 
         DelsRecyclerView.setVisibility(View.GONE);
         DateRecyclerView.setVisibility(View.GONE);
@@ -180,29 +177,9 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
         DelsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void initDates(){
-        dNames.add("product");
-        dDates.add("10/10/10");
-        dStat.add("pending");
-        dId.add("15464");
-        dCur.add("dave");
-
-        dNames.add("2product2");
-        dDates.add("10/10/10");
-        dStat.add("delivered");
-        dId.add("15464");
-        dCur.add("dave");
-
-        dNames.add("3product3");
-        dDates.add("10/10/10");
-        dStat.add("in process");
-        dId.add("15464");
-        dCur.add("dave");
-        }
-
     private void initRecyclerViewDates(){
         DateRecyclerView = (RecyclerView) findViewById(R.id.recveiwDates);
-        recSet = new RecyclerViewDate(this, aDeliveryPend, btnSetDate);
+        recSet = new RecyclerViewDate(this, aDeliveryPend);
         DateRecyclerView.setAdapter(recSet);
         DateRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -234,6 +211,28 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
+        profileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openImage();
+            }
+        });
+    }
+
+    private void openImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, IMAGE_REQUEST);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null){
+            imageUri = data.getData();
+        }
     }
 
     @Override
@@ -278,7 +277,7 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
             for (DataSnapshot ds: dataSnapshot.getChildren()){
                 for(DataSnapshot dsnp: ds.getChildren()){
                     Delivery delivery = dsnp.getValue(Delivery.class);
-                    if(!delivery.getStatus().equals("pending"))
+                    if(!delivery.getStatus().equals("pending")&&delivery.getCustomer_email().equals(auth.getCurrentUser().getEmail()))
                         aDelivery.add(delivery);
                 }
             }
@@ -291,7 +290,7 @@ public class CustomerActivity extends AppCompatActivity implements NavigationVie
             for (DataSnapshot ds: dataSnapshot.getChildren()){
                 for(DataSnapshot dsnp: ds.getChildren()){
                     Delivery delivery = dsnp.getValue(Delivery.class);
-                    if(delivery.getStatus().equals("pending"))
+                    if(delivery.getStatus().equals("pending")&&delivery.getCustomer_email().equals(auth.getCurrentUser().getEmail()))
                         aDeliveryPend.add(delivery);
                 }
             }

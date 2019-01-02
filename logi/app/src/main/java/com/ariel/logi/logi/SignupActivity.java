@@ -27,7 +27,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private FirebaseDatabase database;
-
+    String type;
     private EditText inputEmail, inputPassword, inputName, inputPhoneNumber;
     private Button btnSignIn, btnSignUp;
     private ProgressBar progressBar;
@@ -69,7 +69,7 @@ public class SignupActivity extends AppCompatActivity {
                 v.startAnimation(buttonClicked);
                 RadioButton selectedButton = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
 
-                final String type = selectedButton.getText().toString();
+                type = selectedButton.getText().toString();
                 final String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
                 final String name = inputName.getText().toString().trim();
@@ -126,6 +126,9 @@ public class SignupActivity extends AppCompatActivity {
                                     mDatabase.child("users").child(userUid).child("email").setValue(email);
                                     mDatabase.child("users").child(userUid).child("name").setValue(name);
                                     mDatabase.child("users").child(userUid).child("phone").setValue(phoneNumber);
+                                    if(type.toLowerCase().equals("null")){
+                                        type = "customer";
+                                    }
                                     mDatabase.child("users").child(userUid).child("type").setValue(type.toLowerCase());
                                     mDatabase.child("users").child(userUid).child("address").setValue("Please fill");
                                     mDatabase.child("users").child(userUid).child("city").setValue("Please fill");
