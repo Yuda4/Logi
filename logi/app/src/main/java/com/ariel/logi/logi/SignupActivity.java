@@ -128,8 +128,9 @@ public class SignupActivity extends AppCompatActivity {
                                     mDatabase.child("users").child(userUid).child("phone").setValue(phoneNumber);
                                     if(type.toLowerCase().equals("null")){
                                         type = "customer";
+                                    }else {
+                                        mDatabase.child("users").child(userUid).child("type").setValue(type.toLowerCase());
                                     }
-                                    mDatabase.child("users").child(userUid).child("type").setValue(type.toLowerCase());
                                     mDatabase.child("users").child(userUid).child("address").setValue("Please fill");
                                     mDatabase.child("users").child(userUid).child("city").setValue("Please fill");
                                     mDatabase.child("users").child(userUid).child("country").setValue("Please fill");
