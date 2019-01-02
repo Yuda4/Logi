@@ -28,12 +28,12 @@
                 android:orientation="vertical"
                 android:id="@+id/recycler_child_layout"
                 android:layout_alignParentStart="true">
-                <ImageButton
+                <ImageView
                     android:id="@+id/recycler_img"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/ic_delivery" />
+                    android:src="@drawable/ic_delivery_truck" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -96,13 +96,13 @@
             android:paddingStart="30dp"
             android:paddingEnd="5dp">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/recycler_setA_img"
                 android:layout_width="36dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_toolbar_deliveries" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/recycler_setD_img"
                 android:layout_width="38dp"
                 android:layout_height="50dp"
