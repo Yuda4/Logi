@@ -1,6 +1,13 @@
 # Logi
-Logistic Application goals:
+Android Logistic Application.
 
- * better communication between suppliers to costumers.
- * better management of logistic business .
- * better schedule management of  Couriers.
+Developed by:
+Adiel Matuf, Yehuda Newman and Bar Janach.
+
+App uses Firebase features - Database, user authentication and use of firebase storage service.
+
+App aims:
+ * Better communication between suppliers and costumers.
+ * Better management of logistic business .
+ * Better schedule management of  Couriers.
+

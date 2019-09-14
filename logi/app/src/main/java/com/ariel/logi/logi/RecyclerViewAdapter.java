@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -142,7 +143,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CardView parentLayout;
         LinearLayout linl;
-        ImageButton call,address,gotit;
+        ImageView call,address,gotit;
         private TextView name, date, id, cour, stat;
         public ViewHolder(View itemView){
             super(itemView);
@@ -153,9 +154,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             stat = (TextView) itemView.findViewById(R.id.recycler_staus);
             parentLayout = (CardView)itemView.findViewById(R.id.recycler_cust_item);
             linl = (LinearLayout)itemView.findViewById(R.id.recycler_child_linear_layout);
-            call = (ImageButton)itemView.findViewById(R.id.recycler_callCur_img);
-            address = (ImageButton)itemView.findViewById(R.id.recycler_setA_img);
-            gotit = (ImageButton)itemView.findViewById(R.id.recycler_fin_btn);
+            call = (ImageView)itemView.findViewById(R.id.recycler_callCur_img);
+            address = (ImageView)itemView.findViewById(R.id.recycler_setA_img);
+            gotit = (ImageView)itemView.findViewById(R.id.recycler_fin_btn);
         }
 
         @Override

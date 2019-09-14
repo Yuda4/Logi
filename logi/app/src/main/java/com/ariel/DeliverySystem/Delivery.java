@@ -15,7 +15,7 @@ public class Delivery {
     private String customer_phone;
     private String address;
     private String storage_id;
-	private String date;
+	private Date date;
 	private String status;
 	private String city;
 	private String company_name;
@@ -89,19 +89,17 @@ public class Delivery {
 
 
     public String getDate() {
-        /*DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
-            return dateFormat.format(this.date);*/
-        return date;
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
+            return dateFormat.format(this.date);
     }
 
     public void setDate(String date) {
-        /*DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy hh:mm");
         try {
             this.date = dateFormat.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
-        }*/
-        this.date = date;
+        }
     }
 
 
